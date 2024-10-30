@@ -18,6 +18,7 @@
 		"@oslojs/crypto": "^1.0.1",
 		"@oslojs/encoding": "^1.1.0",
 		"mysql2": "^3.11.3",
+		"nodemailer": "^6.9.16",
 		"safejslib": "^1.0.1"
 	}
 }
