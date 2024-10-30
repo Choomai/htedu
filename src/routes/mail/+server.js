@@ -3,6 +3,12 @@ import { MAIL_HOST, MAIL_ACCOUNT, MAIL_PASSWORD } from "$env/static/private";
 import { error } from "@sveltejs/kit";
 import { randomInt } from "node:crypto"
 import Safe from "safejslib";
+import { readFileSync } from "node:fs";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /** @type {import('./$types').RequestHandler} */
 export async function GET({ url }) {
@@ -25,8 +31,8 @@ export async function GET({ url }) {
     const info = await mailSender.sendMail({
         from: "no-reply@huongtraedu.site",
         to: mailTo,
-        subject: "This is an OTP test",
-        text: `Your OTP code is ${String(generatedOTP).padStart(6, "0")}`
+        subject: "Account activation at huongtraedu.site",
+        html: readFileSync(join(__dirname, "otp.html"), { encoding: "utf-8" }).replace("%OTP%", String(generatedOTP).padStart(6, "0")) 
     })
     return new Response(`Mail sent to ${mailTo}. Check your spam folder.\n${JSON.stringify(info, null, 4)}`);
 }
