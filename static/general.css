@@ -9,6 +9,30 @@
 body {
     font-family: 'Noto Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
+}
+
+div#svelte-root {
+    display: flex;
+}
+
+button.fake {
+    background: none;
+    border: none;
+}
+
+div.container {
     display: flex;
     flex-direction: column;
+    width: fit-content;
+    overflow-x: hidden;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 8px;
+    flex-grow: 1;
 }
