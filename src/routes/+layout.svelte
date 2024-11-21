@@ -32,13 +32,28 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        gap: 1.5rem;
         height: 100vh;
         width: 300px;
         padding: 1rem;
         overflow-y: overlay;
         border-right: 1px solid #fff;
-        font-size: 1.5rem;
+        font-size: 1.25rem;
+    }
+
+    div.sidebar-main {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    div.sidebar-main div:first-child {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+    div.sidebar-main div:first-child > img {
+        width: 48px;
+        border-radius: 100%;
     }
     nav.sidebar a {
         display: flex;
@@ -57,17 +72,6 @@
     }
     nav.sidebar a.selected {
         background-color: var(--primary-color);
-    }
-
-    div.sidebar-main div:first-child {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 8px;
-    }
-    div.sidebar-main div:first-child > img {
-        width: 48px;
-        border-radius: 100%;
     }
 
 
@@ -92,6 +96,10 @@
         font-size: 1rem;
     }
     input#search::placeholder {color: var(--placeholder-color);}
+    input#search::after {
+        content: "\f002";
+        font-family: var(--fa-font-solid);
+    }
     div.user {
         display: flex;
         justify-self: flex-end;
