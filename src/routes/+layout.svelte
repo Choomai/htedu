@@ -1,10 +1,10 @@
 <nav class="sidebar">
     <div class="sidebar-main">
         <div>
-            <img src="" alt="Site logo">
+            <img src="/logo.png" alt="Site logo">
             <span>Huong Tra</span>
         </div>
-        <a href="/"><i class="fa-solid fa-house fa-fw"></i>Trang chủ</a>
+        <a class="selected" href="/"><i class="fa-solid fa-house fa-fw"></i>Trang chủ</a>
         <a href="/khu-hoc-tap"><i class="fa-solid fa-pen fa-fw"></i>Khu học tập</a>
         <a href="/luyen-de"><i class="fa-solid fa-file-lines fa-fw"></i>Luyện đề</a>
         <a href="/teachers"><i class="fa-solid fa-chalkboard-user fa-fw"></i>Giáo viên</a>
@@ -18,10 +18,10 @@
 
 <div class="container">
     <nav class="navbar">
-        <input type="text" id="search" placeholder="Tìm kiếm...">
+        <div class="search-wrapper"><input type="text" id="search" placeholder="Tìm kiếm..."></div>
         <div class="user">
             <button class="fake" type="button"><i class="fa-solid fa-bell fa-2x"></i></button>
-            <img src alt="profile">
+            <img src="https://gravatar.com/avatar/000000000000000000000000000000000000000000000000000000?d=identicon&f=y" alt="profile">
         </div>
     </nav>
     <slot/>
@@ -32,30 +32,75 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        gap: 1.5rem;
         height: 100vh;
         width: 300px;
         padding: 1rem;
+        overflow-y: overlay;
         border-right: 1px solid #fff;
+        font-size: 1.5rem;
     }
     nav.sidebar a {
         display: flex;
         align-items: center;
         gap: .5rem;
+        padding: 8px;
         text-decoration: none;
+        color: white;
+        border-radius: 16px;
+        transition: 500ms ease color;
     }
+
+    nav.sidebar a:not(.selected):hover {
+        color: var(--primary-color);
+        transition: 500ms ease color;
+    }
+    nav.sidebar a.selected {
+        background-color: var(--primary-color);
+    }
+
+    div.sidebar-main div:first-child {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+    div.sidebar-main div:first-child > img {
+        width: 48px;
+        border-radius: 100%;
+    }
+
 
     nav.navbar {
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-between;
         align-items: center;
         height: fit-content;
-        width: 100%;
+        margin: 8px;
+        margin-bottom: 0;
+    }
+    div.search-wrapper {
+        display: flex;
+        justify-content: center;
+        flex-grow: 1;
     }
     input#search {
-        width: 200px;
-        padding: .5rem;
+        width: 75%;
+        padding: 8px;
+        border-radius: 16px;
+        border: 1px solid gray;
+        font-size: 1rem;
     }
+    input#search::placeholder {color: var(--placeholder-color);}
     div.user {
+        display: flex;
         justify-self: flex-end;
+        align-items: center;
+        gap: 8px;
+    }
+    div.user > img {
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
     }
 </style>
