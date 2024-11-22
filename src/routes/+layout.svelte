@@ -1,14 +1,18 @@
+<script>
+    import { page } from "$app/stores";
+</script>
+
 <nav class="sidebar">
     <div class="sidebar-main">
         <div>
             <img src="/logo.png" alt="Site logo">
             <span>Huong Tra</span>
         </div>
-        <a class="selected" href="/"><i class="fa-solid fa-house fa-fw"></i>Trang chủ</a>
-        <a href="/khu-hoc-tap"><i class="fa-solid fa-pen fa-fw"></i>Khu học tập</a>
-        <a href="/luyen-de"><i class="fa-solid fa-file-lines fa-fw"></i>Luyện đề</a>
-        <a href="/teachers"><i class="fa-solid fa-chalkboard-user fa-fw"></i>Giáo viên</a>
-        <a href="/community"><i class="fa-solid fa-users fa-fw"></i>Cộng đồng</a>
+        <a class:selected={$page.url.pathname == "/"} href="/"><i class="fa-solid fa-house fa-fw"></i>Trang chủ</a>
+        <a class:selected={$page.url.pathname.startsWith("/khu-hoc-tap")} href="/khu-hoc-tap"><i class="fa-solid fa-pen fa-fw"></i>Khu học tập</a>
+        <a class:selected={$page.url.pathname.startsWith("/practice")} href="/practice"><i class="fa-solid fa-file-lines fa-fw"></i>Luyện đề</a>
+        <a class:selected={$page.url.pathname.startsWith("/teachers")} href="/teachers"><i class="fa-solid fa-chalkboard-user fa-fw"></i>Giáo viên</a>
+        <a class:selected={$page.url.pathname.startsWith("/community")} href="/community"><i class="fa-solid fa-users fa-fw"></i>Cộng đồng</a>
     </div>
 
     <div class="sidebar-bottom">
@@ -81,7 +85,6 @@
         align-items: center;
         height: fit-content;
         margin: 8px;
-        margin-bottom: 0;
     }
     div.search-wrapper {
         display: flex;
