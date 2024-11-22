@@ -6,13 +6,17 @@
 
 * {box-sizing: border-box;}
 
+html {height: 100%;}
 body {
     font-family: 'Noto Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
+    overflow: hidden;
+    height: 100%;
 }
 
 div#svelte-root {
     display: flex;
+    height: 100%;
 }
 
 button.fake {
