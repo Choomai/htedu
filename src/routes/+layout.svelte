@@ -1,4 +1,5 @@
 <script>
+    export let data;
     import { page } from "$app/stores";
 </script>
 
@@ -25,7 +26,7 @@
         <div class="search-wrapper"><input type="text" id="search" placeholder="Tìm kiếm..."></div>
         <div class="user">
             <button class="fake" type="button"><i class="fa-solid fa-bell fa-2x"></i></button>
-            <img src="https://gravatar.com/avatar/000000000000000000000000000000000000000000000000000000?d=identicon&f=y" alt="profile">
+            <img src={data.avatar ?? "https://gravatar.com/avatar/000000000000000000000000000000000000000000000000000000?d=mp&f=y"} alt="profile">
         </div>
     </nav>
     <slot/>
