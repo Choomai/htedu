@@ -29,7 +29,7 @@
         <div class="user">
             <button class="fake" type="button" on:click={() => notifyDropdown = !notifyDropdown}><i class="fa-solid fa-bell fa-2x"></i></button>
             <button class="fake" type="button" on:click={() => userDropdown = !userDropdown}><img src={data.avatar ?? "/avatars/default.png"} alt="profile"></button>
-            <!-- {#if userDropdown} -->
+            {#if userDropdown}
                 <div class="user-dropdown">
                     {data.username}
                     <div class="auth-action">
@@ -37,9 +37,13 @@
                         <a class="button" href="/auth/register">Đăng ký</a>
                     </div>
                 </div>
-            <!-- {:else if notifyDropdown} -->
-                <!-- <div class="notify-dropdown"></div> -->
-            <!-- {/if} -->
+            {:else if notifyDropdown}
+                <div class="notify-dropdown">
+                    <div class="notification">
+                        <span>someone like ur mom</span>
+                    </div>
+                </div>
+            {/if}
         </div>
     </nav>
     <slot/>
@@ -123,17 +127,20 @@
         justify-self: flex-end;
     }
 
-    div.user-dropdown {
+    div.user-dropdown, div.notify-dropdown {
         position: absolute;
         display: flex;
         flex-direction: column;
-        align-items: center;
         gap: .5rem;
         top: 64px;
         right: 16px;
-        width: fit-content;
         padding: 1rem;
+        border-radius: 1rem;
         background-color: var(--dropdown-dark);
+    }
+    div.user-dropdown {
+        align-items: center;
+        width: fit-content;
     }
     div.auth-action {
         display: flex;
