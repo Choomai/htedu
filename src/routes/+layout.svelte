@@ -2,6 +2,8 @@
     import { page } from "$app/stores";
     
     export let data;
+    let userDropdown = false;
+    let notifyDropdown = false;
 </script>
 
 <nav class="sidebar">
@@ -25,8 +27,19 @@
             <i id="searchIcon" class="fa-solid fa-magnifying-glass fa-1x"></i>
         </div>
         <div class="user">
-            <button class="fake" type="button"><i class="fa-solid fa-bell fa-2x"></i></button>
-            <img src={data.avatar ?? "/avatars/default.png"} alt="profile">
+            <button class="fake" type="button" on:click={() => notifyDropdown = !notifyDropdown}><i class="fa-solid fa-bell fa-2x"></i></button>
+            <button class="fake" type="button" on:click={() => userDropdown = !userDropdown}><img src={data.avatar ?? "/avatars/default.png"} alt="profile"></button>
+            <!-- {#if userDropdown} -->
+                <div class="user-dropdown">
+                    {data.username}
+                    <div class="auth-action">
+                        <a class="button" href="/auth/login">Đăng nhập</a>
+                        <a class="button" href="/auth/register">Đăng ký</a>
+                    </div>
+                </div>
+            <!-- {:else if notifyDropdown} -->
+                <!-- <div class="notify-dropdown"></div> -->
+            <!-- {/if} -->
         </div>
     </nav>
     <slot/>
@@ -106,8 +119,24 @@
         top: 10px;
         cursor: pointer;
     }
-
     div.user {
         justify-self: flex-end;
+    }
+
+    div.user-dropdown {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .5rem;
+        top: 64px;
+        right: 16px;
+        width: fit-content;
+        padding: 1rem;
+        background-color: var(--dropdown-dark);
+    }
+    div.auth-action {
+        display: flex;
+        gap: 1rem;
     }
 </style>

@@ -4,7 +4,8 @@
     --bg-dark: #111;
     --text: black;
     --text-dark: white;
-    --input-box-dark: #222; 
+    --input-box-dark: #222;
+    --dropdown-dark: #222;
     --placeholder: #f2f2f2;
 
     --first-gradient-start: #47cacc;
@@ -30,13 +31,6 @@ body {
     background-color: var(--bg);
     color: var(--text);
 }
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: var(--bg-dark);
-        color: var(--text-dark);
-    }
-    input::placeholder {color: initial;}
-}
 
 a {
     text-decoration: none;
@@ -51,9 +45,9 @@ div#svelte-root {
 div.user {
     display: flex;
     align-items: center;
-    gap: .5rem;
+    gap: 1rem;
 }
-div.user > img {
+div.user img {
     width: 40px;
     height: 40px;
     border-radius: 100%;
@@ -78,14 +72,28 @@ main {
 
 input::placeholder {color: var(--placeholder);}
 
-button {
+button, a.button {
+    display: block;
+    width: fit-content;
     padding: 1rem;
     border: none;
     border-radius: 1rem;
     background-color: var(--primary-color);
+    color: var(--text);
+    font-size: 1rem;
 }
+a.button:hover {text-decoration: none;}
 
 button.fake {
     padding: initial;
     background: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--bg-dark);
+        color: var(--text-dark);
+    }
+    input::placeholder {color: initial;}
+    button, a.button {color: var(--text-dark);}
 }
