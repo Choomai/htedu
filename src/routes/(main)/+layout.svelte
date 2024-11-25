@@ -1,5 +1,6 @@
 <script>
     import { page } from "$app/stores";
+    import { app_name } from "$lib/const";
     
     export let data;
     let userDropdown = false;
@@ -10,10 +11,10 @@
     <div class="sidebar-main">
         <div>
             <img src="/imgs/logo.png" alt="Site logo">
-            <span>Huong Tra</span>
+            <span>{app_name}</span>
         </div>
         <a class:selected={$page.url.pathname == "/"} href="/"><i class="fa-solid fa-house fa-fw"></i>Trang chủ</a>
-        <a class:selected={$page.url.pathname.startsWith("/khu-hoc-tap")} href="/khu-hoc-tap"><i class="fa-solid fa-pen fa-fw"></i>Khu học tập</a>
+        <a class:selected={$page.url.pathname.startsWith("/study-area")} href="/study-area"><i class="fa-solid fa-pen fa-fw"></i>Khu học tập</a>
         <a class:selected={$page.url.pathname.startsWith("/practice")} href="/practice"><i class="fa-solid fa-file-lines fa-fw"></i>Luyện đề</a>
         <a class:selected={$page.url.pathname.startsWith("/teachers")} href="/teachers"><i class="fa-solid fa-chalkboard-user fa-fw"></i>Giáo viên</a>
         <a class:selected={$page.url.pathname.startsWith("/community")} href="/community"><i class="fa-solid fa-users fa-fw"></i>Cộng đồng</a>
@@ -52,6 +53,15 @@
 </div>
 
 <style>
+    div.container {
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+        overflow-x: hidden;
+        overflow-y: auto;
+        flex-grow: 1;
+    }
+
     nav.sidebar {
         display: flex;
         flex-direction: column;

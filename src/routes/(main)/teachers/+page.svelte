@@ -31,7 +31,7 @@
         padding: .5rem 2rem;
         border-radius: .5rem;
         text-decoration: none;
-        color: var(--primary-color);
+        color: var(--text-dark);
         background-color: var(--bg-dark);
     }
 

@@ -21,7 +21,7 @@
     <article class="works">
         <div class="header-wrapper">
             <h2>Bài tập phổ biến</h2>
-            <a href="/khu-hoc-tap">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="/study-area">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
         </div>
         <figure>
             <img src="/imgs/logo.png" alt="works thumbnail">
