@@ -1,5 +1,6 @@
 <script>
     import User from "./components/user.svelte";
+    import Teachers from "./components/teachers.svelte";
     export let data;
 </script>
 
@@ -30,58 +31,38 @@
             </figcaption>
         </figure>
     </article>
-    <article class="teachers">
-        <h2>Giáo viên</h2>
-        <figure>
-            <img src="/imgs/logo.png" alt="teachers avatar">
-            <figcaption>insert name</figcaption>
-        </figure>
-    </article>
+    <Teachers/>
 </main>
 
 <style>
-    article:not(.teachers) > div.header-wrapper {
+    article > div.header-wrapper {
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
-    article:not(.teachers) > div.header-wrapper > a {
+    article > div.header-wrapper > a {
         color: var(--placeholder-color);
         text-decoration: none;
     }
-    h2 {margin: 0 1rem;}
+    h2 {margin: 0;}
 
-    article:not(.teachers) > figure {
+    article > figure {
         display: flex;
         flex-direction: column;
         width: 400px;
         border-radius: 1rem;
     }
-    article:not(.teachers) > figure > img {
+    article > figure > img {
         width: 400px;
         height: 150px;
         border-top-left-radius: 1rem;
         border-top-right-radius: 1rem;
     }
-    article:not(.teachers) > figure > figcaption {
+    article > figure > figcaption {
         padding: .5rem;
         background-color: black;
         border-bottom-left-radius: 16px;
         border-bottom-right-radius: 16px;
     }
     h3 {margin-top: 0;}
-
-    article.teachers > figure {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        width: fit-content;
-        font-size: 1.25rem;
-    }
-    article.teachers > figure > img {
-        width: 120px;
-        height: 120px;
-        border-radius: 100%;
-    }
 </style>

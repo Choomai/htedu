@@ -16,10 +16,6 @@
         <a class:selected={$page.url.pathname.startsWith("/teachers")} href="/teachers"><i class="fa-solid fa-chalkboard-user fa-fw"></i>Giáo viên</a>
         <a class:selected={$page.url.pathname.startsWith("/community")} href="/community"><i class="fa-solid fa-users fa-fw"></i>Cộng đồng</a>
     </div>
-
-    <div class="sidebar-bottom">
-        <a href="/settings"><i class="fa-solid fa-gear fa-fw"></i>Cài đặt</a>
-    </div>
 </nav>
 
 <div class="container">
