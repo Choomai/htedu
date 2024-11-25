@@ -29,16 +29,18 @@
         <div class="user">
             <button class="fake" type="button" on:click={() => notifyDropdown = !notifyDropdown}><i class="fa-solid fa-bell fa-2x"></i></button>
             <button class="fake" type="button" on:click={() => userDropdown = !userDropdown}><img src={data.avatar ?? "/avatars/default.png"} alt="profile"></button>
+            <!-- svelte-ignore a11y-no-static-element-interactions -->
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
             {#if userDropdown}
                 <div class="user-dropdown">
                     {data.username}
-                    <div class="auth-action">
+                    <div class="auth-action" on:click={() => userDropdown = false}>
                         <a class="button" href="/auth/login">Đăng nhập</a>
                         <a class="button" href="/auth/register">Đăng ký</a>
                     </div>
                 </div>
             {:else if notifyDropdown}
-                <div class="notify-dropdown">
+                <div class="notify-dropdown" on:click={() => notifyDropdown = false}>
                     <div class="notification">
                         <span>someone like ur mom</span>
                     </div>

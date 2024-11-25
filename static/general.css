@@ -18,6 +18,17 @@
     --fourth-graident-end: #cdb3d4;
     --fifth-graident-start: #ffbe88;
     --fifth-graident-end: #e7b7c8;
+
+    --first-gradient-dark-start: #041B2D;
+    --first-gradient-dark-end: #004E9A;
+    --second-gradient-dark-start: #004E9A;
+    --second-gradient-dark-end: #428CD4;
+    --third-gradient-dark-start: #FF9CDA;
+    --third-gradient-dark-end: #F9AD6A;
+    --fourth-gradient-dark-start: #FF9CDA;
+    --fourth-gradient-dark-end: #EA4492;
+    --fifth-gradient-dark-start: #EA4492;
+    --fifth-gradient-dark-end: #004E9A;
 }
 
 * {box-sizing: border-box;}
