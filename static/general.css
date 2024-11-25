@@ -19,6 +19,17 @@ div#svelte-root {
     height: 100%;
 }
 
+div.user {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+div.user > img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
 button.fake {
     background: none;
     border: none;
@@ -37,6 +48,6 @@ main {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 0 8px;
+    padding: 0 .5rem;
     flex-grow: 1;
 }

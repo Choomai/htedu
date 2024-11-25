@@ -18,6 +18,7 @@
 	"dependencies": {
 		"mysql2": "^3.11.3",
 		"safejslib": "^1.0.1",
+		"sharp": "^0.33.5",
 		"svelte-kit-sessions": "^0.3.2"
 	}
 }

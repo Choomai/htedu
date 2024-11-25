@@ -1,12 +1,13 @@
 <script>
-    export let data;
     import { page } from "$app/stores";
+    
+    export let data;
 </script>
 
 <nav class="sidebar">
     <div class="sidebar-main">
         <div>
-            <img src="/logo.png" alt="Site logo">
+            <img src="/imgs/logo.png" alt="Site logo">
             <span>Huong Tra</span>
         </div>
         <a class:selected={$page.url.pathname == "/"} href="/"><i class="fa-solid fa-house fa-fw"></i>Trang chủ</a>
@@ -23,10 +24,13 @@
 
 <div class="container">
     <nav class="navbar">
-        <div class="search-wrapper"><input type="text" id="search" placeholder="Tìm kiếm..."></div>
+        <div class="search-wrapper">
+            <input type="text" id="search" placeholder="Tìm kiếm...">
+            <i id="searchIcon" class="fa-solid fa-magnifying-glass fa-1x"></i>
+        </div>
         <div class="user">
             <button class="fake" type="button"><i class="fa-solid fa-bell fa-2x"></i></button>
-            <img src={data.avatar ?? "https://gravatar.com/avatar/000000000000000000000000000000000000000000000000000000?d=mp&f=y"} alt="profile">
+            <img src={data.avatar ?? "/static/avatars/default.png"} alt="profile">
         </div>
     </nav>
     <slot/>
@@ -93,26 +97,21 @@
         flex-grow: 1;
     }
     input#search {
-        width: 75%;
+        width: 60%;
         padding: 8px;
         border-radius: 16px;
         border: 1px solid gray;
         font-size: 1rem;
     }
     input#search::placeholder {color: var(--placeholder-color);}
-    input#search::after {
-        content: "\f002";
-        font-family: var(--fa-font-solid);
+    #searchIcon {
+        position: relative;
+        left: -28px;
+        top: 10px;
+        cursor: pointer;
     }
+
     div.user {
-        display: flex;
         justify-self: flex-end;
-        align-items: center;
-        gap: 8px;
-    }
-    div.user > img {
-        width: 40px;
-        height: 40px;
-        border-radius: 100%;
     }
 </style>
