@@ -30,7 +30,7 @@
         </div>
         <div class="user">
             <button class="fake" type="button"><i class="fa-solid fa-bell fa-2x"></i></button>
-            <img src={data.avatar ?? "/static/avatars/default.png"} alt="profile">
+            <img src={data.avatar ?? "/avatars/default.png"} alt="profile">
         </div>
     </nav>
     <slot/>

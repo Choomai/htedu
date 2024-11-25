@@ -4,6 +4,6 @@
 </script>
 
 <div class="user">
-    <img src={avatar ?? "/static/avatars/default.png"} alt="profile">
+    <img src={avatar ?? "/avatars/default.png"} alt="profile">
     {username}
 </div>
