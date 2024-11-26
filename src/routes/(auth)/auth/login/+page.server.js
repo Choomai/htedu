@@ -1,21 +1,23 @@
-import { scryptSync } from "node:crypto";
-import Safe from "safejslib";
+import { scryptSync, timingSafeEqual } from "node:crypto";
+import { pool } from "$lib/db";
+import { redirect } from "@sveltejs/kit";
 
 /** @type {import('./$types').Actions} */
 export const actions = {
     default: async ({ request, locals }) => {
         const data = await request.formData();
         const { session } = locals;
-        let email = data.get("email"), password = data.get("password");
-        if (!(email && password)) return { success: false, message: "Hãy nhập đầy đủ các thông tin" };
-        if (!Safe.validateEmail(email)) return { success: false, message: "Email không hợp lệ" };
+        let username = data.get("username"), password = data.get("password");
+        if (!(username && password)) return { success: false, message: "Hãy nhập đầy đủ các thông tin" };
         
-        let [rows] = await pool.execute("SELECT * FROM users WHERE email = ?", [email]);
+        let [rows] = await pool.execute("SELECT * FROM users WHERE username = ?", [username]);
         if (rows.length <= 0) return { success: false, message: "Tài khoản không tồn tại" };
-
-        password = scryptSync(password, salt, 64).toString("hex");
-        if (password != rows.password) return { success: false, message: "Sai mật khẩu" }
-        await session.setData({ auth: true, email, username: rows.username, password });
+        
+        const [salt, key] = rows[0].password.split(":");
+        password = scryptSync(password, salt, 64);
+        console.log(`${salt}:${password.toString("hex")}`)
+        if (!timingSafeEqual(password, Buffer.from(key, "hex"))) return { success: false, message: "Sai mật khẩu" }
+        await session.setData({ auth: true, username: rows[0].username, password });
         await session.save();
         return redirect(302, "/");
     }

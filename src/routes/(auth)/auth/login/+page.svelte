@@ -1,5 +1,6 @@
 <script>
     import { app_name } from "$lib/const";
+    export let form;
 </script>
 
 <main>
@@ -12,6 +13,7 @@
         </div>
         <form action method="post">
             <h2>Đăng nhập</h2>
+            {#if form?.success == false}<p>{form?.message}</p>{/if}
             <div class="input">
                 <input type="text" name="username" placeholder="Tên đăng nhập">
                 <input type="password" name="password" placeholder="Mật khẩu">
@@ -50,9 +52,10 @@
         gap: 1rem;
         background-color: var(--primary-color);
         width: 60%;
-        border-radius: 0 40% 40% 0;
+        border-radius: 0 35% 35% 0;
     }
     h1, h2 {margin: 0;}
+
     a.button {
         background-color: #111;
         color: var(--text-dark);
@@ -69,6 +72,10 @@
         font-size: 1.5rem;
     }
     form > h2 {margin-bottom: revert;}
+    form > p {
+        margin-top: 0;
+        color: red;
+    }
     div.input {
         display: flex;
         flex-direction: column;

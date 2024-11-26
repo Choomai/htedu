@@ -1,6 +1,7 @@
 import { scryptSync, randomBytes } from "node:crypto";
 import Safe from "safejslib";
 import { usernamePattern } from "$lib/const";
+import { pool } from "$lib/db";
 
 /** @type {import('./$types').Actions} */
 export const actions = {

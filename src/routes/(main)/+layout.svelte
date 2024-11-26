@@ -3,6 +3,7 @@
     import { app_name } from "$lib/const";
     
     export let data;
+    const { session } = data;
     let userDropdown = false;
     let notifyDropdown = false;
 </script>
@@ -34,17 +35,24 @@
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             {#if userDropdown}
                 <div class="user-dropdown">
-                    {data.username}
-                    <div class="auth-action" on:click={() => userDropdown = false}>
-                        <a class="button" href="/auth/login">Đăng nhập</a>
-                        <a class="button" href="/auth/register">Đăng ký</a>
-                    </div>
+                    {#if session.auth}
+                        Xin chào, {session.username}!
+                        <a class="button" href="/auth/logout">Đăng xuất</a>
+                    {:else}
+                        Khách
+                        <div class="auth-action" on:click={() => userDropdown = false}>
+                            <a class="button" href="/auth/login">Đăng nhập</a>
+                            <a class="button" href="/auth/register">Đăng ký</a>
+                        </div>
+                    {/if}
                 </div>
             {:else if notifyDropdown}
                 <div class="notify-dropdown" on:click={() => notifyDropdown = false}>
-                    <div class="notification">
+                    {#if session.auth}
                         <span>someone like ur mom</span>
-                    </div>
+                    {:else}
+                        Bạn chưa đăng nhập!
+                    {/if}
                 </div>
             {/if}
         </div>
