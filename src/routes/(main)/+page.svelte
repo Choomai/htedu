@@ -1,6 +1,6 @@
 <script>
-    import User from "./components/user.svelte";
-    import Teachers from "./components/teachers.svelte";
+    import User from "/src/components/user.svelte";
+    import Teachers from "/src/components/teachers.svelte";
     export let data;
 </script>
 

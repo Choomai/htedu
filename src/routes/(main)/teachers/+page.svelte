@@ -1,5 +1,5 @@
 <script>
-    import Teachers from "../components/teachers.svelte";
+    import Teachers from "/src/components/teachers.svelte";
 </script>
 
 <main>
