@@ -12,7 +12,7 @@
     <h1 class="app-name">{app_name}</h1>
     <div class="container">
         <form action method="post" enctype="multipart/form-data">
-            <h2>Đăng nhập</h2>
+            <h2>Đăng ký</h2>
             {#if form?.success == false}<p>{form?.message}</p>{/if}
             <div class="input">
                 <input type="text" name="username" placeholder="Tên đăng nhập" required>

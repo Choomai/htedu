@@ -1,5 +1,9 @@
 node_modules
 
+# Static
+/static/avatars/*.png
+!/static/avatars/default.png
+
 # Output
 .output
 .vercel
