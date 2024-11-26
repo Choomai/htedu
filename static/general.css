@@ -72,7 +72,7 @@ main {
     flex-grow: 1;
 }
 
-input {
+input:not([type="file"]) {
     padding: 1rem;
     border: none;
     border-radius: 1rem;

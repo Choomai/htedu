@@ -15,9 +15,8 @@ export const actions = {
         
         const [salt, key] = rows[0].password.split(":");
         password = scryptSync(password, salt, 64);
-        console.log(`${salt}:${password.toString("hex")}`)
         if (!timingSafeEqual(password, Buffer.from(key, "hex"))) return { success: false, message: "Sai mật khẩu" }
-        await session.setData({ auth: true, username: rows[0].username, password });
+        await session.setData({ auth: true, name: rows[0].name, username: rows[0].username, password });
         await session.save();
         return redirect(302, "/");
     }

@@ -36,7 +36,7 @@
             {#if userDropdown}
                 <div class="user-dropdown">
                     {#if session.auth}
-                        Xin chào, {session.username}!
+                        Xin chào, {session.name}!
                         <a class="button" href="/auth/logout">Đăng xuất</a>
                     {:else}
                         Khách
