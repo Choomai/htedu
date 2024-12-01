@@ -4,7 +4,7 @@ import { redirect } from '@sveltejs/kit';
 export async function load({ request, locals }) {
     const { session } = locals;
     if (!session.data.auth) return redirect(302, "/auth/login");
-    if (session.data.verify) return redirect(302, "/");
+    if (session.data.verified) return redirect(302, "/");
 }
 
 /** @type {import('./$types').Actions} */

@@ -39,7 +39,7 @@
                         Xin chào, {session.name}!
                         <a class="button" href="/auth/logout">Đăng xuất</a>
                     {:else}
-                        Khách
+                        Xin chào, Khách!
                         <div class="auth-action" on:click={() => userDropdown = false}>
                             <a class="button" href="/auth/login">Đăng nhập</a>
                             <a class="button" href="/auth/register">Đăng ký</a>

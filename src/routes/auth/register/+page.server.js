@@ -48,6 +48,16 @@ export const actions = {
         if (rows.affectedRows == 0) return { success: false, message: "Username hoặc email trùng với tài khoản khác" };
         
         await session.setData({ auth: true, email, username, password});
+
+        await session.setData({ 
+            auth: true,
+            verified: !!rows[0].verified,
+            email,
+            avatar: avatar_path,
+            name,
+            username,
+            password
+        });
         await session.save();
         return redirect(302, "/");
     }
