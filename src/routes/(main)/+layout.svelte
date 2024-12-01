@@ -106,6 +106,7 @@
         color: white;
         border-radius: 16px;
         transition: 500ms ease color;
+        user-select: none;
     }
 
     nav.sidebar a:not(.selected):hover {
