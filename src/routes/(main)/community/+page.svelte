@@ -8,9 +8,9 @@
     {#if articles.length >= 1}
         {#each articles as article}
             <article>
-                <h2><img src={article.avatar || "https://gravatar.com/avatar/000000000000000000000000000000000000000000000000000000?d=mp&f=y"} alt="user avatar">{article.username}</h2>
+                <h2><img src={article.avatar || "/avatars/default.png"} alt="user avatar">{article.username}</h2>
                 <p>{article.content}</p>
-                <div class="actions">
+                <div class="action">
                     <button class="fake" type="button" title="like"><i class="fa-solid fa-heart"></i>&nbsp;{article.total_likes}</button>
                     <button class="fake" type="button" title="comment"><i class="fa-solid fa-comment"></i>&nbsp;{article.total_comments}</button>
                     <button class="fake" type="button" title="share"><i class="fa-solid fa-share"></i></button>
@@ -44,6 +44,11 @@
         width: 80%;
         padding: 8px;
         border-radius: 16px;
+    }
+
+    div.action {
+        display: flex;
+        gap: 1rem;
     }
 
     button.fake {
