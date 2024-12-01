@@ -7,6 +7,7 @@
     --input-box-dark: #222;
     --dropdown-dark: #222;
     --placeholder: #f2f2f2;
+    --placeholder-dark: gray;
 
     --first-gradient-start: #47cacc;
     --first-gradient-end: #cdb3d4;
@@ -102,6 +103,6 @@ button.fake {
         background-color: var(--bg-dark);
         color: var(--text-dark);
     }
-    input::placeholder {color: initial;}
+    input::placeholder {color: var(--placeholder-dark);}
     button, a.button {color: var(--text-dark);}
 }
