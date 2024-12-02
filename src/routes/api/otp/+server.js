@@ -29,5 +29,5 @@ export async function POST({ locals }) {
             text: `Your OTP code is ${generatedOTP}. This code will expire in 10 minutes.`
         })
         return new Response(`Mail sent to ${mailTo}.`);
-    } catch {throw error(400, "Failed to send email.")}
+    } catch {error(400, "Failed to send email.");}
 }
