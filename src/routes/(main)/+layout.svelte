@@ -2,10 +2,10 @@
     import { page } from "$app/stores";
     import { app_name } from "$lib/const";
     
-    export let data;
+    let { data, children } = $props();
     const { session } = data;
-    let userDropdown = false;
-    let notifyDropdown = false;
+    let userDropdown = $state(false);
+    let notifyDropdown = $state(false);
 </script>
 
 <nav class="sidebar">
@@ -29,10 +29,8 @@
             <i id="searchIcon" class="fa-solid fa-magnifying-glass fa-1x"></i>
         </div>
         <div class="user">
-            <button class="fake" type="button" on:click={() => notifyDropdown = !notifyDropdown}><i class="fa-solid fa-bell fa-2x"></i></button>
-            <button class="fake" type="button" on:click={() => userDropdown = !userDropdown}><img src={data.avatar ?? "/avatars/default.png"} alt="profile"></button>
-            <!-- svelte-ignore a11y-no-static-element-interactions -->
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <button class="fake" type="button" aria-label="user" onclick={() => notifyDropdown = !notifyDropdown}><i class="fa-solid fa-bell fa-2x"></i></button>
+            <button class="fake" type="button" aria-label="notification" onclick={() => userDropdown = !userDropdown}><img src={data.avatar ?? "/avatars/default.png"} alt="profile"></button>
             {#if userDropdown}
                 <div class="user-dropdown">
                     {#if session.auth}
@@ -40,24 +38,24 @@
                         <a class="button" href="/auth/logout">Đăng xuất</a>
                     {:else}
                         Xin chào, Khách!
-                        <div class="auth-action" on:click={() => userDropdown = false}>
+                        <button type="button" class="fake auth-action" onclick={() => userDropdown = false}>
                             <a class="button" href="/auth/login">Đăng nhập</a>
                             <a class="button" href="/auth/register">Đăng ký</a>
-                        </div>
+                        </button>
                     {/if}
                 </div>
             {:else if notifyDropdown}
-                <div class="notify-dropdown" on:click={() => notifyDropdown = false}>
+                <button type="button" class="fake notify-dropdown" onclick={() => notifyDropdown = false}>
                     {#if session.auth}
                         <span>someone like ur mom</span>
                     {:else}
                         Bạn chưa đăng nhập!
                     {/if}
-                </div>
+                </button>
             {/if}
         </div>
     </nav>
-    <slot/>
+    {@render children()}
 </div>
 
 <style>
@@ -148,7 +146,7 @@
         justify-self: flex-end;
     }
 
-    div.user-dropdown, div.notify-dropdown {
+    div.user-dropdown, button.notify-dropdown {
         position: absolute;
         display: flex;
         flex-direction: column;
@@ -163,7 +161,7 @@
         align-items: center;
         width: fit-content;
     }
-    div.auth-action {
+    button.auth-action {
         display: flex;
         gap: 1rem;
     }
