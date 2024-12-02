@@ -1,6 +1,5 @@
 <script>
-    export let data;
-
+    let { data } = $props();
     const articles = data.articles;
 </script>
 
@@ -13,7 +12,7 @@
                 <div class="action">
                     <button class="fake" type="button" title="like"><i class="fa-solid fa-heart"></i>&nbsp;{article.total_likes}</button>
                     <button class="fake" type="button" title="comment"><i class="fa-solid fa-comment"></i>&nbsp;{article.total_comments}</button>
-                    <button class="fake" type="button" title="share"><i class="fa-solid fa-share"></i></button>
+                    <button class="fake" type="button" aria-label="share" title="share"><i class="fa-solid fa-share"></i></button>
                 </div>
             </article>
         {/each}

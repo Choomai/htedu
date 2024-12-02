@@ -1,7 +1,7 @@
 <script>
     import User from "/src/components/user.svelte";
     import Teachers from "/src/components/teachers.svelte";
-    export let data;
+    let { data } = $props();
 </script>
 
 <main>
