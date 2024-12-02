@@ -3,6 +3,7 @@ import { MAIL_HOST, MAIL_ACCOUNT, MAIL_PASSWORD } from "$env/static/private";
 import { error } from "@sveltejs/kit";
 import { randomInt } from "node:crypto"
 import Safe from "safejslib";
+import { pool } from "$lib/db";
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ locals }) {
@@ -22,7 +23,8 @@ export async function POST({ locals }) {
     // OTP code, 6 digits
     const generatedOTP = String(randomInt(1, 999999)).padStart(6, "0");
     try {
-        const info = await mailSender.sendMail({
+        await pool.execute("INSERT INTO otp(username, otp) VALUES (?, ?) ON DUPLICATE KEY UPDATE otp = ?", [session.data.username, generatedOTP, generatedOTP]);
+        await mailSender.sendMail({
             from: "no-reply@huongtraedu.site",
             to: mailTo,
             subject: `Verify OTP: ${generatedOTP}`,

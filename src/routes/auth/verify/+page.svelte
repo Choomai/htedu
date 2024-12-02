@@ -1,6 +1,6 @@
 <script>
     import { app_name } from "$lib/const";
-    export let form;
+    let { form } = $props();
     let timeLeft = 0;
 
     async function sendOTP(e) {
@@ -27,9 +27,10 @@
     <div class="container">
         <form action method="post">
             <!-- TODO: Add CAPCHA system -->
+            {#if !form?.success}<p class="invalid">{form?.message}</p>{/if}
             <div class="input">
-                <input type="number" min={1} max={999999} name="otp" placeholder="Mã OTP" class:invalid={form?.invalid}>
-                <button type="button" on:click={sendOTP}>Gửi mã OTP</button>
+                <input type="number" min={1} max={999999} name="otp" placeholder="Mã OTP" required>
+                <button type="button" onclick={sendOTP}>Gửi mã OTP</button>
             </div>
             <button type="submit">Xác nhận OTP</button>
         </form>
@@ -78,6 +79,11 @@
         flex-grow: 1;
         width: 30%;
         font-size: 1.5rem;
+    }
+    p.invalid {
+        color: red;
+        font-weight: bold;
+        margin-top: 0;
     }
     div.input {
         display: flex;

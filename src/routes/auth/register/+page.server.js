@@ -51,7 +51,7 @@ export const actions = {
 
         await session.setData({ 
             auth: true,
-            verified: !!rows[0].verified,
+            verified: false,
             email,
             avatar: avatar_path,
             name,

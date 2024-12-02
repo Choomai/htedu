@@ -1,5 +1,6 @@
 :root {
     --primary-color: #9900ff;
+    --primary-color-selected: #b850fd;
     --bg: white;
     --bg-dark: #111;
     --text: black;
@@ -90,8 +91,15 @@ button, a.button {
     background-color: var(--primary-color);
     color: var(--text);
     font-size: 1rem;
+    transition: ease 500ms;
 }
-a.button:hover {text-decoration: none;}
+button:hover, a.button:hover {
+    background-color: var(--primary-color-selected);
+    border-radius: .5rem;
+    text-decoration: none;
+    transition: ease 500ms;
+}
+
 
 button.fake {
     padding: initial;
