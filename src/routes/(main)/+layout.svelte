@@ -30,27 +30,15 @@
         </div>
         <div class="user">
             <button class="fake" type="button" aria-label="user" onclick={() => notifyDropdown = !notifyDropdown}><i class="fa-solid fa-bell fa-2x"></i></button>
-            <button class="fake" type="button" aria-label="notification" onclick={() => userDropdown = !userDropdown}><img src={data.avatar ?? "/avatars/default.png"} alt="profile"></button>
+            <button class="fake" type="button" aria-label="notification" onclick={() => userDropdown = !userDropdown}><img src={data.avatar ?? "/avatars/default.webp"} alt="profile"></button>
             {#if userDropdown}
                 <div class="user-dropdown">
-                    {#if session.auth}
-                        Xin chào, {session.name}!
-                        <a class="button" href="/auth/logout">Đăng xuất</a>
-                    {:else}
-                        Xin chào, Khách!
-                        <button type="button" class="fake auth-action" onclick={() => userDropdown = false}>
-                            <a class="button" href="/auth/login">Đăng nhập</a>
-                            <a class="button" href="/auth/register">Đăng ký</a>
-                        </button>
-                    {/if}
+                    Xin chào, {session.name}!
+                    <a class="button" href="/auth/logout">Đăng xuất</a>
                 </div>
             {:else if notifyDropdown}
                 <button type="button" class="fake notify-dropdown" onclick={() => notifyDropdown = false}>
-                    {#if session.auth}
-                        <span>someone like ur mom</span>
-                    {:else}
-                        Bạn chưa đăng nhập!
-                    {/if}
+                    <span>someone like ur mom</span>
                 </button>
             {/if}
         </div>
@@ -160,9 +148,5 @@
     div.user-dropdown {
         align-items: center;
         width: fit-content;
-    }
-    button.auth-action {
-        display: flex;
-        gap: 1rem;
     }
 </style>

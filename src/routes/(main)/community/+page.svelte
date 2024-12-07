@@ -7,7 +7,7 @@
     {#if articles.length >= 1}
         {#each articles as article}
             <article>
-                <h2><img src={article.avatar || "/avatars/default.png"} alt="user avatar">{article.username}</h2>
+                <h2><img src={article.avatar || "/avatars/default.webp"} alt="user avatar">{article.username}</h2>
                 <p>{article.content}</p>
                 <div class="action">
                     <button class="fake" type="button" title="like"><i class="fa-solid fa-heart"></i>&nbsp;{article.total_likes}</button>

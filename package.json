@@ -16,6 +16,8 @@
 		"vite": "^5.0.3"
 	},
 	"dependencies": {
+		"@monaco-editor/loader": "^1.4.0",
+		"monaco-editor": "^0.52.0",
 		"mysql2": "^3.11.3",
 		"nodemailer": "^6.9.16",
 		"safejslib": "^1.0.1",

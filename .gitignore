@@ -1,8 +1,8 @@
 node_modules
 
 # Static
-/static/avatars/*.png
-!/static/avatars/default.png
+/static/avatars/*.webp
+!/static/avatars/default.webp
 
 # Output
 .output

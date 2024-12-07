@@ -29,9 +29,9 @@ export const actions = {
 
         if (avatar_image instanceof File && avatar_image.type.startsWith("image/")) {
             const buff = await avatar_image.arrayBuffer()
-            avatar_path = path.join(process.cwd(), "static", "avatars", `${username}.png`);
-            await sharp(Buffer.from(buff)).toFormat("png").toFile(avatar_path);
-            avatar_path = `/static/avatars/${username}.png`;
+            avatar_path = path.join(process.cwd(), "static", "avatars", `${username}.webp`);
+            await sharp(Buffer.from(buff)).toFormat("webp").toFile(avatar_path);
+            avatar_path = `/static/avatars/${username}.webp`;
         }
         
         const salt = randomBytes(16).toString("hex");
