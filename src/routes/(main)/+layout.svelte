@@ -33,7 +33,7 @@
             <button class="fake" type="button" aria-label="notification" onclick={() => userDropdown = !userDropdown}><img src={data.avatar ?? "/avatars/default.webp"} alt="profile"></button>
             {#if userDropdown}
                 <div class="user-dropdown">
-                    Xin chào, {session.name}!
+                    Xin chào, {session.name ?? "Khách"}!
                     <a class="button" href="/auth/logout">Đăng xuất</a>
                 </div>
             {:else if notifyDropdown}
@@ -144,6 +144,7 @@
         padding: 1rem;
         border-radius: 1rem;
         background-color: var(--dropdown-dark);
+        z-index: 50;
     }
     div.user-dropdown {
         align-items: center;

@@ -1,9 +1,24 @@
 <script>
+    import { Tipex } from "@friendofsvelte/tipex";
+    import "@friendofsvelte/tipex/styles/Tipex.css";
+    import "@friendofsvelte/tipex/styles/ProseMirror.css";
+    import "@friendofsvelte/tipex/styles/Controls.css";
+    import "@friendofsvelte/tipex/styles/EditLink.css";
+    import "@friendofsvelte/tipex/styles/CodeBlock.css";
+
     let { data } = $props();
     const articles = data.articles;
 </script>
 
 <main>
+    <form action="?/new_article" method="post">
+        <Tipex controls floating focal>
+            {#snippet foot(tipex)}
+                <button type="submit"><i class="fa-solid fa-pen-to-square fa-fw"></i>Đăng bài</button>
+            {/snippet}
+        </Tipex>
+    </form>
+
     {#if articles.length >= 1}
         {#each articles as article}
             <article>
@@ -24,6 +39,7 @@
 <style>
     main {
         align-items: center;
+        padding: 0 6rem;
     }
 
     h2 {
@@ -38,19 +54,21 @@
         height: 40px;
     }
 
+    form {
+        width: 100%;
+    }
+
     article {
         border: 1px solid white;
-        width: 80%;
+        width: 100%;
         padding: 8px;
         border-radius: 16px;
     }
-
-    div.action {
+    article > div.action {
         display: flex;
         gap: 1rem;
     }
-
-    button.fake {
+    article > div.action > button.fake {
         display: inline-flex;
         align-items: center;
         font-size: 1.5rem;
