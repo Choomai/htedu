@@ -38,7 +38,7 @@
                 </div>
             {:else if notifyDropdown}
                 <button type="button" class="fake notify-dropdown" onclick={() => notifyDropdown = false}>
-                    <span>someone like ur mom</span>
+                    <span>Không có thông báo</span>
                 </button>
             {/if}
         </div>
