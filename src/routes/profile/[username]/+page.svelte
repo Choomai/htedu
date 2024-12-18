@@ -2,7 +2,7 @@
     import { app_name } from "$lib/const";
     
     let { data } = $props();
-    const { session } = data;
+    const { session, user } = data;
     let userDropdown = $state(false);
     let notifyDropdown = $state(false);
 </script>
@@ -30,9 +30,9 @@
         <div class="cover"></div>
         <article>
             <div class="profile">
-                <img src="/avatars/default.webp" alt="user avatar">
+                <img src={user.avatar ?? "/avatars/default.webp"} alt="user avatar">
                 <div class="info">
-                    <span class="name">Nguyễn Văn A</span>
+                    <span class="name">{user.name}</span>
                     <!-- Edit button if self -->
                     {#if true} 
                         <a class="button" href="/profile/ngvana/edit">Chỉnh sửa</a>
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="follow-container">
-                <span>{69} đang theo dõi</span>
+                <span>69 đang theo dõi</span>
             </div>
             <hr>
             
