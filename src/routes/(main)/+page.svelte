@@ -31,21 +31,10 @@
             </figcaption>
         </figure>
     </article>
-    <Teachers/>
+    <Teachers data={data?.teachers} homepage={true}/>
 </main>
 
 <style>
-    article > div.header-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    article > div.header-wrapper > a {
-        color: var(--placeholder-color);
-        text-decoration: none;
-    }
-    h2 {margin: 0;}
-
     article > figure {
         display: flex;
         flex-direction: column;

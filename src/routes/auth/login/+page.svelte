@@ -58,7 +58,7 @@
 
     a.button {
         background-color: #111;
-        color: var(--text-dark);
+        color: var(--text);
         border-radius: 2rem;
     }
 

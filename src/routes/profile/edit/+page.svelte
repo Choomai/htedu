@@ -26,7 +26,7 @@
         border: none;
         border-radius: 1rem;
         outline: 2px solid transparent;
-        background-color: var(--input-box-dark);
+        background-color: var(--input-box);
     }
     form input:focus-visible {
         outline: 2px solid var(--primary-color);

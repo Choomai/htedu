@@ -68,7 +68,7 @@
 
     a.button {
         background-color: #111;
-        color: var(--text-dark);
+        color: var(--text);
         border-radius: 2rem;
     }
 
@@ -106,7 +106,7 @@
         border-radius: 1rem;
         padding: .5rem;
         user-select: none;
-        border: 1px solid var(--text-dark);
+        border: 1px solid var(--text);
         white-space: nowrap;
     }
     div.file-input > span {

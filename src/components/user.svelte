@@ -1,9 +1,8 @@
 <script>
-    let username;
-    let avatar;
+    let props = $props();
 </script>
 
 <div class="user">
-    <img src={avatar ?? "/avatars/default.webp"} alt="profile">
-    {username}
+    <img src={props.avatar ?? "/avatars/default.webp"} alt="profile">
+    {props.name}
 </div>

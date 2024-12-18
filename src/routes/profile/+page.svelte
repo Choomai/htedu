@@ -103,7 +103,7 @@
         width: 160px;
         height: 160px;
         border-radius: 100%;
-        outline: 1rem solid var(--bg-dark);
+        outline: 1rem solid var(--bg);
         user-select: none;
     }
     div.info {
@@ -118,7 +118,7 @@
 
     hr {
         width: 100%;
-        border-color: var(--placeholder-dark);
+        border-color: var(--placeholder);
     }
 
     nav.profile {

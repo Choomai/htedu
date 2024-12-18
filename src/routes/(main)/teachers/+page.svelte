@@ -1,4 +1,6 @@
 <script>
+    let { data } = $props();
+
     import Teachers from "/src/components/teachers.svelte";
 </script>
 
@@ -11,7 +13,7 @@
         <i>Bằng việc đăng ký tài khoản giáo viên bạn sẽ đăng tải được các tài liệu học tập, bài tập lên website của chúng tôi</i>
     </div>
     <hr>
-    <Teachers/>
+    <Teachers data={data?.teachers}/>
 </main>
 
 <style>
@@ -31,8 +33,8 @@
         padding: .5rem 2rem;
         border-radius: .5rem;
         text-decoration: none;
-        color: var(--text-dark);
-        background-color: var(--bg-dark);
+        color: black;
+        background-color: white;
     }
 
     hr {

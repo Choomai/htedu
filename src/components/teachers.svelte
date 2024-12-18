@@ -1,21 +1,45 @@
-<article class="teachers">
+<script>
+    let props = $props();
+</script>
+
+{#if props?.homepage}
+    <div class="header-wrapper">
+        <h2>Giáo viên</h2>
+        <a href="/teachers">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+{:else}
     <h2>Giáo viên</h2>
-    <figure>
-        <img src="/imgs/logo.png" alt="teachers avatar">
-        <figcaption>insert name</figcaption>
-    </figure>
+{/if}
+<article>
+    {#each props?.data as teacher}
+        <a href="/profile/{teacher.username}">
+            <figure>
+                <img src={teacher.avatar ?? "/avatars/default.webp"} alt="teachers avatar">
+                <figcaption>{teacher.name}</figcaption>
+            </figure>
+        </a>
+    {/each}
 </article>
 
 <style>
-    article.teachers > figure {
+    article {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    a {
+        color: var(--text);
+        text-decoration: none;
+    }
+
+    figure {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 1rem;
-        width: fit-content;
         font-size: 1.25rem;
     }
-    article.teachers > figure > img {
+    figure > img {
         width: 120px;
         height: 120px;
         border-radius: 100%;

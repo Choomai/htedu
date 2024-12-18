@@ -5,6 +5,7 @@
     import "@friendofsvelte/tipex/styles/Controls.css";
     import "@friendofsvelte/tipex/styles/EditLink.css";
     import "@friendofsvelte/tipex/styles/CodeBlock.css";
+    import Foot from "./foot.svelte";
 
     let { data } = $props();
     const articles = data.articles;
@@ -12,10 +13,8 @@
 
 <main>
     <form action="?/new_article" method="post">
-        <Tipex controls floating focal>
-            {#snippet foot(tipex)}
-                <button type="submit"><i class="fa-solid fa-pen-to-square fa-fw"></i>Đăng bài</button>
-            {/snippet}
+        <Tipex class="dark" controls floating focal>
+            {#snippet foot(tipex)}<Foot/>{/snippet}
         </Tipex>
     </form>
 

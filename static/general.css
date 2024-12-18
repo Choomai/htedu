@@ -2,13 +2,9 @@
     --primary-color: #9900ff;
     --primary-color-selected: #b850fd;
     --bg: white;
-    --bg-dark: #111;
     --text: black;
-    --text-dark: white;
-    --input-box-dark: #222;
-    --dropdown-dark: #222;
     --placeholder: #f2f2f2;
-    --placeholder-dark: gray;
+    
 
     --cover-gradient-start: #f4afaf;
     --cover-gradient-end: #ab72f0;
@@ -48,15 +44,24 @@ body {
     color: var(--text);
 }
 
-a {
-    text-decoration: none;
-}
+a {text-decoration: none;}
 a:hover {text-decoration: underline;}
 
 div#svelte-root {
     display: flex;
     height: 100%;
 }
+
+div.header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+div.header-wrapper > a {
+    color: var(--placeholder-color);
+    text-decoration: none;
+}
+div.header-wrapper h2 {margin: 0;}
 
 div.user {
     display: flex;
@@ -111,6 +116,13 @@ button.fake {
 }
 
 @media (prefers-color-scheme: dark) {
+    :root {
+        --bg-dark: #111;
+        --text: white;
+        --input-box: #222;
+        --dropdown: #222;
+        --placeholder: gray;
+    }
     body {
         background-color: var(--bg-dark);
         color: var(--text-dark);

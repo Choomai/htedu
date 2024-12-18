@@ -143,7 +143,7 @@
         right: 16px;
         padding: 1rem;
         border-radius: 1rem;
-        background-color: var(--dropdown-dark);
+        background-color: var(--dropdown);
         z-index: 50;
     }
     div.user-dropdown {
