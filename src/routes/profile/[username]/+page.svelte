@@ -34,8 +34,10 @@
                 <div class="info">
                     <span class="name">{user.name}</span>
                     <!-- Edit button if self -->
-                    {#if true} 
-                        <a class="button" href="/profile/ngvana/edit">Chỉnh sửa</a>
+                    {#if session.username == user.username} 
+                        <a class="button" href="/profile/{user.username}/edit">Chỉnh sửa</a>
+                    {:else}
+                        <button type="button">Theo dõi</button>
                     {/if}
                 </div>
             </div>
@@ -46,10 +48,10 @@
             
             <nav class="profile">
                 <section>
-                    <a class="active" href="/profile/ngvana"><i class="fa-solid fa-newspaper fa-fw"></i>Bài viết</a>
+                    <a class="active normalize" href="/profile/ngvana"><i class="fa-solid fa-newspaper fa-fw"></i>Bài viết</a>
                 </section>
                 <section>
-                    <a href="/profile/ngvana/history/"><i class="fa-solid fa-file-lines fa-fw"></i>Lịch sử bài tập</a>
+                    <a class="normalize" href="/profile/ngvana/history/"><i class="fa-solid fa-file-lines fa-fw"></i>Lịch sử bài tập</a>
                 </section>
             </nav>
         </article>
@@ -111,7 +113,7 @@
         align-items: center;
         gap: 1.5rem;
     }
-    div.info > a.button {
+    div.info > :is(a.button, button) {
         font-size: inherit;
         padding: 1rem 1.5rem;
     }
@@ -125,5 +127,4 @@
         display: flex;
         gap: 1rem;
     }
-    nav.profile > section > h2
 </style>

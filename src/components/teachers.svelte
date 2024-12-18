@@ -12,7 +12,7 @@
 {/if}
 <article>
     {#each props?.data as teacher}
-        <a href="/profile/{teacher.username}">
+        <a class="normalize" href="/profile/{teacher.username}">
             <figure>
                 <img src={teacher.avatar ?? "/avatars/default.webp"} alt="teachers avatar">
                 <figcaption>{teacher.name}</figcaption>
@@ -25,11 +25,6 @@
     article {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-    }
-
-    a {
-        color: var(--text);
-        text-decoration: none;
     }
 
     figure {
