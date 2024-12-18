@@ -66,7 +66,7 @@ div.header-wrapper h2 {margin: 0;}
 div.user {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: .5rem;
 }
 div.user img {
     width: 40px;
@@ -86,7 +86,7 @@ input:not([type="file"]) {
     padding: 1rem;
     border: none;
     border-radius: 1rem;
-    background-color: var(--input-box-dark);
+    background-color: var(--input-box);
 }
 input::placeholder {color: var(--placeholder);}
 
@@ -117,16 +117,10 @@ button.fake {
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-dark: #111;
+        --bg: #111;
         --text: white;
         --input-box: #222;
         --dropdown: #222;
         --placeholder: gray;
     }
-    body {
-        background-color: var(--bg-dark);
-        color: var(--text-dark);
-    }
-    input::placeholder {color: var(--placeholder-dark);}
-    button, a.button {color: var(--text-dark);}
 }
