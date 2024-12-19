@@ -89,7 +89,7 @@
         gap: .5rem;
         padding: 8px;
         text-decoration: none;
-        color: white;
+        color: var(--text);
         border-radius: 16px;
         transition: 500ms ease color;
         user-select: none;
@@ -101,6 +101,7 @@
     }
     nav.sidebar a.selected {
         background-color: var(--primary-color);
+        color: white;
     }
 
 

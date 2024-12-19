@@ -61,13 +61,14 @@
         justify-content: center;
         gap: 1rem;
         background-color: var(--primary-color);
+        color: white;
         width: 60%;
         border-radius: 35% 0 0 35%;
     }
     h1, h2 {margin: 0;}
 
     a.button {
-        background-color: #111;
+        background-color: var(--bg);
         color: var(--text);
         border-radius: 2rem;
     }

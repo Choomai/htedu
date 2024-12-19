@@ -49,7 +49,7 @@
     }
     article > figure > figcaption {
         padding: .5rem;
-        background-color: black;
+        background-color: var(--secondary-bg);
         border-bottom-left-radius: 16px;
         border-bottom-right-radius: 16px;
     }

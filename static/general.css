@@ -2,8 +2,12 @@
     --primary-color: #9900ff;
     --primary-color-selected: #b850fd;
     --bg: white;
+    --secondary-bg: #eee;
+    --input-box: #f2f2f2;
     --text: black;
-    --placeholder: #f2f2f2;
+    --url: #9900ff;
+    --dropdown: #eee;
+    --placeholder: #bfbfbf;
     
 
     --cover-gradient-start: #f4afaf;
@@ -44,7 +48,10 @@ body {
     color: var(--text);
 }
 
-a {text-decoration: none;}
+a {
+    color: var(--url);
+    text-decoration: none;
+}
 a:hover {text-decoration: underline;}
 a.normalize {
     color: var(--text);
@@ -91,6 +98,7 @@ input:not([type="file"]) {
     border: none;
     border-radius: 1rem;
     background-color: var(--input-box);
+    color: var(--text);
 }
 input::placeholder {color: var(--placeholder);}
 
@@ -101,7 +109,7 @@ button, a.button {
     border: none;
     border-radius: 1rem;
     background-color: var(--primary-color);
-    color: var(--text);
+    color: white;
     font-size: 1rem;
     transition: ease 500ms;
     user-select: none;
@@ -117,12 +125,15 @@ button:hover, a.button:hover {
 button.fake {
     padding: initial;
     background: none;
+    color: var(--text);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         --bg: #111;
+        --secondary-bg: #222;
         --text: white;
+        --url: white;
         --input-box: #222;
         --dropdown: #222;
         --placeholder: gray;
