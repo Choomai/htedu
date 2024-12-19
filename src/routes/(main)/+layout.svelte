@@ -134,21 +134,4 @@
     div.user {
         justify-self: flex-end;
     }
-
-    div.user-dropdown, button.notify-dropdown {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        gap: .5rem;
-        top: 64px;
-        right: 16px;
-        padding: 1rem;
-        border-radius: 1rem;
-        background-color: var(--dropdown);
-        z-index: 50;
-    }
-    div.user-dropdown {
-        align-items: center;
-        width: fit-content;
-    }
 </style>
