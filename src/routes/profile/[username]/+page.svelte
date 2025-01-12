@@ -1,10 +1,9 @@
 <script>
+    import Navbar from "/src/components/navbar.svelte";
     import { app_name } from "$lib/const";
     
     let { data } = $props();
     const { session, user } = data;
-    let userDropdown = $state(false);
-    let notifyDropdown = $state(false);
 
     function requestFollow(e) {
         e.target.disabled = true;
@@ -13,31 +12,24 @@
             method: "PUT",
             headers: {"Content-Type": "text/plain"},
             body: user.id
-        }).then(res => {
+        })
+        .then(res => {
             e.target.disabled = false;
             if (res.status == 201) {
                 e.target.textContent = "Đã theo dõi";
             } else if (res.status == 200) {
                 e.target.textContent = "Theo dõi";
             };
+        })
+        .catch(err => {
+            console.error(err);
+            e.target.textContent = "Lỗi";
         });
     }
 </script>
 
 <div class="container">
-    <nav class="navbar">
-        <h2>{app_name}</h2>
-        <div class="user">
-            <button class="fake" type="button" aria-label="user" onclick={() => notifyDropdown = !notifyDropdown}><i class="fa-solid fa-bell fa-2x"></i></button>
-            <button class="fake" type="button" aria-label="notification" onclick={() => userDropdown = !userDropdown}><img src={data.avatar ?? "/avatars/default.webp"} alt="profile"></button>
-            {#if userDropdown}
-                <div class="user-dropdown">
-                    Xin chào, {session.name}!
-                    <a class="button" href="/auth/logout">Đăng xuất</a>
-                </div>
-            {/if}
-        </div>
-    </nav>
+    <Navbar showTitle name={session.name} avatar={session.avatar}/>
     
     <main>
         <div class="cover"></div>
@@ -80,16 +72,10 @@
         height: 100%;
         overflow-y: scroll;
     }
-    
-    nav.navbar {
-        display: flex;
-        justify-content: space-between;
-        height: fit-content;
-    }
 
     main {
         flex-grow: 1;
-        padding: 0 2rem;
+        padding: 0;
     }
     div.cover {
         background: linear-gradient(-45deg, var(--cover-gradient-start), var(--cover-gradient-end));

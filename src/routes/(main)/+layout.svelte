@@ -1,11 +1,10 @@
 <script>
+    import Navbar from "/src/components/navbar.svelte";
     import { page } from "$app/stores";
     import { app_name } from "$lib/const";
     
     let { data, children } = $props();
     const { session } = data;
-    let userDropdown = $state(false);
-    let notifyDropdown = $state(false);
 </script>
 
 <nav class="sidebar">
@@ -23,26 +22,7 @@
 </nav>
 
 <div class="container">
-    <nav class="navbar">
-        <div class="search-wrapper">
-            <input type="text" id="search" placeholder="Tìm kiếm...">
-            <i id="searchIcon" class="fa-solid fa-magnifying-glass fa-1x"></i>
-        </div>
-        <div class="user">
-            <button class="fake" type="button" aria-label="user" onclick={() => notifyDropdown = !notifyDropdown}><i class="fa-solid fa-bell fa-2x"></i></button>
-            <button class="fake" type="button" aria-label="notification" onclick={() => userDropdown = !userDropdown}><img src={data.avatar ?? "/avatars/default.webp"} alt="profile"></button>
-            {#if userDropdown}
-                <div class="user-dropdown">
-                    Xin chào, {session.name ?? "Khách"}!
-                    <a class="button" href="/auth/logout">Đăng xuất</a>
-                </div>
-            {:else if notifyDropdown}
-                <button type="button" class="fake notify-dropdown" onclick={() => notifyDropdown = false}>
-                    <span>Không có thông báo</span>
-                </button>
-            {/if}
-        </div>
-    </nav>
+    <Navbar name={session.name} avatar={session.avatar}/>
     {@render children()}
 </div>
 
@@ -102,36 +82,5 @@
     nav.sidebar a.selected {
         background-color: var(--primary-color);
         color: white;
-    }
-
-
-    nav.navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: fit-content;
-        margin: 8px;
-    }
-    div.search-wrapper {
-        display: flex;
-        justify-content: center;
-        flex-grow: 1;
-    }
-    input#search {
-        width: 60%;
-        padding: 8px;
-        border-radius: 16px;
-        border: 1px solid gray;
-        font-size: 1rem;
-    }
-    input#search::placeholder {color: var(--placeholder-color);}
-    #searchIcon {
-        position: relative;
-        left: -28px;
-        top: 10px;
-        cursor: pointer;
-    }
-    div.user {
-        justify-self: flex-end;
     }
 </style>

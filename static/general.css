@@ -114,7 +114,7 @@ figure > figcaption {
 }
 figure h3 {margin-top: 0;}
 
-input:not([type="file"]) {
+input:not([type="file"], [type="radio"]) {
     padding: 1rem;
     border: none;
     border-radius: 1rem;
