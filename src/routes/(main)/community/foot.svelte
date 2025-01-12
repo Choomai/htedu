@@ -1,5 +1,9 @@
+<script>
+    let props = $props();
+</script>
+
 <footer>
-    <span>Đăng bài dưới username </span>
+    <span>Bạn đang đăng bài với username là {props.username}</span>
     <button type="submit"><i class="fa-solid fa-pen-to-square fa-fw"></i>Đăng bài</button>
 </footer>
 
@@ -9,5 +13,6 @@
         justify-content: space-between;
         width: 100%;
         padding: .5rem;
+        align-items: center;
     }
 </style>

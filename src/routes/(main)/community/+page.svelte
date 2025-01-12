@@ -5,6 +5,7 @@
     import "@friendofsvelte/tipex/styles/Controls.css";
     import "@friendofsvelte/tipex/styles/EditLink.css";
     import "@friendofsvelte/tipex/styles/CodeBlock.css";
+    import "./tipex.css";
     import Foot from "./foot.svelte";
 
     let { data } = $props();
@@ -13,8 +14,8 @@
 
 <main>
     <form action="?/new_article" method="post">
-        <Tipex class="dark" controls floating focal>
-            {#snippet foot(tipex)}<Foot/>{/snippet}
+        <Tipex class={window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : ""} controls floating focal>
+            {#snippet foot(editor)}<Foot username={data.session.username}/>{/snippet}
         </Tipex>
     </form>
 
