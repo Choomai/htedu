@@ -5,6 +5,23 @@
     const { session, user } = data;
     let userDropdown = $state(false);
     let notifyDropdown = $state(false);
+
+    function requestFollow(e) {
+        e.target.disabled = true;
+        e.target.textContent = "Đang xử lý...";
+        fetch("/api/follow/", {
+            method: "PUT",
+            headers: {"Content-Type": "text/plain"},
+            body: user.id
+        }).then(res => {
+            e.target.disabled = false;
+            if (res.status == 201) {
+                e.target.textContent = "Đã theo dõi";
+            } else if (res.status == 200) {
+                e.target.textContent = "Theo dõi";
+            };
+        });
+    }
 </script>
 
 <div class="container">
@@ -18,10 +35,6 @@
                     Xin chào, {session.name}!
                     <a class="button" href="/auth/logout">Đăng xuất</a>
                 </div>
-            {:else if notifyDropdown}
-                <button type="button" class="fake notify-dropdown" onclick={() => notifyDropdown = false}>
-                    <span>someone like ur mom</span>
-                </button>
             {/if}
         </div>
     </nav>
@@ -37,7 +50,7 @@
                     {#if session.username == user.username} 
                         <a class="button" href="/profile/{user.username}/edit">Chỉnh sửa</a>
                     {:else}
-                        <button type="button">Theo dõi</button>
+                        <button type="button" onclick={requestFollow}>{data.followed ? "Đã theo dõi" : "Theo dõi"}</button>
                     {/if}
                 </div>
             </div>

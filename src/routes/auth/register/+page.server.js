@@ -47,10 +47,10 @@ export const actions = {
             `.replace(/\s+/g, " ").trim(), [username, password, name, email, avatar_path, username, email]);
         if (rows.affectedRows == 0) return { success: false, message: "Username hoặc email trùng với tài khoản khác" };
         
-        await session.setData({ auth: true, email, username, password});
-
-        await session.setData({ 
+        const [userId] = await pool.execute("SELECT id FROM users WHERE username = ?", [username]);
+        await session.setData({
             auth: true,
+            id: userId[0].id,
             verified: false,
             email,
             avatar: avatar_path,

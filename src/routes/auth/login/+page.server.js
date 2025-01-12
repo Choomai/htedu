@@ -11,13 +11,14 @@ export const actions = {
         if (!(username && password)) return { success: false, message: "Hãy nhập đầy đủ các thông tin" };
         
         let [rows] = await pool.execute("SELECT * FROM users WHERE username = ?", [username]);
-        if (rows.length <= 0) return { success: false, message: "Tài khoản không tồn tại" };
+        if (rows.length == 0) return { success: false, message: "Tài khoản không tồn tại" };
         
         const [salt, key] = rows[0].password.split(":");
         password = scryptSync(password, salt, 64);
         if (!timingSafeEqual(password, Buffer.from(key, "hex"))) return { success: false, message: "Sai mật khẩu" }
-        await session.setData({ 
+        await session.setData({
             auth: true,
+            id: rows[0].id,
             verified: !!rows[0].verified,
             email: rows[0].email,
             avatar: rows[0].avatar,
