@@ -61,7 +61,7 @@
         flex-direction: column;
         justify-content: space-between;
         height: 100vh;
-        width: 300px;
+        min-width: 300px;
         padding: 1rem;
         overflow-y: overlay;
         border-right: 1px solid #fff;
