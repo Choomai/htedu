@@ -33,6 +33,10 @@
         align-items: center;
         gap: 1rem;
         font-size: 1.25rem;
+        width: unset;
+    }
+    figcaption {
+        background-color: unset;
     }
     figure > img {
         width: 120px;
