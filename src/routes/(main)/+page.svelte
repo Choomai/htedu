@@ -33,25 +33,3 @@
     </article>
     <Teachers data={data?.teachers} homepage={true}/>
 </main>
-
-<style>
-    article > figure {
-        display: flex;
-        flex-direction: column;
-        width: 400px;
-        border-radius: 1rem;
-    }
-    article > figure > img {
-        width: 400px;
-        height: 150px;
-        border-top-left-radius: 1rem;
-        border-top-right-radius: 1rem;
-    }
-    article > figure > figcaption {
-        padding: .5rem;
-        background-color: var(--secondary-bg);
-        border-bottom-left-radius: 16px;
-        border-bottom-right-radius: 16px;
-    }
-    h3 {margin-top: 0;}
-</style>

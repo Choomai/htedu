@@ -1,6 +1,7 @@
 :root {
-    --primary-color: #9900ff;
-    --primary-color-selected: #b850fd;
+    --primary-color: hsl(276, 100%, 50%);
+    --primary-color-selected: hsl(276, 100%, 65%);
+    --primary-color-disabled: hsl(276, 100%, 35%);
     --bg: white;
     --secondary-bg: #eee;
     --input-box: #f2f2f2;
@@ -13,7 +14,7 @@
     --cover-gradient-start: #f4afaf;
     --cover-gradient-end: #ab72f0;
 
-    --first-gradient-start: #47cacc;
+    /* --first-gradient-start: #47cacc;
     --first-gradient-end: #cdb3d4;
     --second-graident-start: #fe676e;
     --second-graident-end: #47cacc;
@@ -33,7 +34,7 @@
     --fourth-gradient-dark-start: #FF9CDA;
     --fourth-gradient-dark-end: #EA4492;
     --fifth-gradient-dark-start: #EA4492;
-    --fifth-gradient-dark-end: #004E9A;
+    --fifth-gradient-dark-end: #004E9A; */
 }
 
 * {box-sizing: border-box;}
@@ -93,6 +94,26 @@ main {
     flex-grow: 1;
 }
 
+figure {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    border-radius: 1rem;
+}
+figure > img {
+    width: 400px;
+    height: 150px;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+figure > figcaption {
+    padding: .5rem;
+    background-color: var(--secondary-bg);
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+figure h3 {margin-top: 0;}
+
 input:not([type="file"]) {
     padding: 1rem;
     border: none;
@@ -119,6 +140,13 @@ button:hover, a.button:hover {
     border-radius: .5rem;
     text-decoration: none;
     transition: ease 500ms;
+}
+
+button[disabled], a.button[disabled] {
+    background-color: var(--primary-color-disabled);
+    color: lightgray;
+    cursor: not-allowed;
+    border-radius: 1rem;
 }
 
 button.fake {
