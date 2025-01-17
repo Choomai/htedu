@@ -1,8 +1,8 @@
 <script>
     import { app_name } from "$lib/const";
-    export let form;
+    let { form } = $props();
 
-    let currentFilename = "";
+    let currentFilename = $state("");
     function updateFilename(e) {
         currentFilename = e.target.value.replace(/^.*[\\\/]/, '');
     }
@@ -15,7 +15,7 @@
             <h2>Đăng ký</h2>
             {#if form?.success == false}<p>{form?.message}</p>{/if}
             <div class="input">
-                <input type="text" name="username" placeholder="Tên đăng nhập" required>
+                <input type="text" name="username" placeholder="Tên đăng nhập" required minlength="3" maxlength="24">
                 <input type="text" name="name" placeholder="Họ và tên" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Mật khẩu" required>
@@ -23,7 +23,7 @@
                 <div class="file-input">
                     <label for="avatar"><i class="fa-solid fa-file-image"></i>Ảnh đại diện</label>
                     <span>{currentFilename}</span>
-                    <input type="file" name="avatar" id="avatar" accept="image/*" on:change={updateFilename} hidden>
+                    <input type="file" name="avatar" id="avatar" accept="image/*" onchange={updateFilename} hidden>
                 </div>
             </div>
             <button type="submit">Đăng ký</button>

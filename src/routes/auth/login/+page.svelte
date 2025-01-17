@@ -1,6 +1,6 @@
 <script>
     import { app_name } from "$lib/const";
-    export let form;
+    let { form } = $props();
 </script>
 
 <main>
