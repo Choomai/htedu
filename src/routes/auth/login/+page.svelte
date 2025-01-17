@@ -1,4 +1,5 @@
 <script>
+    import { enhance } from "$app/forms";
     import { app_name } from "$lib/const";
     let { form } = $props();
 </script>
@@ -11,7 +12,7 @@
             <h2>Bạn chưa có tài khoản?</h2>
             <a href="/auth/register" class="button">Tạo tài khoản</a>
         </div>
-        <form action method="post">
+        <form action method="post" use:enhance>
             <h2>Đăng nhập</h2>
             {#if form?.success == false}<p>{form?.message}</p>{/if}
             <div class="input">

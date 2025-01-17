@@ -1,4 +1,5 @@
 <script>
+    import { enhance } from "$app/forms";
     import { app_name } from "$lib/const";
     let { form } = $props();
 
@@ -11,7 +12,7 @@
 <main>
     <h1 class="app-name">{app_name}</h1>
     <div class="container">
-        <form action method="post" enctype="multipart/form-data">
+        <form action method="post" enctype="multipart/form-data" use:enhance>
             <h2>Đăng ký</h2>
             {#if form?.success == false}<p>{form?.message}</p>{/if}
             <div class="input">
