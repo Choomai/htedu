@@ -1,6 +1,7 @@
 <script>
     import { enhance } from "$app/forms";
     import { app_name } from "$lib/const";
+    import AuthDecoration from "/src/components/auth-decoration.svelte";
     let { form } = $props();
 
     let currentFilename = $state("");
@@ -29,11 +30,7 @@
             </div>
             <button type="submit">Đăng ký</button>
         </form>
-        <div class="hint">
-            <h1>Chào mừng đến với {app_name}!</h1>
-            <h2>Bạn đã có tài khoản?</h2>
-            <a href="/auth/login" class="button">Đăng nhập</a>
-        </div>
+        <AuthDecoration type="register"/>
     </div>
 </main>
 
@@ -55,24 +52,7 @@
         flex-direction: row;
         flex-grow: 1;
     }
-    div.hint {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
-        background-color: var(--primary-color);
-        color: white;
-        width: 60%;
-        border-radius: 35% 0 0 35%;
-    }
     h1, h2 {margin: 0;}
-
-    a.button {
-        background-color: var(--bg);
-        color: var(--text);
-        border-radius: 2rem;
-    }
 
     form {
         display: flex;

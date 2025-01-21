@@ -1,17 +1,14 @@
 <script>
     import { enhance } from "$app/forms";
     import { app_name } from "$lib/const";
+    import AuthDecoration from "/src/components/auth-decoration.svelte";
     let { form } = $props();
 </script>
 
 <main>
     <h1 class="app-name">{app_name}</h1>
     <div class="container">
-        <div class="hint">
-            <h1>Chào mừng trở lại!</h1>
-            <h2>Bạn chưa có tài khoản?</h2>
-            <a href="/auth/register" class="button">Tạo tài khoản</a>
-        </div>
+        <AuthDecoration type="login"/>
         <form action method="post" use:enhance>
             <h2>Đăng nhập</h2>
             {#if form?.success == false}<p>{form?.message}</p>{/if}
@@ -23,7 +20,7 @@
                 <a href="/auth/reset-password">Quên mật khẩu?</a>
                 <button type="submit">Đăng nhập</button>
             </div>
-        </form>
+        </form> 
     </div>
 </main>
 
@@ -45,24 +42,7 @@
         flex-direction: row;
         flex-grow: 1;
     }
-    div.hint {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
-        background-color: var(--primary-color);
-        color: white;
-        width: 60%;
-        border-radius: 0 35% 35% 0;
-    }
     h1, h2 {margin: 0;}
-
-    a.button {
-        background-color: var(--bg);
-        color: var(--text);
-        border-radius: 2rem;
-    }
 
     form {
         display: flex;

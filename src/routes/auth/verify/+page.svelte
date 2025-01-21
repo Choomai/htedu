@@ -1,10 +1,13 @@
 <script>
+    import AuthDecoration from "/src/components/auth-decoration.svelte";
     import { app_name } from "$lib/const";
     let { form } = $props();
     let timeLeft = 0;
 
     async function sendOTP(e) {
-        const otpFetch = await fetch("/api/otp", { method: "POST" })
+        const formData = new FormData();
+        formData.append("type", "verify");
+        const otpFetch = await fetch("/api/otp", { method: "POST", body: formData })
         if (otpFetch.ok) {
             e.target.disabled = true;
             timeLeft = 60;
@@ -30,14 +33,11 @@
             {#if !form?.success}<p class="invalid">{form?.message}</p>{/if}
             <div class="input">
                 <input type="number" min={1} max={999999} name="otp" placeholder="Mã OTP" required>
-                <button type="button" onclick={sendOTP}>Gửi mã OTP</button>
+                <button type="button" onclick={sendOTP}>Gửi OTP</button>
             </div>
             <button type="submit">Xác nhận OTP</button>
         </form>
-        <div class="hint">
-            <h1>Chào mừng đến với {app_name}!</h1>
-            <h2>Bạn phải xác nhận email trước khi sử dụng dịch vụ!</h2>
-        </div>
+        <AuthDecoration type="verify"/>
     </div>
 </main>
 
@@ -59,17 +59,6 @@
         flex-direction: row;
         flex-grow: 1;
     }
-    div.hint {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
-        background-color: var(--primary-color);
-        width: 60%;
-        border-radius: 35% 0 0 35%;
-    }
-    h1, h2 {margin: 0;}
 
     form {
         display: flex;
