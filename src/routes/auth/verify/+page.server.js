@@ -16,8 +16,8 @@ export const actions = {
 
         const otp = data.get("otp");
         await pool.execute("DELETE FROM otp WHERE timestamp < NOW() - INTERVAL 10 MINUTE");
-        const [otpQuery] = await pool.execute("SELECT username, otp FROM otp WHERE username = ?", [session.data.username]);
-        if (otpQuery.length < 1 || otpQuery[0]?.otp != otp) return { success: false, message: "Sai mã OTP" }
+        const [otpRows] = await pool.execute("SELECT username, otp FROM otp WHERE username = ?", [session.data.username]);
+        if (otpRows.length < 1 || otpRows[0]?.otp != otp) return { success: false, message: "Sai mã OTP" }
 
         const [verifiedQuery] = await pool.execute("UPDATE users SET verified = true WHERE username = ?", [session.data.username]);
         if (verifiedQuery.affectedRows < 1) return { success: false, message: "Có lỗi xảy ra khi xác minh OTP" };
