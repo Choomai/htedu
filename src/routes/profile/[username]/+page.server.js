@@ -1,4 +1,4 @@
-import { pool } from "$lib/db";
+import { pool } from "$lib";
 import { error } from "@sveltejs/kit";
 
 /** @type {import('./$types').PageServerLoad} */

@@ -1,6 +1,6 @@
 <script>
     import { enhance } from "$app/forms";
-    import { app_name } from "$lib/const";
+    import { app_name } from "$lib";
     let { form } = $props();
 </script>
 

@@ -1,4 +1,4 @@
-import { pool } from "$lib/db";
+import { pool } from "$lib";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {

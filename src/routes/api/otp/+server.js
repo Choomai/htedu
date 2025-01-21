@@ -3,7 +3,7 @@ import { MAIL_HOST, MAIL_ACCOUNT, MAIL_PASSWORD } from "$env/static/private";
 import { error } from "@sveltejs/kit";
 import { randomInt } from "node:crypto"
 import Safe from "safejslib";
-import { pool } from "$lib/db";
+import { pool } from "$lib";
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ locals }) {

@@ -1,5 +1,5 @@
 import { error, redirect } from "@sveltejs/kit";
-import { pool } from "$lib/db";
+import { pool } from "$lib";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ request, locals }) {

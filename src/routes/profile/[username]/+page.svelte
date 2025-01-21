@@ -1,6 +1,6 @@
 <script>
     import Navbar from "/src/components/navbar.svelte";
-    import { app_name } from "$lib/const";
+    import { app_name } from "$lib";
     
     let { data } = $props();
     const { session, user } = data;
