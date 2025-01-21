@@ -13,7 +13,7 @@ print("Archive:  build.zip")
 zipf = ZipFile("build.zip", "w", ZIP_STORED)
 zipdir("build/", zipf)
 
-for file in ["package.json", "package-lock.json"]:
-    print(f" adding: {file}")
+for file in ["package.json", "package-lock.json", "cert.pem", "key.pem", "ca.pem"]:
+    print(f"adding: {file}")
     zipf.write(file)
 zipf.close()

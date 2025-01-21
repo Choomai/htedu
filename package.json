@@ -18,11 +18,13 @@
 	"dependencies": {
 		"@friendofsvelte/tipex": "^0.0.7-up-5",
 		"@monaco-editor/loader": "^1.4.0",
+		"ioredis": "^5.4.2",
 		"monaco-editor": "^0.52.0",
 		"mysql2": "^3.11.3",
 		"nodemailer": "^6.9.16",
 		"safejslib": "^1.0.1",
 		"sharp": "^0.33.5",
+		"svelte-kit-connect-redis": "^0.1.0",
 		"svelte-kit-sessions": "^0.4.0"
 	}
 }
