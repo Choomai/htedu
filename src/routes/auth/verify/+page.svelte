@@ -1,5 +1,5 @@
 <script>
-    import { app_name } from "$lib";
+    import { app_name } from "$lib/const";
     let { form } = $props();
     let timeLeft = 0;
 

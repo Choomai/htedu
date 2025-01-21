@@ -1,7 +1,7 @@
 <script>
     import Navbar from "/src/components/navbar.svelte";
     import { page } from "$app/stores";
-    import { app_name } from "$lib";
+    import { app_name } from "$lib/const";
     
     let { data, children } = $props();
     const { session } = data;

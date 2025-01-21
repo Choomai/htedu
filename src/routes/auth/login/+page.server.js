@@ -1,5 +1,5 @@
 import { scryptSync, timingSafeEqual } from "node:crypto";
-import { pool } from "$lib";
+import { pool } from "$lib/db";
 import { redirect } from "@sveltejs/kit";
 
 /** @type {import('./$types').Actions} */

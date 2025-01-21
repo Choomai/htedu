@@ -1,5 +1,5 @@
 import { error } from "@sveltejs/kit";
-import { pool } from "$lib";
+import { pool } from "$lib/db";
 
 /** @type {import("./$types").RequestHandler} */
 export async function PUT({ request, locals }) {
