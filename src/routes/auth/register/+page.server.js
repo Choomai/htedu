@@ -2,8 +2,8 @@ import { scryptSync, randomBytes } from "node:crypto";
 import path from "node:path";
 import Safe from "safejslib";
 import { redirect } from "@sveltejs/kit";
-import { usernamePattern } from "$lib/const";
-import { pool } from "$lib/db";
+import { usernamePattern } from "$lib";
+import { pool } from "$lib";
 import sharp from "sharp";
 
 /** @type {import('./$types').Actions} */
@@ -29,7 +29,8 @@ export const actions = {
 
         if (avatar_image instanceof File && avatar_image.type.startsWith("image/")) {
             const buff = await avatar_image.arrayBuffer()
-            avatar_path = path.join(process.cwd(), "static", "avatars", `${username}.webp`);
+            if (process.env.NODE_ENV == "production") avatar_path = path.join(process.cwd(), "client", "avatars", `${username}.webp`);
+            else avatar_path = path.join(process.cwd(), "static", "avatars", `${username}.webp`);
             await sharp(Buffer.from(buff)).toFormat("webp").toFile(avatar_path);
             avatar_path = `/static/avatars/${username}.webp`;
         }
