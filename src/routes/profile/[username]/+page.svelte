@@ -29,7 +29,7 @@
 </script>
 
 <div class="container">
-    <Navbar showTitle name={session.name} avatar={session.avatar}/>
+    <Navbar showTitle name={session.name} avatar={session.avatar} username={session.username}/>
     
     <main>
         <div class="cover"></div>

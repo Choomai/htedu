@@ -6,7 +6,7 @@
 </script>
 
 <nav class="navbar">
-    {#if props.showTitle}<h3>Huong Tra</h3>{/if}
+    {#if props.showTitle}<a class="title" href="/"><h3>Huong Tra</h3></a>{/if}
     <div class="search-wrapper">
         <input type="text" id="search" placeholder="Tìm kiếm...">
         <i id="searchIcon" class="fa-solid fa-magnifying-glass fa-1x"></i>
@@ -16,8 +16,12 @@
         <button class="fake" type="button" aria-label="notification" onclick={() => userDropdown = !userDropdown}><img src={props.avatar ?? "/avatars/default.webp"} alt="profile"></button>
         {#if userDropdown}
             <div class="user-dropdown">
-                Xin chào, {props.name ?? "Khách"}!
-                <a class="button" href="/auth/logout">Đăng xuất</a>
+                <span>Xin chào, {props.name}!</span>
+                <div class="action">
+                    <a class="button" href="/profile/{props.username}">Trang cá nhân</a>
+                    <!-- svelte-ignore a11y_consider_explicit_label -->
+                    <a class="button" href="/auth/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+                </div>
             </div>
         {:else if notifyDropdown}
             <button type="button" class="fake notify-dropdown" onclick={() => notifyDropdown = false}>
@@ -35,8 +39,8 @@
         height: fit-content;
         margin: 8px;
     }
-
-    h3 {margin: 0;}
+    
+    nav.navbar > a.title:hover {text-decoration: none;}
 
     div.search-wrapper {
         display: flex;
@@ -59,5 +63,10 @@
     }
     div.user {
         justify-self: flex-end;
+    }
+
+    div.user-dropdown > div.action {
+        display: flex;
+        gap: 1rem;
     }
 </style>

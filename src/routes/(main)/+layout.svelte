@@ -22,7 +22,7 @@
 </nav>
 
 <div class="container">
-    <Navbar name={session.name} avatar={session.avatar}/>
+    <Navbar name={session.name} avatar={session.avatar} username={session.username}/>
     {@render children()}
 </div>
 
