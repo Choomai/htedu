@@ -17,14 +17,9 @@ export const actions = {
         password = scryptSync(password, salt, 64);
         if (!timingSafeEqual(password, Buffer.from(key, "hex"))) return { success: false, message: "Sai mật khẩu" }
         await session.setData({
+            ...rows[0],
             auth: true,
-            id: rows[0].id,
             verified: !!rows[0].verified,
-            email: rows[0].email,
-            avatar: rows[0].avatar,
-            name: rows[0].name,
-            username: rows[0].username,
-            password
         });
         await session.save();
         return redirect(302, "/");
