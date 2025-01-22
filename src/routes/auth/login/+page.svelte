@@ -42,7 +42,7 @@
         flex-direction: row;
         flex-grow: 1;
     }
-    h1, h2 {margin: 0;}
+    h1 {margin: 0;}
 
     form {
         display: flex;

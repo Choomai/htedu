@@ -43,5 +43,4 @@
         height: 120px;
         border-radius: 100%;
     }
-    h2 {margin: 0;}
 </style>

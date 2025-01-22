@@ -38,7 +38,7 @@
     div.left {border-radius: 35% 0 0 35%;}
     div.right {border-radius: 0 35% 35% 0;}
 
-    h1, h2 {margin: 0;}
+    h1 {margin: 0;}
 
     a.button {
         background-color: var(--bg);
