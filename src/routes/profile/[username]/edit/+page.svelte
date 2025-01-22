@@ -9,9 +9,9 @@
         <input type="text" name="name" placeholder="Tên" value={session.name}>
         <input type="text" name="username" placeholder="Username" value={session.username}>
         <input type="email" name="email" placeholder="Email" value={session.email}>
-        <input type="password" name="" placeholder="Mật khẩu cũ">
-        <input type="password" name="" placeholder="Mật khẩu mới">
-        <input type="password" name="" placeholder="Xác nhận mật khẩu mới">
+        <input type="password" name="old-password" placeholder="Mật khẩu cũ">
+        <input type="password" name="new-password" placeholder="Mật khẩu mới">
+        <input type="password" name="new-password-confirm" placeholder="Xác nhận mật khẩu mới">
         <button type="submit">Lưu thay đổi</button>
     </form>
 </main>
@@ -36,7 +36,6 @@
     form input:focus-visible {
         outline: 2px solid var(--primary-color);
     }
-    form input::placeholder {font-size: 1rem;}
     button {
         width: fit-content;
         margin-left: auto;

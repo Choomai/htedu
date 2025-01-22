@@ -59,6 +59,13 @@ a.normalize {
     text-decoration: none;
 }
 
+hr {
+    width: 100%;
+    border-color: var(--placeholder-color);
+}
+
+h2, h3 {margin: 0;}
+
 div#svelte-root {
     display: flex;
     height: 100%;
@@ -114,14 +121,20 @@ figure > figcaption {
 }
 figure h3 {margin-top: 0;}
 
-input:not([type="file"], [type="radio"]) {
+input:not([type="file"], [type="radio"]), select {
     padding: 1rem;
     border: none;
     border-radius: 1rem;
     background-color: var(--input-box);
     color: var(--text);
+    font-size: 1.25rem;
 }
 input::placeholder {color: var(--placeholder);}
+select {appearance: none;}
+select::after {
+    content: "\f078";
+}
+
 
 button, a.button {
     display: block;
@@ -170,6 +183,9 @@ div.user-dropdown, button.notify-dropdown {
 div.user-dropdown {
     align-items: center;
     width: fit-content;
+}
+div.user-dropdown a.button {
+    padding: .5rem;
 }
 
 @media (prefers-color-scheme: dark) {
