@@ -5,14 +5,16 @@
 </script>
 
 <main>
-    <div class="banner-container">
-        <div class="banner">
-            <h1>Đăng ký tài khoản giáo viên</h1>
-            <a href="/auth/register">Đăng ký</a>
+    {#if data.session.permission_level == 0}
+        <div class="banner-container">
+            <div class="banner">
+                <h1>Đăng ký tài khoản giáo viên</h1>
+                <a href="/auth/register">Đăng ký</a>
+            </div>
+            <i>Bằng việc đăng ký tài khoản giáo viên bạn sẽ đăng tải được các tài liệu học tập, bài tập lên website của chúng tôi</i>
         </div>
-        <i>Bằng việc đăng ký tài khoản giáo viên bạn sẽ đăng tải được các tài liệu học tập, bài tập lên website của chúng tôi</i>
-    </div>
-    <hr>
+        <hr>
+    {/if}
     <Teachers data={data?.teachers}/>
 </main>
 
@@ -35,10 +37,5 @@
         text-decoration: none;
         color: black;
         background-color: white;
-    }
-
-    hr {
-        width: 100%;
-        border-color: var(--placeholder-color);
     }
 </style>
