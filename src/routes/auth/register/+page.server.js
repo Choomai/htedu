@@ -2,8 +2,8 @@ import { scryptSync, randomBytes } from "node:crypto";
 import path from "node:path";
 import Safe from "safejslib";
 import { redirect } from "@sveltejs/kit";
-import { usernamePattern } from "$lib";
-import { pool } from "$lib";
+import { usernamePattern } from "$lib/const";
+import { pool } from "$lib/db";
 import sharp from "sharp";
 
 /** @type {import('./$types').Actions} */

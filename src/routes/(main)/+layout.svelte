@@ -2,6 +2,7 @@
     import Navbar from "/src/components/navbar.svelte";
     import { page } from "$app/stores";
     import { app_name } from "$lib/const";
+    import { version } from "/package.json";
     
     let { data, children } = $props();
     const { session } = data;
@@ -18,6 +19,9 @@
         <a class:selected={$page.url.pathname.startsWith("/practice")} href="/practice"><i class="fa-solid fa-file-lines fa-fw"></i>Luyện đề</a>
         <a class:selected={$page.url.pathname.startsWith("/teachers")} href="/teachers"><i class="fa-solid fa-chalkboard-user fa-fw"></i>Giáo viên</a>
         <a class:selected={$page.url.pathname.startsWith("/community")} href="/community"><i class="fa-solid fa-users fa-fw"></i>Cộng đồng</a>
+    </div>
+    <div>
+        <code>v{version ?? "dev"}</code>
     </div>
 </nav>
 
@@ -63,6 +67,7 @@
         width: 48px;
         border-radius: 100%;
     }
+
     nav.sidebar a {
         display: flex;
         align-items: center;
@@ -83,4 +88,6 @@
         background-color: var(--primary-color);
         color: white;
     }
+
+    nav.sidebar div:last-child {color: gray;}
 </style>

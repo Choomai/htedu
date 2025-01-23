@@ -106,7 +106,6 @@
         padding: 2rem;
         border-radius: 1rem;
     }
-    div.question > h3 {margin: 0;}
 
     div.answers {
         display: grid;
