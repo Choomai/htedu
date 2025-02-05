@@ -2,7 +2,6 @@
     import User from "/src/components/user.svelte";
     import Teachers from "/src/components/teachers.svelte";
     let { data } = $props();
-    console.log(data.stats)
 </script>
 
 <main>
@@ -24,7 +23,7 @@
         </div>
         <div class="card" style="--line:#7030A0">
             <i class="fa-regular fa-file"></i>
-            <span>{data.stats.exams_count}</span>
+            <span>{0}</span>
             <span>Bài tập tải lên</span>
         </div>
     </section>

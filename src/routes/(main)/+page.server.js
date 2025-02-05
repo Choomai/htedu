@@ -9,6 +9,7 @@ export async function load({ locals }) {
             COUNT(follows.follow_user_id) AS followers_count,
             (SELECT COUNT(articles.id) FROM articles) AS articles_count,
             (SELECT COUNT(exams.id) FROM exams) AS exams_count
-        FROM follows`.replace(/\s+/g, " ").trim(), [session.data.id]);
+        FROM follows
+        WHERE follow_user_id = ?`.replace(/\s+/g, " ").trim(), [session.data.id]);
     return { teachers, stats: stats[0] }
 }
