@@ -1,6 +1,5 @@
 import { sveltekitSessionHandle } from "svelte-kit-sessions";
 import RedisStore from "svelte-kit-connect-redis";
-import fs from "node:fs";
 import { Redis } from "ioredis";
 import { REDIS_HOST, REDIS_PASSWORD, SESSION_KEY } from "$env/static/private";
 const client = new Redis({
