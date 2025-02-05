@@ -3,7 +3,6 @@ import { error, redirect } from "@sveltejs/kit";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ locals }) {
-    error(403, "Forbidden");
     const query_stmt = `
 SELECT articles.*, users.username, users.avatar, COUNT(likes.id) AS total_likes, COUNT(comments.id) AS total_comments FROM articles
 INNER JOIN users ON users.id = articles.user_id
