@@ -16,7 +16,7 @@
         <a class="normalize" href={`#${category.id}`}><i class="fa-solid fa-pen"></i>{category.title}</a>
     {/each}
     {#if data.session.permission_level >= 1}
-        <a class="button" href="/practice/new"><i class="fa-solid fa-plus"></i>Tạo đề</a>
+        <a class="button new" href="/practice/new"><i class="fa-solid fa-plus"></i>Tạo đề</a>
     {/if}
 </nav>
 <main>
@@ -42,5 +42,10 @@
         background-color: var(--secondary-bg);
         padding: .5rem;
         border-radius: 1rem;
+    }
+    nav.filter > a.new {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: bold;
     }
 </style>
