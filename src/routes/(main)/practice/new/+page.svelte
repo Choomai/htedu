@@ -1,3 +1,8 @@
+<script>
+    import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
+    import { faPlus } from "@fortawesome/free-solid-svg-icons";
+</script>
+
 <main>
     <h2>Tạo đề</h2>
     <hr>
@@ -14,7 +19,7 @@
             <option value="thud">Định hướng tin học ứng dụng</option>
         </select>
         <input type="number" id="approach-total" placeholder="Bạn nên nhập số lượng là 2 để bám sát với đề minh họa">
-        <button type="submit"><i class="fa-solid fa-plus"></i> Tạo đề</button>
+        <button type="submit"><FontAwesomeIcon icon={faPlus}/> Tạo đề</button>
     </form>
 </main>
 

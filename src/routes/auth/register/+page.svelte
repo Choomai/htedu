@@ -1,4 +1,6 @@
 <script>
+    import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
+    import { faFileImage } from "@fortawesome/free-solid-svg-icons";
     import { enhance } from "$app/forms";
     import { app_name } from "$lib/const";
     import AuthDecoration from "/src/components/auth-decoration.svelte";
@@ -23,7 +25,7 @@
                 <input type="password" name="password" placeholder="Mật khẩu" required>
                 <input type="password" name="password-confirm" placeholder="Xác nhận mật khẩu" required>
                 <div class="file-input">
-                    <label for="avatar"><i class="fa-solid fa-file-image"></i>Ảnh đại diện</label>
+                    <label for="avatar"><FontAwesomeIcon icon={faFileImage}/>Ảnh đại diện</label>
                     <span>{currentFilename}</span>
                     <input type="file" name="avatar" id="avatar" accept="image/*" onchange={updateFilename} hidden>
                 </div>

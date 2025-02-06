@@ -1,10 +1,12 @@
 <script>
+    import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
+    import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
     let props = $props();
 </script>
 
 <footer>
     <span>Bạn đang đăng bài với username là {props.username}</span>
-    <button type="submit"><i class="fa-solid fa-pen-to-square fa-fw"></i>Đăng bài</button>
+    <button type="submit"><FontAwesomeIcon icon={faPenToSquare} fixedWidth={true}/>Đăng bài</button>
 </footer>
 
 <style>

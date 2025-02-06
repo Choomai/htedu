@@ -1,4 +1,6 @@
 <script>
+    import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
+    import { faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
     import { onMount } from "svelte";
     import User from "/src/components/user.svelte";
     let { data } = $props();
@@ -13,9 +15,9 @@
 
 <nav class="filter">
     {#each data.exam_categories as category}
-        <a class="normalize" href={`#${category.id}`}><i class="fa-solid fa-pen"></i>{category.title}</a>
+        <a class="normalize" href={`#${category.id}`}><FontAwesomeIcon icon={faPen}/>{category.title}</a>
     {/each}
-    <a class="button new" href="/practice/new"><i class="fa-solid fa-plus"></i>Tạo đề</a>
+    <a class="button new" href="/practice/new"><FontAwesomeIcon icon={faPlus}/>Tạo đề</a>
 </nav>
 <main>
     <figure>

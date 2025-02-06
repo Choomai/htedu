@@ -1,6 +1,6 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
-    import { faUser, faFile, faFileLines } from "@fortawesome/free-solid-svg-icons";
+    import { faUser, faFile, faFileLines, faArrowRight } from "@fortawesome/free-solid-svg-icons";
     import User from "/src/components/user.svelte";
     import Teachers from "/src/components/teachers.svelte";
     let { data } = $props();
@@ -34,7 +34,7 @@
     <article class="documents">
         <div class="header-wrapper">
             <h2>Tài liệu phổ biến</h2>
-            <a href="/practice">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="/practice">Xem tất cả <FontAwesomeIcon icon={faArrowRight}/></a>
         </div>
         <figure>
             <img src="/imgs/logo.png" alt="document thumbnail">
@@ -47,7 +47,7 @@
     <article class="works">
         <div class="header-wrapper">
             <h2>Bài tập phổ biến</h2>
-            <a href="/study-area">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="/study-area">Xem tất cả <FontAwesomeIcon icon={faArrowRight}/></a>
         </div>
         <figure>
             <img src="/imgs/logo.png" alt="works thumbnail">

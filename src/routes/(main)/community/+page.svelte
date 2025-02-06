@@ -1,4 +1,6 @@
 <script>
+    import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
+    import { faComment, faHeart, faShare } from "@fortawesome/free-solid-svg-icons";
     import { Tipex } from "@friendofsvelte/tipex";
     import "@friendofsvelte/tipex/styles/Tipex.css";
     import "@friendofsvelte/tipex/styles/ProseMirror.css";
@@ -7,14 +9,19 @@
     import "@friendofsvelte/tipex/styles/CodeBlock.css";
     import "./tipex.css";
     import Foot from "./foot.svelte";
+    import { onMount } from "svelte";
 
     let { data } = $props();
     const articles = data.articles;
+    let theme = $state("");
+    onMount(() => {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "";
+    })
 </script>
 
 <main>
     <form action="?/new_article" method="post">
-        <Tipex class={window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : ""} controls floating focal>
+        <Tipex class={theme} controls floating focal>
             {#snippet foot(editor)}<Foot username={data.session.username}/>{/snippet}
         </Tipex>
     </form>
@@ -25,9 +32,9 @@
                 <h2><img src={article.avatar || "/avatars/default.webp"} alt="user avatar">{article.username}</h2>
                 <p>{article.content}</p>
                 <div class="action">
-                    <button class="fake" type="button" title="like"><i class="fa-solid fa-heart"></i>&nbsp;{article.total_likes}</button>
-                    <button class="fake" type="button" title="comment"><i class="fa-solid fa-comment"></i>&nbsp;{article.total_comments}</button>
-                    <button class="fake" type="button" aria-label="share" title="share"><i class="fa-solid fa-share"></i></button>
+                    <button class="fake" type="button" title="like"><FontAwesomeIcon icon={faHeart}/>&nbsp;{article.total_likes}</button>
+                    <button class="fake" type="button" title="comment"><FontAwesomeIcon icon={faComment}/>&nbsp;{article.total_comments}</button>
+                    <button class="fake" type="button" aria-label="share" title="share"><FontAwesomeIcon icon={faShare}/>&nbsp;</button>
                 </div>
             </article>
         {/each}

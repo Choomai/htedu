@@ -1,4 +1,7 @@
 <script>
+    import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
+    import { faNewspaper, faFileLines } from "@fortawesome/free-solid-svg-icons";
+
     import Navbar from "/src/components/navbar.svelte";
     import { app_name } from "$lib/const";
     
@@ -53,10 +56,10 @@
             
             <nav class="profile">
                 <section>
-                    <a class="active normalize" href="/profile/ngvana"><i class="fa-solid fa-newspaper fa-fw"></i>Bài viết</a>
+                    <a class="active normalize" href="/profile/ngvana"><FontAwesomeIcon icon={faNewspaper} fixedWidth={true}/>Bài viết</a>
                 </section>
                 <section>
-                    <a class="normalize" href="/profile/ngvana/history/"><i class="fa-solid fa-file-lines fa-fw"></i>Lịch sử bài tập</a>
+                    <a class="normalize" href="/profile/ngvana/history/"><FontAwesomeIcon icon={faFileLines} fixedWidth={true}/>Lịch sử bài tập</a>
                 </section>
             </nav>
         </article>

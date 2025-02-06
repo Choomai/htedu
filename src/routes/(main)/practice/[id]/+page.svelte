@@ -1,4 +1,6 @@
 <script>
+    import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
+    import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
     let { data } = $props();
     let pointer = $state(0);
     let question = $state(data.questions[0]);
@@ -82,8 +84,8 @@
     <!-- TODO: Add question with code editor/textarea input. -->
     {/if}
     <div class="action">
-        <button class="button" data-shift={-1} disabled={pointer === 0} onclick={changeQuestion}><i class="fa-solid fa-arrow-left"></i> Câu trước đó</button>
-        <button class="button" data-shift={1} disabled={pointer === data.questions.length - 1} onclick={changeQuestion}><i class="fa-solid fa-arrow-right"></i> Câu tiếp theo</button>
+        <button class="button" data-shift={-1} disabled={pointer === 0} onclick={changeQuestion}><FontAwesomeIcon icon={faArrowLeft}/> Câu trước đó</button>
+        <button class="button" data-shift={1} disabled={pointer === data.questions.length - 1} onclick={changeQuestion}><FontAwesomeIcon icon={faArrowRight}/> Câu tiếp theo</button>
     </div>
 </main>
 

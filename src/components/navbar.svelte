@@ -1,4 +1,6 @@
 <script>
+    import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
+    import { faBell, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
     let userDropdown = $state(false);
     let notifyDropdown = $state(false);
 
@@ -12,7 +14,7 @@
         <i id="searchIcon" class="fa-solid fa-magnifying-glass fa-1x"></i>
     </div>
     <div class="user">
-        <button class="fake" type="button" aria-label="user" onclick={() => notifyDropdown = !notifyDropdown}><i class="fa-solid fa-bell fa-2x"></i></button>
+        <button class="fake" type="button" aria-label="user" onclick={() => notifyDropdown = !notifyDropdown}><FontAwesomeIcon icon={faBell} size="2x"/></button>
         <button class="fake" type="button" aria-label="notification" onclick={() => userDropdown = !userDropdown}><img src={props.avatar ?? "/avatars/default.webp"} alt="profile"></button>
         {#if userDropdown}
             <div class="user-dropdown">
@@ -20,7 +22,7 @@
                 <div class="action">
                     <a class="button" href="/profile/{props.username}">Trang cá nhân</a>
                     <!-- svelte-ignore a11y_consider_explicit_label -->
-                    <a class="button" href="/auth/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+                    <a class="button" href="/auth/logout"><FontAwesomeIcon icon={faRightFromBracket}/></a>
                 </div>
             </div>
         {:else if notifyDropdown}

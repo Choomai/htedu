@@ -1,11 +1,13 @@
 <script>
+    import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
+    import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
     let props = $props();
 </script>
 
 {#if props.homepage}
     <div class="header-wrapper">
         <h2>Giáo viên</h2>
-        <a href="/teachers">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="/teachers">Xem tất cả <FontAwesomeIcon icon={faArrowRight}/></a>
     </div>
 {:else}
     <h2>Giáo viên</h2>

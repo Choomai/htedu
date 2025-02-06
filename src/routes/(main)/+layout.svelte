@@ -1,4 +1,6 @@
 <script>
+    import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
+    import { faHouse, faPen, faFileLines, faChalkboardUser, faUsers } from "@fortawesome/free-solid-svg-icons";
     import Navbar from "/src/components/navbar.svelte";
     import { page } from "$app/stores";
     import { app_name } from "$lib/const";
@@ -13,14 +15,14 @@
             <img src="/imgs/logo.png" alt="Site logo">
             <span>{app_name}</span>
         </div>
-        <a class:selected={$page.url.pathname == "/"} href="/"><i class="fa-solid fa-house fa-fw"></i>Trang chủ</a>
-        <a class:selected={$page.url.pathname.startsWith("/study-area")} href="/study-area"><i class="fa-solid fa-pen fa-fw"></i>Khu học tập</a>
-        <a class:selected={$page.url.pathname.startsWith("/practice")} href="/practice"><i class="fa-solid fa-file-lines fa-fw"></i>Luyện đề</a>
-        <a class:selected={$page.url.pathname.startsWith("/teachers")} href="/teachers"><i class="fa-solid fa-chalkboard-user fa-fw"></i>Giáo viên</a>
-        <a class:selected={$page.url.pathname.startsWith("/community")} href="/community"><i class="fa-solid fa-users fa-fw"></i>Cộng đồng</a>
+        <a class:selected={$page.url.pathname == "/"} href="/"><FontAwesomeIcon icon={faHouse} fixedWidth={true}/>Trang chủ</a>
+        <a class:selected={$page.url.pathname.startsWith("/study-area")} href="/study-area"><FontAwesomeIcon icon={faPen} fixedWidth={true}/>Khu học tập</a>
+        <a class:selected={$page.url.pathname.startsWith("/practice")} href="/practice"> <FontAwesomeIcon icon={faFileLines} fixedWidth={true}/>Luyện đề</a>
+        <a class:selected={$page.url.pathname.startsWith("/teachers")} href="/teachers"><FontAwesomeIcon icon={faChalkboardUser} fixedWidth={true}/>Giáo viên</a>
+        <a class:selected={$page.url.pathname.startsWith("/community")} href="/community"><FontAwesomeIcon icon={faUsers} fixedWidth={true}/>Cộng đồng</a>
     </div>
     <div>
-        <code>v{version ?? "dev"}</code>
+        <code>v{version ?? "x.x.x"}</code>
     </div>
 </nav>
 
