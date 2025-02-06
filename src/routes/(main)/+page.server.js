@@ -12,5 +12,5 @@ export async function load({ locals }) {
             (SELECT COUNT(exams.id) FROM exams) AS exams_count
         FROM follows
         WHERE follow_user_id = ?`.replace(/\s+/g, " ").trim(), [session.data.id]);
-    return { teachers, stats, session: session.data }
+    return { teachers, stats: stats[0], session: session.data }
 }

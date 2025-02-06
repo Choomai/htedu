@@ -9,22 +9,22 @@
 <main>
     {#if data.session.permission_level >= 1}
         <section class="stats">
-            <div class="card">
+            <div class="card" style="--line:#E60000">
                 <FontAwesomeIcon icon={faUser}/>
                 <span>{data.stats.followers_count}</span>
                 <span>Người theo dõi</span>
             </div>
-            <div class="card">
+            <div class="card" style="--line:#00B050">
                 <FontAwesomeIcon icon={faFileLines}/>
                 <span>{data.stats.articles_count}</span>
                 <span>Bài viết</span>
             </div>
-            <div class="card">
+            <div class="card" style="--line:#00B0F0">
                 <FontAwesomeIcon icon={faFile}/>
                 <span>{data.stats.exams_count}</span>
                 <span>Tài liệu tải lên</span>
             </div>
-            <div class="card">
+            <div class="card" style="--line:#7030A0">
                 <FontAwesomeIcon icon={faFile}/>
                 <span>{data.stats.exams_count}</span>
                 <span>Bài tập tải lên</span>
