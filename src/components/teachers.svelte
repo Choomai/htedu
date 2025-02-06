@@ -2,7 +2,7 @@
     let props = $props();
 </script>
 
-{#if props?.homepage}
+{#if props.homepage}
     <div class="header-wrapper">
         <h2>Giáo viên</h2>
         <a href="/teachers">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
@@ -11,7 +11,7 @@
     <h2>Giáo viên</h2>
 {/if}
 <article>
-    {#each props?.data as teacher}
+    {#each props.data as teacher}
         <a class="normalize" href="/profile/{teacher.username}">
             <figure>
                 <img src={teacher.avatar ?? "/avatars/default.webp"} alt="teachers avatar">

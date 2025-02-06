@@ -4,5 +4,5 @@
 
 <div class="user">
     <img src={props.avatar ?? "/avatars/default.webp"} alt="profile">
-    {props.username}
+    <span>{props.username}</span>
 </div>

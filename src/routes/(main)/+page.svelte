@@ -1,32 +1,36 @@
 <script>
+    import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
+    import { faUser, faFile, faFileLines } from "@fortawesome/free-solid-svg-icons";
     import User from "/src/components/user.svelte";
     import Teachers from "/src/components/teachers.svelte";
     let { data } = $props();
 </script>
 
 <main>
-    <section class="stats">
-        <div class="card" style="--line:#E60000">
-            <i class="fa-solid fa-shoe-prints"></i>
-            <span>{data.stats.followers_count}</span>
-            <span>Người theo dõi</span>
-        </div>
-        <div class="card" style="--line:#00B050">
-            <i class="fa-solid fa-file-lines"></i>
-            <span>{data.stats.articles_count}</span>
-            <span>Bài viết</span>
-        </div>
-        <div class="card" style="--line:#00B0F0">
-            <i class="fa-regular fa-file"></i>
-            <span>{data.stats.exams_count}</span>
-            <span>Tài liệu tải lên</span>
-        </div>
-        <div class="card" style="--line:#7030A0">
-            <i class="fa-regular fa-file"></i>
-            <span>{0}</span>
-            <span>Bài tập tải lên</span>
-        </div>
-    </section>
+    {#if data.session.permission_level >= 1}
+        <section class="stats">
+            <div class="card">
+                <FontAwesomeIcon icon={faUser}/>
+                <span>{data.stats.followers_count}</span>
+                <span>Người theo dõi</span>
+            </div>
+            <div class="card">
+                <FontAwesomeIcon icon={faFileLines}/>
+                <span>{data.stats.articles_count}</span>
+                <span>Bài viết</span>
+            </div>
+            <div class="card">
+                <FontAwesomeIcon icon={faFile}/>
+                <span>{data.stats.exams_count}</span>
+                <span>Tài liệu tải lên</span>
+            </div>
+            <div class="card">
+                <FontAwesomeIcon icon={faFile}/>
+                <span>{data.stats.exams_count}</span>
+                <span>Bài tập tải lên</span>
+            </div>
+        </section>
+    {/if}
     <article class="documents">
         <div class="header-wrapper">
             <h2>Tài liệu phổ biến</h2>

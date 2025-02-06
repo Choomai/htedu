@@ -5,7 +5,6 @@
     import { version } from "/package.json";
     
     let { data, children } = $props();
-    const { session } = data;
 </script>
 
 <nav class="sidebar">
@@ -26,7 +25,7 @@
 </nav>
 
 <div class="container">
-    <Navbar name={session.name} avatar={session.avatar} username={session.username}/>
+    <Navbar name={data.session.name} avatar={data.session.avatar} username={data.session.username}/>
     {@render children()}
 </div>
 
