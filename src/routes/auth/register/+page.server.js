@@ -28,11 +28,11 @@ export const actions = {
 
 
         if (avatar_image instanceof File && avatar_image.type.startsWith("image/")) {
-            const buff = await avatar_image.arrayBuffer()
+            const buff = await avatar_image.arrayBuffer();
             if (process.env.NODE_ENV == "production") avatar_path = path.join(process.cwd(), "client", "avatars", `${username}.webp`);
             else avatar_path = path.join(process.cwd(), "static", "avatars", `${username}.webp`);
             await sharp(Buffer.from(buff)).toFormat("webp").toFile(avatar_path);
-            avatar_path = `/static/avatars/${username}.webp`;
+            avatar_path = `/avatars/${username}.webp`;
         }
         
         const salt = randomBytes(16).toString("hex");
