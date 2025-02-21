@@ -1,7 +1,7 @@
 :root {
-    --primary-color: hsl(276, 100%, 50%);
-    --primary-color-selected: hsl(276, 100%, 65%);
-    --primary-color-disabled: hsl(276, 100%, 35%);
+    --primary-color: #9900ff;
+    --primary-color-selected: #b84dff;
+    --primary-color-disabled: #6b00b3;
     --bg: white;
     --secondary-bg: #ddd;
     --input-box: #f2f2f2;
@@ -9,6 +9,9 @@
     --url: #9900ff;
     --dropdown: #eee;
     --placeholder: #bfbfbf;
+    --toggle-ball: #9900ff;
+    --toggle-on-bg: #dcb9ff;
+    --toggle-off-bg: #d0cece;
     
 
     --cover-gradient-start: #f4afaf;
@@ -121,7 +124,7 @@ figure > figcaption {
 }
 figure h3 {margin-top: 0;}
 
-input:not([type="file"], [type="radio"]), select {
+input:not([type="file"], [type="radio"], [type="checkbox"]), select {
     padding: 1rem;
     border: none;
     border-radius: 1rem;
@@ -197,5 +200,8 @@ div.user-dropdown a.button {
         --input-box: #222;
         --dropdown: #222;
         --placeholder: gray;
+        --toggle-ball: #eee;
+        --toggle-on-bg: #9900ff;
+        --toggle-off-bg: #514d4d;
     }
 }

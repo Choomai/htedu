@@ -19,6 +19,10 @@
             <h2>Đăng ký</h2>
             {#if form?.success == false}<p>{form?.message}</p>{/if}
             <div class="input">
+                <div class="teacher-toggle">
+                    <label for="teacher">Tài khoản giáo viên</label>
+                    <input type="checkbox" name="teacher" id="teacher">
+                </div>
                 <input type="text" name="username" placeholder="Tên đăng nhập" required minlength="3" maxlength="24">
                 <input type="text" name="name" placeholder="Họ và tên" required>
                 <input type="email" name="email" placeholder="Email" required>
@@ -103,5 +107,52 @@
         width: 80%;
         margin-top: .5rem;
         font-size: 1.25rem;
+    }
+
+    div.teacher-toggle {
+        display: flex;
+        justify-content: space-between;
+    }
+    input[type="checkbox"] {
+        appearance: none;
+        min-width: 96px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        border-radius: 2rem;
+        overflow: hidden;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        background-color: var(--toggle-off-bg);
+        margin: 3px 3px 3px 3px;
+        transition: background-color ease 300ms;
+    }
+    input[type="checkbox"]::before {
+        content: "Tắt";
+        display: inline-flex;
+        align-items: center;
+        position: absolute;
+        z-index: 3;
+        width: 28px;
+        height: 28px;
+        background-color: var(--toggle-ball);
+        left: 2px;
+        border-radius: 100%;
+        font-size: 1rem;
+        font-weight: bold;
+        text-indent: 48px;
+        color: gray;
+        text-shadow: -1px -1px rgba(0,0,0,0.15);
+        white-space: nowrap;
+        transition: all cubic-bezier(0.3, 1.5, 0.7, 1) 0.3s;
+    }
+    input[type="checkbox"]:checked {background-color: var(--toggle-on-bg);}
+    input[type="checkbox"]:checked::before {
+        content: "Bật";
+        color: var(--text);
+        text-indent: -48px;
+        left: 66px;
     }
 </style>
