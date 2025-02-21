@@ -16,36 +16,40 @@ export const actions = {
             password = data.get("password"),
             passwordConfirm = data.get("password-confirm"),
             name = data.get("name"),
-            avatar_image = data.get("avatar"),
-            avatar_path = null;
+            teacherToggle = data.get("teacher"),
+            avatarImage = data.get("avatar"),
+            avatarPath = null;
         
         
         if (!(username && password && passwordConfirm && email)) return { success: false, message: "Hãy nhập đầy đủ các thông tin" };
         if (!usernamePattern.test(username)) return { success: false, message: "Username không hợp lệ" };
         // allow no email, but if exists then it must be correct.
         if (!Safe.validateEmail(email)) return { success: false, message: "Email không hợp lệ" };
+        const emailDomain = email.split("@")[1];
+        if (teacherToggle && !emailDomain.includes(".edu.")) return { success: false, message: "Email không thuộc domain EDU" };
         if (password != passwordConfirm) return { success: false, message: "Mật khẩu không giống nhau"};
 
 
-        if (avatar_image instanceof File && avatar_image.type.startsWith("image/")) {
-            const buff = await avatar_image.arrayBuffer();
-            if (process.env.NODE_ENV == "production") avatar_path = path.join(process.cwd(), "client", "avatars", `${username}.webp`);
-            else avatar_path = path.join(process.cwd(), "static", "avatars", `${username}.webp`);
-            await sharp(Buffer.from(buff)).toFormat("webp").toFile(avatar_path);
-            avatar_path = `/avatars/${username}.webp`;
+        if (avatarImage instanceof File && avatarImage.type.startsWith("image/")) {
+            const buff = await avatarImage.arrayBuffer();
+            if (process.env.NODE_ENV == "production") avatarPath = path.join(process.cwd(), "client", "avatars", `${username}.webp`);
+            else avatarPath = path.join(process.cwd(), "static", "avatars", `${username}.webp`);
+            await sharp(Buffer.from(buff)).toFormat("webp").toFile(avatarPath);
+            avatarPath = `/avatars/${username}.webp`;
         }
+        const permissionLevel = +teacherToggle;
         
         const salt = randomBytes(16).toString("hex");
         password = `${salt}:${scryptSync(password, salt, 64).toString("hex")}`;
         const [rows] = await pool.execute(`
-            INSERT INTO users(username, password, name, email, avatar)
-            SELECT ?, ?, ?, ?, ?
+            INSERT INTO users(username, password, name, email, avatar, permission_level)
+            SELECT ?, ?, ?, ?, ?, ?
             FROM dual
             WHERE NOT EXISTS (
                 SELECT * FROM users
                 WHERE username = ? OR email = ?
             )
-            `.replace(/\s+/g, " ").trim(), [username, password, name, email, avatar_path, username, email]);
+            `.replace(/\s+/g, " ").trim(), [username, password, name, email, avatarPath, username, email, permissionLevel]);
         if (rows.affectedRows == 0) return { success: false, message: "Username hoặc email trùng với tài khoản khác" };
         
         const [userId] = await pool.execute("SELECT id FROM users WHERE username = ?", [username]);
@@ -54,8 +58,9 @@ export const actions = {
             id: userId[0].id,
             verified: false,
             email,
-            avatar: avatar_path,
+            avatar: avatarPath,
             name,
+            permission_level: permissionLevel,
             username,
             password
         });

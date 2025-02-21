@@ -10,6 +10,7 @@
     function updateFilename(e) {
         currentFilename = e.target.value.replace(/^.*[\\\/]/, '');
     }
+    let teacherToggle = $state(false)
 </script>
 
 <main>
@@ -21,11 +22,15 @@
             <div class="input">
                 <div class="teacher-toggle">
                     <label for="teacher">Tài khoản giáo viên</label>
-                    <input type="checkbox" name="teacher" id="teacher">
+                    <input type="checkbox" name="teacher" id="teacher" bind:checked={teacherToggle}>
                 </div>
                 <input type="text" name="username" placeholder="Tên đăng nhập" required minlength="3" maxlength="24">
                 <input type="text" name="name" placeholder="Họ và tên" required>
-                <input type="email" name="email" placeholder="Email" required>
+                {#if teacherToggle}
+                    <input type="email" name="email" placeholder="Email (edu.vn)" required>
+                {:else}
+                    <input type="email" name="email" placeholder="Email" required>
+                {/if}
                 <input type="password" name="password" placeholder="Mật khẩu" required>
                 <input type="password" name="password-confirm" placeholder="Xác nhận mật khẩu" required>
                 <div class="file-input">
@@ -69,7 +74,6 @@
         width: 30%;
         font-size: 1.5rem;
     }
-    form > h2 {margin-bottom: revert;}
     form > p {
         margin-top: 0;
         color: red;
