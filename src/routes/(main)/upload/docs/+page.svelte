@@ -4,9 +4,14 @@
     let { data } = $props();
 
     let currentFileName = $state("");
+    let docsTitle = $state("");
+    let previousDocsTitle = "";
     let currentImgName = $state("");
     function updateFileName(e) {
         currentFileName = e.target.value.replace(/^.*[\\\/]/, '');
+        previousDocsTitle ||= docsTitle;
+        if (!docsTitle || previousDocsTitle == docsTitle) docsTitle = currentFileName;
+        previousDocsTitle = currentFileName;
     }
     function updateImgName(e) {
         currentImgName = e.target.value.replace(/^.*[\\\/]/, '');
@@ -16,7 +21,7 @@
 <main>
     <form action method="POST" enctype="multipart/form-data">
         <label for="docs-name">Tên tài liệu</label>
-        <input type="text" name="name" id="docs-name" placeholder="Tên của tài liệu">
+        <input type="text" name="name" id="docs-name" bind:value={docsTitle} placeholder="Tên của tài liệu">
         <label for="docs-tag">Chọn thẻ cho tài liệu</label>
         <select name="tag" id="docs-tag">
             {#each data.cats as cat}
@@ -33,8 +38,8 @@
                 <label class="file" for="docs"><FontAwesomeIcon icon={faFile}/> Tài liệu</label>
                 <span>{currentFileName}</span>
             </div>
-            <input type="file" name="thumbnail" id="docs-thumbnail" accept="image/*" hidden onchange={updateImgName}>
-            <input type="file" name="docs" id="docs" accept=".doc,.docx,.pdf,.rtf" hidden onchange={updateFileName}>
+            <input type="file" name="thumbnail" id="docs-thumbnail" accept="image/*" hidden required onchange={updateImgName}>
+            <input type="file" name="docs" id="docs" accept=".doc,.docx,.pdf,.rtf" hidden required onchange={updateFileName}>
         </div>
     </form>
 </main>
