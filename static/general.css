@@ -133,7 +133,6 @@ input:not([type="file"], [type="radio"], [type="checkbox"]), select {
     font-size: 1.25rem;
 }
 input::placeholder {color: var(--placeholder);}
-select {appearance: none;}
 select::after {
     content: "\f078";
 }
