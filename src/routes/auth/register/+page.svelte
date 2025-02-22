@@ -90,22 +90,6 @@
         align-items: center;
         gap: .5rem;
     }
-    label[for="avatar"] {
-        display: flex;
-        align-items: center;
-        gap: .5rem;
-        width: fit-content;
-        border-radius: 1rem;
-        padding: .5rem;
-        user-select: none;
-        border: 1px solid var(--text);
-        white-space: nowrap;
-    }
-    div.file-input > span {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
 
     button[type="submit"] {
         width: 80%;

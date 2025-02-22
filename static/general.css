@@ -137,6 +137,23 @@ select::after {
     content: "\f078";
 }
 
+label.file {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    width: fit-content;
+    border-radius: 1rem;
+    padding: .5rem;
+    user-select: none;
+    border: 1px solid var(--text);
+    white-space: nowrap;
+}
+label.file ~ span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 
 button, a.button {
     display: block;
