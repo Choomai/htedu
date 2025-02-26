@@ -30,7 +30,7 @@ export const actions = {
                 process.env.NODE_ENV == "production" ? "client" : "static",
                 "docs", `${username}@${UUID}.webp`);
             await sharp(Buffer.from(imgBuff)).toFormat("webp").toFile(thumbnailPath);
-            thumbnailPath = `/avatars/${username}@${UUID}.webp`;
+            thumbnailPath = `/docs/${username}@${UUID}.webp`;
         } else return { success: false, message: "Hình ảnh không hợp lệ" };
 
         if (docsFile instanceof File) {
@@ -45,7 +45,7 @@ export const actions = {
             docsFilePath = `/docs/${username}@${UUID}.${fileType}`;
         } else return { success: false, message: "Tài liệu không hợp lệ" };
 
-        const [rows] = await pool.execute("INSERT INTO docs(uuid, username, name, path, imgPath, category) VALUES(?, ?, ?, ?, ?)",
+        const [rows] = await pool.execute("INSERT INTO docs(uuid, username, name, path, img_path, category) VALUES(?, ?, ?, ?, ?, ?)",
             [UUID, username, docsName, docsFilePath, thumbnailPath, docsCat]);
         if (rows.affectedRows == 0) return { success: false, message: "Có lỗi xảy ra khi upload tài liệu" };
         return { success: true, message: "Đăng tài liệu thành công", viewPath: docsFilePath };
