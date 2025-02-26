@@ -1,7 +1,10 @@
 <script>
+    import { onMount } from "svelte";
+
     let { data } = $props();
-    const { doc } = data;
-    const url = new URL(doc.path, window.location.origin).toString();
+    const doc = data.docs[0];
+    let url = $state("");
+    onMount(() => url = new URL(doc.path, window.location.origin).toString());
 </script>
 
 <main>
