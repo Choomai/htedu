@@ -164,6 +164,7 @@ button, a.button {
     background-color: var(--primary-color);
     color: white;
     font-size: 1rem;
+    font-weight: bold;
     transition: ease 500ms;
     user-select: none;
 }

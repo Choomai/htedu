@@ -26,7 +26,6 @@
     {#each data.categories as category}
         <a class="normalize" class:active={currentFilter == category.id} href={`#${category.id}`}><FontAwesomeIcon icon={faPen}/>{category.title}</a>
     {/each}
-    <a class="button new" href="/study-area/new"><FontAwesomeIcon icon={faPlus}/>Tạo đề</a>
 </nav>
 <main>
     {#if docs.length == 0}

@@ -24,6 +24,7 @@
 </main>
 
 <style>
+    main {gap: 0;}
     form {
         display: flex;
         flex-direction: column;

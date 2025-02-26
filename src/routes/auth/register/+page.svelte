@@ -34,7 +34,7 @@
                 <input type="password" name="password" placeholder="Mật khẩu" required>
                 <input type="password" name="password-confirm" placeholder="Xác nhận mật khẩu" required>
                 <div class="file-input">
-                    <label for="avatar"><FontAwesomeIcon icon={faFileImage}/>Ảnh đại diện</label>
+                    <label class="file" for="avatar"><FontAwesomeIcon icon={faFileImage}/>Ảnh đại diện</label>
                     <span>{currentFilename}</span>
                     <input type="file" name="avatar" id="avatar" accept="image/jpeg,image/png,image/webp,image/gif,image/avif,image/tiff,image/svg" onchange={updateFilename} hidden>
                 </div>
