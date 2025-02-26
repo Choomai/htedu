@@ -4,6 +4,7 @@
     import User from "/src/components/user.svelte";
     import Teachers from "/src/components/teachers.svelte";
     let { data } = $props();
+    if (data.stats) data.stats.docs_count = data.docs.filter(doc => doc.username == data.session.username).length;
 </script>
 
 <main>
@@ -21,7 +22,7 @@
             </div>
             <div class="card" style="--line:#00B0F0">
                 <FontAwesomeIcon icon={faFile}/>
-                <span>{data.stats.exams_count}</span>
+                <span>{data.stats.docs_count}</span>
                 <span>Tài liệu tải lên</span>
             </div>
             <div class="card" style="--line:#7030A0">
