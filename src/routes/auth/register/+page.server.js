@@ -48,7 +48,7 @@ export const actions = {
                 SELECT * FROM users
                 WHERE username = ? OR email = ?
             )
-            `.replace(/\s+/g, " ").trim(), [username, password, name, email, avatarPath, username, email, permissionLevel]);
+            `.replace(/\s+/g, " ").trim(), [username, password, name, email, avatarPath, permissionLevel, username, email]);
         if (rows.affectedRows == 0) return { success: false, message: "Username hoặc email trùng với tài khoản khác" };
         
         const [userId] = await pool.execute("SELECT id FROM users WHERE username = ?", [username]);
