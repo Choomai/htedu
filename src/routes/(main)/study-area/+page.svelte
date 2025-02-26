@@ -17,11 +17,11 @@
     {#each data.exam_categories as category}
         <a class="normalize" href={`#${category.id}`}><FontAwesomeIcon icon={faPen}/>{category.title}</a>
     {/each}
-    <a class="button new" href="/practice/new"><FontAwesomeIcon icon={faPlus}/>Tạo đề</a>
+    <a class="button new" href="/study-area/new"><FontAwesomeIcon icon={faPlus}/>Tạo đề</a>
 </nav>
 <main>
     {#each data.docs as doc}
-        <a class="normalize" href="/practice/{doc.uuid}">
+        <a class="normalize" href="/study-area/{doc.uuid}">
             <figure>
                 <img src={doc.img_path} alt="works thumbnail">
                 <figcaption>

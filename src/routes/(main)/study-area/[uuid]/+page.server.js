@@ -1,4 +1,5 @@
 import { pool } from "$lib/db";
+import { error } from "@sveltejs/kit";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ locals, params }) {
@@ -7,5 +8,6 @@ export async function load({ locals, params }) {
     if (!uuidv4Regex.test(params.uuid)) error(400, "Invalid UUID format");
 
     const [doc] = await pool.execute("SELECT * FROM docs WHERE uuid = ?", [params.uuid]);
+    if (doc.length == 0) error(404, "Not found");
     return { doc };
 }
