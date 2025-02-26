@@ -46,6 +46,12 @@
 </main>
 
 <style>
+    main {
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+    main a {width: fit-content;}
+    
     nav.filter {
         display: flex;
         gap: 1rem;
@@ -64,5 +70,4 @@
         color: white;
         font-weight: bold;
     }
-    main a {width: fit-content;}
 </style>

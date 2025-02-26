@@ -36,7 +36,7 @@
                 <div class="file-input">
                     <label for="avatar"><FontAwesomeIcon icon={faFileImage}/>Ảnh đại diện</label>
                     <span>{currentFilename}</span>
-                    <input type="file" name="avatar" id="avatar" accept="image/*" onchange={updateFilename} hidden>
+                    <input type="file" name="avatar" id="avatar" accept="image/jpeg,image/png,image/webp,image/gif,image/avif,image/tiff,image/svg" onchange={updateFilename} hidden>
                 </div>
             </div>
             <button type="submit">Đăng ký</button>

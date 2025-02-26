@@ -31,21 +31,25 @@
             </div>
         </section>
     {/if}
-    <article class="documents">
-        <div class="header-wrapper">
+    <section class="documents">
+        <div class="header">
             <h2>Tài liệu phổ biến</h2>
-            <a href="/practice">Xem tất cả <FontAwesomeIcon icon={faArrowRight}/></a>
+            <a href="/study-area">Xem tất cả <FontAwesomeIcon icon={faArrowRight}/></a>
         </div>
-        <figure>
-            <img src="/imgs/logo.png" alt="document thumbnail">
-            <figcaption>
-                <h3>document title</h3>
-                <User username={data.session?.username} avatar={data.session?.avatar}/>
-            </figcaption>
-        </figure>
-    </article>
-    <article class="works">
-        <div class="header-wrapper">
+        {#each data.docs as doc}
+            <a class="normalize" href="/study-area/{doc.uuid}">
+                <figure>
+                    <img src={doc.img_path} alt="works thumbnail">
+                    <figcaption>
+                        <h3>{doc.name}</h3>
+                        <User username={doc.username} avatar={doc.avatar}/>
+                    </figcaption>
+                </figure>
+            </a>
+        {/each}
+    </section>
+    <section class="works">
+        <div class="header">
             <h2>Bài tập phổ biến</h2>
             <a href="/study-area">Xem tất cả <FontAwesomeIcon icon={faArrowRight}/></a>
         </div>
@@ -56,16 +60,27 @@
                 <User username={data.session?.username} avatar={data.session?.avatar}/>
             </figcaption>
         </figure>
-    </article>
+    </section>
     <Teachers data={data?.teachers} homepage={true}/>
 </main>
 
 <style>
+    section:is(.documents, .works) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    section:is(.documents, .works) > div.header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
     section.stats {
         display: flex;
         justify-content: space-evenly;
     }
-
     section.stats > div {
         display: flex;
         flex-direction: column;

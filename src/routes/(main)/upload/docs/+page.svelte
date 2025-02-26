@@ -40,7 +40,7 @@
                 <label class="file" for="docs"><FontAwesomeIcon icon={faFile}/> Tài liệu</label>
                 <span>{currentFileName}</span>
             </div>
-            <input type="file" name="thumbnail" id="docs-thumbnail" accept="image/*" hidden required onchange={updateImgName}>
+            <input type="file" name="thumbnail" id="docs-thumbnail" accept="image/jpeg,image/png,image/webp,image/gif,image/avif,image/tiff,image/svg" hidden required onchange={updateImgName}>
             <input type="file" name="docs" id="docs" accept=".doc,.docx,.pdf,.rtf" hidden required onchange={updateFileName}>
         </div>
         <button type="submit"><FontAwesomeIcon icon={faFileArrowUp}/> Tải lên</button>

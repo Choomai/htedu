@@ -12,6 +12,7 @@ export async function load({ locals }) {
             (SELECT COUNT(exams.id) FROM exams) AS exams_count
         FROM follows
         WHERE follow_user_id = ?`.replace(/\s+/g, " ").trim(), [session.data.id]);
+    const [docs] = await pool.execute("SELECT docs.*, users.avatar FROM docs LEFT JOIN users ON docs.username = users.username LIMIT 4");
     
-    return { teachers, stats: stats[0], session: session.data }
+    return { teachers, stats: stats[0], session: session.data, docs }
 }
