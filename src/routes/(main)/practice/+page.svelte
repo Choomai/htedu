@@ -2,17 +2,15 @@
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
     import { onMount } from "svelte";
-    import User from "/src/components/user.svelte";
     let { data } = $props();
-    let docs = $state(data.docs);
 
     let currentFilter = $state("");
     function changeFilter(filter) {
-        if (!filter) docs = data.docs;
-        else {
-            docs = data.docs.filter(doc => doc.category == filter);
+        // if (!filter) docs = data.docs;
+        // else {
+            // docs = data.docs.filter(doc => doc.category == filter);
             currentFilter = filter;
-        }
+        // }
     }
     onMount(() => {
         window.addEventListener("hashchange", () => {
@@ -29,20 +27,7 @@
     <a class="button new" href="/study-area/new"><FontAwesomeIcon icon={faPlus}/>Tạo đề</a>
 </nav>
 <main>
-    {#if docs.length == 0}
-        <h2>Không có tài liệu</h2>
-    {/if}
-    {#each docs as doc}
-        <a class="normalize" href="/study-area/{doc.uuid}">
-            <figure>
-                <img src={doc.img_path} alt="works thumbnail">
-                <figcaption>
-                    <h3>{doc.name}</h3>
-                    <User username={doc.username} avatar={doc.avatar}/>
-                </figcaption>
-            </figure>
-        </a>
-    {/each}
+    <h2>Không có đề</h2>
 </main>
 
 <style>
@@ -59,10 +44,9 @@
         padding: .5rem;
         border-radius: 1rem;
     }
-    nav.filter > a.active {
+    nav.filter > a.new {
         background-color: var(--primary-color);
         color: white;
         font-weight: bold;
     }
-    main a {width: fit-content;}
 </style>
