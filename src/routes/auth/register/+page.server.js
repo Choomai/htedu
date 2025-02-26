@@ -29,13 +29,17 @@ export const actions = {
         if (teacherToggle && !emailDomain.includes(".edu.")) return { success: false, message: "Email không thuộc domain EDU" };
         if (password != passwordConfirm) return { success: false, message: "Mật khẩu không giống nhau"};
 
-
-        if (avatarImage instanceof File && avatarImage.type.startsWith("image/")) {
-            const buff = await avatarImage.arrayBuffer();
-            avatarPath = path.join(process.cwd(), "static", "avatars", `${username}.webp`);
-            await sharp(Buffer.from(buff)).toFormat("webp").toFile(avatarPath);
-            avatarPath = `/avatars/${username}.webp`;
-        } else return { success: false, message: "Hình ảnh không hợp lệ" };
+        if (avatarImage === null) {
+            if (avatarImage instanceof File && avatarImage.type.startsWith("image/")) {
+                const buff = await avatarImage.arrayBuffer();
+                avatarPath = path.join(process.cwd(), "static", "avatars", `${username}.webp`);
+                await sharp(Buffer.from(buff)).toFormat("webp").toFile(avatarPath);
+                avatarPath = `/avatars/${username}.webp`;
+            } else return {
+                success: false,
+                message: "Hình ảnh không hợp lệ"
+            }
+        };
         const permissionLevel = +teacherToggle;
         
         const salt = randomBytes(16).toString("hex");
