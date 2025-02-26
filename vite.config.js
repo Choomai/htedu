@@ -5,7 +5,8 @@ export default defineConfig({
 	server: {
 		fs: { allow: [
 			"package.json",
-			"/static/avatars"
+			"/static/avatars",
+			"/static/docs"
 		] }
 	},
 	plugins: [sveltekit()]

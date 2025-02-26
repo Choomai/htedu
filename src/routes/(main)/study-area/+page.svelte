@@ -1,16 +1,16 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
-    import { onMount } from "svelte";
+    // import { onMount } from "svelte";
     import User from "/src/components/user.svelte";
     let { data } = $props();
 
-    onMount(() => {
-        window.addEventListener("hashchange", () => {
-            const currentFilter = window.location.hash.slice(1);
+    // onMount(() => {
+    //     window.addEventListener("hashchange", () => {
+    //         const currentFilter = window.location.hash.slice(1);
             
-        })
-    })
+    //     })
+    // })
 </script>
 
 <nav class="filter">
