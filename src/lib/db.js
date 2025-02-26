@@ -6,5 +6,5 @@ export const pool = createPool({
     socketPath: DB_SOCKET,
     user: DB_USER,
     password: DB_PASSWORD,
-    database: DB_NAME   
+    database: DB_NAME
 });
