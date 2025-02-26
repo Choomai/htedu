@@ -25,22 +25,22 @@ export const actions = {
 
         if (thumbnailImg instanceof File && thumbnailImg.type.startsWith("image/")) {
             const imgBuff = await thumbnailImg.arrayBuffer();
-            thumbnailPath = path.join(
-                process.cwd(),
-                process.env.NODE_ENV == "production" ? "client" : "static",
-                "docs", `${username}@${UUID}.webp`);
+            thumbnailPath = path.join(process.cwd(), "static", "docs", `${username}@${UUID}.webp`);
+            
             await sharp(Buffer.from(imgBuff)).toFormat("webp").toFile(thumbnailPath);
             thumbnailPath = `/docs/${username}@${UUID}.webp`;
         } else return { success: false, message: "Hình ảnh không hợp lệ" };
 
-        if (docsFile instanceof File) {
+        const allowedMime = [
+            "application/pdf",
+            "application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        ]
+        if (docsFile instanceof File && allowedMime.includes(docsFile.type)) {
+            const fileType = path.extname(docsFile.name);
             const docsBuff = await docsFile.arrayBuffer();
-            const fileType = docsFile.name.split(".").pop();
-            docsFilePath = path.join(
-                process.cwd(),
-                process.env.NODE_ENV == "production" ? "client" : "static",
-                "docs", `${username}@${UUID}.${fileType}`
-            );
+
+            docsFilePath = path.join(process.cwd(), "static", "docs", `${username}@${UUID}.${fileType}`);
             await writeFile(docsFilePath, Buffer.from(docsBuff));
             docsFilePath = `/docs/${username}@${UUID}.${fileType}`;
         } else return { success: false, message: "Tài liệu không hợp lệ" };
