@@ -32,10 +32,10 @@ export const actions = {
 
         if (avatarImage instanceof File && avatarImage.type.startsWith("image/")) {
             const buff = await avatarImage.arrayBuffer();
-            avatarPath = path.join(process.cwd(), process.env.NODE_ENV == "production" ? "static" : "", "client", "avatars", `${username}.webp`);
+            avatarPath = path.join(process.cwd(), process.env.NODE_ENV == "production" ? "client" : "static", "avatars", `${username}.webp`);
             await sharp(Buffer.from(buff)).toFormat("webp").toFile(avatarPath);
             avatarPath = `/avatars/${username}.webp`;
-        }
+        } else return { success: false, message: "Hình ảnh không hợp lệ" };
         const permissionLevel = +teacherToggle;
         
         const salt = randomBytes(16).toString("hex");

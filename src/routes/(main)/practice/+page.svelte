@@ -20,13 +20,17 @@
     <a class="button new" href="/practice/new"><FontAwesomeIcon icon={faPlus}/>Tạo đề</a>
 </nav>
 <main>
-    <figure>
-        <img src="/imgs/logo.png" alt="works thumbnail">
-        <figcaption>
-            <h3>works title</h3>
-            <User username={data.session?.username} avatar={data.session?.avatar}/>
-        </figcaption>
-    </figure>
+    {#each data.docs as doc}
+        <a class="normalize" href="/practice/{doc.uuid}">
+            <figure>
+                <img src={doc.img_path} alt="works thumbnail">
+                <figcaption>
+                    <h3>{doc.name}</h3>
+                    <User username={doc.username} avatar={doc.avatar}/>
+                </figcaption>
+            </figure>
+        </a>
+    {/each}
 </main>
 
 <style>

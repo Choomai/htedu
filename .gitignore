@@ -3,6 +3,8 @@ node_modules
 # Static
 /static/avatars/*.webp
 !/static/avatars/default.webp
+/static/docs/*.*
+!/static/**/.nomedia
 
 # Output
 .output

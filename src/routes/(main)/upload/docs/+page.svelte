@@ -1,7 +1,7 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
-    import { faFile, faFileImage } from "@fortawesome/free-solid-svg-icons";
-    let { data } = $props();
+    import { faFile, faFileImage, faFileArrowUp } from "@fortawesome/free-solid-svg-icons";
+    let { data, form } = $props();
 
     let currentFileName = $state("");
     let docsTitle = $state("");
@@ -20,10 +20,12 @@
 
 <main>
     <form action method="POST" enctype="multipart/form-data">
+        <h2>Đăng tài liệu</h2>
+        {#if form?.success == false}<p>{form?.message}</p>{/if}
         <label for="docs-name">Tên tài liệu</label>
         <input type="text" name="name" id="docs-name" bind:value={docsTitle} placeholder="Tên của tài liệu">
         <label for="docs-tag">Chọn thẻ cho tài liệu</label>
-        <select name="tag" id="docs-tag">
+        <select name="category" id="docs-tag">
             {#each data.cats as cat}
                 <option value={cat.id}>{cat.title}</option>
             {/each}
@@ -41,6 +43,7 @@
             <input type="file" name="thumbnail" id="docs-thumbnail" accept="image/*" hidden required onchange={updateImgName}>
             <input type="file" name="docs" id="docs" accept=".doc,.docx,.pdf,.rtf" hidden required onchange={updateFileName}>
         </div>
+        <button type="submit"><FontAwesomeIcon icon={faFileArrowUp}/> Tải lên</button>
     </form>
 </main>
 
@@ -58,5 +61,10 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+    button[type="submit"] {
+        width: 100%;
+        font-weight: bold;
+        margin-top: .5rem;
     }
 </style>
