@@ -1,12 +1,9 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { faNewspaper, faFileLines } from "@fortawesome/free-solid-svg-icons";
-
     import Navbar from "/src/components/navbar.svelte";
-    import { app_name } from "$lib/const";
     
     let { data } = $props();
-    const { session, user } = data;
 
     function requestFollow(e) {
         e.target.disabled = true;
@@ -32,25 +29,25 @@
 </script>
 
 <div class="container">
-    <Navbar showTitle name={session.name} avatar={session.avatar} username={session.username}/>
+    <Navbar showTitle name={data.session.name} avatar={data.session.avatar} username={data.session.username}/>
     
     <main>
         <div class="cover"></div>
         <article>
             <div class="profile">
-                <img src={user.avatar ?? "/avatars/default.webp"} alt="user avatar">
+                <img src={data.user.avatar ?? "/avatars/default.webp"} alt="user avatar">
                 <div class="info">
-                    <span class="name">{user.name}</span>
+                    <span class="name">{data.user.name}</span>
                     <!-- Edit button if self -->
-                    {#if session.username == user.username} 
-                        <a class="button" href="/profile/{user.username}/edit">Chỉnh sửa</a>
+                    {#if data.session.username == data.user.username} 
+                        <a class="button" href="/profile/{data.user.username}/edit">Chỉnh sửa</a>
                     {:else}
                         <button type="button" onclick={requestFollow}>{data.followed ? "Đã theo dõi" : "Theo dõi"}</button>
                     {/if}
                 </div>
             </div>
             <div class="follow-container">
-                <span>69 đang theo dõi</span>
+                <span>{data.following.count} đang theo dõi</span>
             </div>
             <hr>
             
