@@ -23,9 +23,9 @@
         <h2>Đăng tài liệu</h2>
         <hr>
         {#if form?.success == false}<p>{form?.message}</p>{/if}
-        <label for="docs-name">Tên tài liệu</label>
+        <h3><label for="docs-name">Tên tài liệu</label></h3>
         <input type="text" name="name" id="docs-name" bind:value={docsTitle} placeholder="Tên của tài liệu">
-        <label for="docs-tag">Chọn thẻ cho tài liệu</label>
+        <h3><label for="docs-tag">Chọn thẻ cho tài liệu</label></h3>
         <select name="category" id="docs-tag">
             {#each data.cats as cat}
                 <option value={cat.id}>{cat.title}</option>
@@ -52,6 +52,7 @@
     form {
         display: flex;
         flex-direction: column;
+        gap: 1rem;
     }
     div.file-container {
         display: flex;
