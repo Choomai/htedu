@@ -1,16 +1,16 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
-    import { faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
+    import { faPen, faPlus, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
     import { onMount } from "svelte";
     let { data } = $props();
 
     let currentFilter = $state("");
     function changeFilter(filter) {
-        // if (!filter) docs = data.docs;
-        // else {
-            // docs = data.docs.filter(doc => doc.category == filter);
-            currentFilter = filter;
-        // }
+        if (filter == "top" || filter == "") {
+            currentFilter = "";
+            return;
+        }
+        currentFilter = filter;
     }
     onMount(() => {
         window.addEventListener("hashchange", () => {
@@ -24,6 +24,9 @@
     {#each data.categories as category}
         <a class="normalize" class:active={currentFilter == category.id} href={`#${category.id}`}><FontAwesomeIcon icon={faPen}/>{category.title}</a>
     {/each}
+    {#if currentFilter != ""}
+        <a class="normalize" href="#top"><FontAwesomeIcon icon={faCircleXmark}/></a>
+    {/if}
     <a class="button new" href="/practice/new"><FontAwesomeIcon icon={faPlus}/>Tạo đề</a>
 </nav>
 <main>
