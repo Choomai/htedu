@@ -54,7 +54,6 @@
         display: grid;
         grid-template-columns: auto auto;
     }
-    main a {width: fit-content;}
     
     nav.filter {
         display: flex;

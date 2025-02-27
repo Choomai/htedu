@@ -19,8 +19,8 @@
         <a class:selected={$page.url.pathname.startsWith("/study-area")} href="/study-area"><FontAwesomeIcon icon={faPen} fixedWidth={true}/>Khu học tập</a>
         <a class:selected={$page.url.pathname.startsWith("/practice")} href="/practice"> <FontAwesomeIcon icon={faFileLines} fixedWidth={true}/>Luyện đề</a>
         {#if data.session.permission_level >= 1}
-            <a class:selected={$page.url.pathname.startsWith("/upload/docs")} href="/upload/docs"> <FontAwesomeIcon icon={faFile} fixedWidth={true}/>Đăng tài liệu</a>
-            <a class:selected={$page.url.pathname.startsWith("/upload/assignments")} href="/upload/assignments"> <FontAwesomeIcon icon={faBook} fixedWidth={true}/>Đăng bài tập</a>
+            <a class:selected={$page.url.pathname.startsWith("/docs")} href="/docs"> <FontAwesomeIcon icon={faFile} fixedWidth={true}/>Đăng tài liệu</a>
+            <a class:selected={$page.url.pathname.startsWith("/assignments")} href="/assignments"> <FontAwesomeIcon icon={faBook} fixedWidth={true}/>Đăng bài tập</a>
         {/if}
         <a class:selected={$page.url.pathname.startsWith("/teachers")} href="/teachers"><FontAwesomeIcon icon={faChalkboardUser} fixedWidth={true}/>Giáo viên</a>
         <a class:selected={$page.url.pathname.startsWith("/community")} href="/community"><FontAwesomeIcon icon={faUsers} fixedWidth={true}/>Cộng đồng</a>

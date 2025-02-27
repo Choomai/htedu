@@ -58,6 +58,7 @@ a {
 }
 a:hover {text-decoration: underline;}
 a.normalize {
+    width: fit-content;
     color: var(--text);
     text-decoration: none;
 }
