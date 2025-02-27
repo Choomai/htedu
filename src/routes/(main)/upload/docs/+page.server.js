@@ -32,6 +32,7 @@ export const actions = {
         } else return { success: false, message: "Hình ảnh không hợp lệ" };
 
         const allowedMime = [
+            "application/rtf",
             "application/pdf",
             "application/msword",
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
@@ -40,7 +41,7 @@ export const actions = {
             const fileType = path.extname(docsFile.name);
             const docsBuff = await docsFile.arrayBuffer();
 
-            docsFilePath = path.join(process.cwd(), "static", "docs", `${username}@${UUID}.${fileType}`);
+            docsFilePath = path.join(process.cwd(), "static", "docs", `${username}@${UUID}${fileType}`);
             await writeFile(docsFilePath, Buffer.from(docsBuff));
             docsFilePath = `/docs/${username}@${UUID}.${fileType}`;
         } else return { success: false, message: "Tài liệu không hợp lệ" };
