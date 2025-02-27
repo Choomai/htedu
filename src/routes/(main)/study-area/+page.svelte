@@ -29,7 +29,7 @@
         <a class="normalize" class:active={currentFilter == category.id} href={`#${category.id}`}><FontAwesomeIcon icon={faPen}/>{category.title}</a>
     {/each}
     {#if currentFilter != ""}
-        <a class="normalize" href="#top"><FontAwesomeIcon icon={faCircleXmark}/></a>
+        <a class="normalize" href="#top"><FontAwesomeIcon icon={faCircleXmark} fixedWidth={true}/></a>
     {/if}
 </nav>
 <main>

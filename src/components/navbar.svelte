@@ -21,8 +21,7 @@
                 <span>Xin chào, {props.name}!</span>
                 <div class="action">
                     <a class="button" href="/profile/{props.username}">Trang cá nhân</a>
-                    <!-- svelte-ignore a11y_consider_explicit_label -->
-                    <a class="button" href="/auth/logout"><FontAwesomeIcon icon={faRightFromBracket}/></a>
+                    <a class="button logout" href="/auth/logout"><FontAwesomeIcon icon={faRightFromBracket} fixedWidth={true}/></a>
                 </div>
             </div>
         {:else if notifyDropdown}
