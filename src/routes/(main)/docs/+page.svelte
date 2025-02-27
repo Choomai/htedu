@@ -10,7 +10,7 @@
 <main>
     <a href="/docs/upload" class="normalize upload">
         <FontAwesomeIcon icon={faPlusCircle} size="3x"/>
-        <span>Đăng bài tập</span>
+        <span>Đăng tài liệu</span>
     </a>
     <h3>Thư viện của tôi</h3>
     {#each docs as doc}
