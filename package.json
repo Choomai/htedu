@@ -20,7 +20,7 @@
 		"@fortawesome/free-regular-svg-icons": "^6.7.2",
 		"@fortawesome/free-solid-svg-icons": "^6.7.2",
 		"@fortawesome/svelte-fontawesome": "^0.2.3",
-		"@friendofsvelte/tipex": "^0.0.7-up-5",
+		"@friendofsvelte/tipex": "^0.0.7-fix-0",
 		"@monaco-editor/loader": "^1.4.0",
 		"ioredis": "^5.4.2",
 		"monaco-editor": "^0.52.0",
