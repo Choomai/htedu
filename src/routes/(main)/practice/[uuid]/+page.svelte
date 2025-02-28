@@ -16,50 +16,42 @@
         question = data.questions[pointer];
     }
 
-    function handleMultipleChoice(e) {
-        answers[pointer].type = "multiple_choice";
-        answers[pointer].answer = e.target.value;
-    }
-
-    function handleTrueFalse(e) {
-        const index = parseInt(e.target.dataset.index);
-        answers[pointer].type = "true_false";
-        answers[pointer].statements[index] = e.target.value === "true";
-    }
+    function handleMultipleChoice(e) {answers[pointer].type = 0;}
+    function handleTrueFalse(e) {answers[pointer].type = 1;}
 </script>
 
 <main>
-    {#if question.type == "multiple_choice"}
+    {#if question.type == 0}
         <section class="multiple-choice">
             <div class="question">
                 <h3>{question.question}</h3>
             </div>
             <div class="answers">
-                <input type="radio" name="choice" id="ansA" value="A" hidden 
-                    checked={answers[pointer].answer === "A"}
+                <input type="radio" name="choice_{question.uuid}" id="ansA" value="A" hidden 
+                    bind:group={answers[pointer].answer}
                     onchange={handleMultipleChoice}>
                 <label for="ansA">{question.answers.A}</label>
 
-                <input type="radio" name="choice" id="ansB" value="B" hidden 
-                    checked={answers[pointer].answer === "B"}
+                <input type="radio" name="choice_{question.uuid}" id="ansB" value="B" hidden 
+                    bind:group={answers[pointer].answer}
                     onchange={handleMultipleChoice}>
                 <label for="ansB">{question.answers.B}</label>
 
-                <input type="radio" name="choice" id="ansC" value="C" hidden 
-                    checked={answers[pointer].answer === "C"}
+                <input type="radio" name="choice_{question.uuid}" id="ansC" value="C" hidden 
+                    bind:group={answers[pointer].answer}
                     onchange={handleMultipleChoice}>
                 <label for="ansC">{question.answers.C}</label>
 
-                <input type="radio" name="choice" id="ansD" value="D" hidden 
-                    checked={answers[pointer].answer === "D"}
+                <input type="radio" name="choice_{question.uuid}" id="ansD" value="D" hidden 
+                    bind:group={answers[pointer].answer}
                     onchange={handleMultipleChoice}>
                 <label for="ansD">{question.answers.D}</label>
             </div>
         </section>
-    {:else if question.type == "true_false"}
+    {:else if question.type == 1}
         <section class="true-false">
             <div class="question">
-                <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ratione repellat maxime excepturi debitis doloremque aliquid, perspiciatis minus ut impedit laudantium natus nisi culpa veritatis, sequi tempore praesentium beatae at.</h3>
+                <h3>{question.question}</h3>
             </div>
             <div class="answers">
                 <h3>Chọn đúng sai</h3>
@@ -68,15 +60,13 @@
                     <span>S</span>
                 </div>
         
-                {#each question.statements as statement, i}
-                    <span>{statement.statement}</span>
+                {#each question.data as stmt, i}
+                    <span>{stmt.statement}</span>
                     <div class="true-false">
-                        <input type="radio" name="statement{i}" value="true" 
-                            checked={answers[pointer].statements[i] === true}
-                            data-index={i} onchange={handleTrueFalse}>
-                        <input type="radio" name="statement{i}" value="false" 
-                            checked={answers[pointer].statements[i] === false}
-                            data-index={i} onchange={handleTrueFalse}>
+                        <input type="radio" name="statement-{i}_{question.uuid}" value="true"
+                            bind:group={answers[pointer].statements[i]} onchange={handleTrueFalse}>
+                        <input type="radio" name="statement-{i}_{question.uuid}" value="false" 
+                            bind:group={answers[pointer].statements[i]} onchange={handleTrueFalse}>
                     </div>
                 {/each}
             </div>
