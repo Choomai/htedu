@@ -27,7 +27,7 @@
             </div>
             <div class="card" style="--line:#7030A0">
                 <FontAwesomeIcon icon={faFile}/>
-                <span>{data.stats.exams_count}</span>
+                <span>{data.stats.assignments_count}</span>
                 <span>Bài tập tải lên</span>
             </div>
         </section>
