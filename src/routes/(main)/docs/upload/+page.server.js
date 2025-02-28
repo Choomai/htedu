@@ -43,7 +43,7 @@ export const actions = {
 
             docsFilePath = path.join(process.cwd(), "static", "docs", `${username}@${UUID}${fileType}`);
             await writeFile(docsFilePath, Buffer.from(docsBuff));
-            docsFilePath = `/docs/${username}@${UUID}.${fileType}`;
+            docsFilePath = `/docs/${username}@${UUID}${fileType}`;
         } else return { success: false, message: "Tài liệu không hợp lệ" };
 
         const [rows] = await pool.execute("INSERT INTO docs(uuid, username, name, path, img_path, category) VALUES(?, ?, ?, ?, ?, ?)",
