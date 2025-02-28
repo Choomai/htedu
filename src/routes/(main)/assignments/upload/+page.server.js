@@ -2,8 +2,8 @@ import { pool } from "$lib/db";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
-    const [cats] = await pool.execute("SELECT * FROM categories");
-    return { categories: cats }
+    const [cats] = await pool.execute("SELECT * FROM categories ORDER BY title ASC");
+    return { cats }
 }
 
 /** @type {import('./$types').Actions} */
@@ -13,8 +13,7 @@ export const actions = {
         const { session } = locals;
         const username = session.data.username;
 
-        const assFile = data.get("ass"),
-            thumbnailImg = data.get("thumbnail"),
+        const thumbnailImg = data.get("thumbnail"),
             assName = data.get("name"),
             assCat = data.get("category");
         let assFilePath = null, thumbnailPath = null;

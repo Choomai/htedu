@@ -14,20 +14,22 @@
         <h2>Đăng bài tập</h2>
         <hr>
         {#if form?.success == false}<p>{form?.message}</p>{/if}
-        <label for="ass-name">Tên bài tập<label>
+        <label for="ass-name">Tên bài tập</label>
         <input type="text" name="name" id="ass-name" placeholder="Tên của bài tập">
-        <label for="ass-tag">Chọn thẻ cho bài tập</label>
-        <select name="category" id="ass-tag">
-            {#each data.cats as cat}
-                <option value={cat.id}>{cat.title}</option>
-            {/each}
-        </select>
-        <div class="file-container">
+        <div class="wrapper">
+            <div class="cats-wrapper">
+                <label for="ass-tag">Chọn thẻ cho bài tập</label>
+                <select name="category" id="ass-tag">
+                    {#each data.cats as cat}
+                        <option value={cat.id}>{cat.title}</option>
+                    {/each}
+                </select>
+            </div>
             <div class="file-wrapper">
                 <label class="file" for="ass-thumbnail"><FontAwesomeIcon icon={faFileImage}/> Ảnh bìa</label>
                 <span>{currentImgName}</span>
+                <input type="file" name="thumbnail" id="ass-thumbnail" accept="image/jpeg,image/png,image/webp,image/gif,image/avif,image/tiff,image/svg" hidden required onchange={updateImgName}>
             </div>
-            <input type="file" name="thumbnail" id="ass-thumbnail" accept="image/jpeg,image/png,image/webp,image/gif,image/avif,image/tiff,image/svg" hidden required onchange={updateImgName}>
         </div>
         <button type="submit"><FontAwesomeIcon icon={faFileArrowUp}/> Tải lên</button>
     </form>
@@ -38,10 +40,14 @@
         display: flex;
         flex-direction: column;
     }
-    div.file-container {
+    div.wrapper {
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+        margin-top: .5rem;
+    }
+    div.cats-wrapper > select {
+        padding: .5rem;
     }
     div.file-wrapper {
         display: flex;
