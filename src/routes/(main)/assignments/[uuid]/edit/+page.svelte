@@ -1,6 +1,7 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { faFloppyDisk, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
+    import { uuidPattern } from "$lib/const";
 
     let { data } = $props();
     data.questions.forEach(e => e.client_uuid = crypto.randomUUID());
@@ -47,8 +48,7 @@
     async function removeQuestion(client_uuid) {
         actionDisabled = true;
         const question = questions.find(question => question.client_uuid == client_uuid);
-        const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-        if (question.uuid && uuidRegex.test(question.uuid)) {
+        if (question.uuid && uuidPattern.test(question.uuid)) {
             try {
                 const deleteFetch = await fetch("/api/questions", {
                     method: "DELETE",
