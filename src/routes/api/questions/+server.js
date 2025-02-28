@@ -4,6 +4,7 @@ import { uuidPattern } from "$lib/const";
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, locals }) {
+    // This will remain unused for a while
     const { session } = locals;
     if (!session.data.auth) error(401, "Unauthorized");
 
