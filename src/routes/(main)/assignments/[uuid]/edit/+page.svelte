@@ -3,7 +3,9 @@
     import { faFloppyDisk, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 
     let { data } = $props();
+    data.questions.forEach(e => e.client_uuid = crypto.randomUUID());
     let questions = $state(data.questions);
+    let actionDisabled = $state(false);
 
     function addNewQuestion(e) {
         switch (parseInt(e.target.dataset.type)) {
@@ -11,6 +13,7 @@
                 questions.push({
                     question: "Nội dung câu hỏi",
                     type: 0,
+                    client_uuid: crypto.randomUUID(),
                     data: {
                         "A": "Câu A",
                         "B": "Câu B",
@@ -25,6 +28,7 @@
                 questions.push({
                     question: "Nội dung câu hỏi",
                     type: 1,
+                    client_uuid: crypto.randomUUID(),
                     data: [
                         {"statement": "stmt 1", "answer": false},
                         {"statement": "stmt 2", "answer": true},
@@ -38,7 +42,24 @@
                 alert("Tính năng đang phát triển!");
                 break;
         }
-        console.log($state.snapshot(questions));
+    }
+
+    async function removeQuestion(client_uuid) {
+        actionDisabled = true;
+        const question = questions.find(question => question.client_uuid == client_uuid);
+        const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+        if (question.uuid && uuidRegex.test(question.uuid)) {
+            try {
+                const deleteFetch = await fetch("/api/questions", {
+                    method: "DELETE",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ uuid: question.uuid })
+                });
+                if (deleteFetch.ok) alert("Đã xóa câu hỏi")
+            } catch (err) {return alert("Có lỗi xảy ra khi xóa câu hỏi")}
+        }
+        questions = questions.filter(q => q.client_uuid != client_uuid);
+        actionDisabled = false;
     }
 </script>
 
@@ -46,7 +67,7 @@
     {#each questions as question, q_index}
         <div class="header">
             <h2>Câu {q_index+1}</h2>
-            <button class="fake" type="button" title="Xóa câu hỏi"><FontAwesomeIcon icon={faXmarkCircle} fixedWidth={true}/></button>
+            <button class="fake" type="button" title="Xóa câu hỏi" disabled={actionDisabled} onclick={() => removeQuestion(question.client_uuid)}><FontAwesomeIcon icon={faXmarkCircle} fixedWidth={true}/></button>
         </div>
         {#if question.type == 0}
             <section class="multiple-choice">
@@ -105,11 +126,11 @@
     {/each}
     <h2>Thêm câu hỏi</h2>
     <div class="select-type">
-        <button type="button" data-type={0} onclick={addNewQuestion}>Trắc nghiệm 4 phương án</button>
-        <button type="button" data-type={1} onclick={addNewQuestion}>Trắc nghiệm đúng sai</button>
-        <button type="button" data-type={2} onclick={addNewQuestion}>Tự luận</button>
+        <button type="button" data-type={0} disabled={actionDisabled} onclick={addNewQuestion}>Trắc nghiệm 4 phương án</button>
+        <button type="button" data-type={1} disabled={actionDisabled} onclick={addNewQuestion}>Trắc nghiệm đúng sai</button>
+        <button type="button" data-type={2} disabled={actionDisabled} onclick={addNewQuestion}>Tự luận</button>
     </div>
-    <button class="save" type="button"><FontAwesomeIcon icon={faFloppyDisk}/> Lưu thay đổi</button>
+    <button class="save" type="button" disabled={actionDisabled}><FontAwesomeIcon icon={faFloppyDisk}/> Lưu thay đổi</button>
 </main>
 
 <style>
