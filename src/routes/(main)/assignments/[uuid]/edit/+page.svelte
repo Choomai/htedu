@@ -1,4 +1,5 @@
 <script>
+    import { page } from "$app/state";
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { faFloppyDisk, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
     import { uuidPattern } from "$lib/const";
@@ -7,6 +8,7 @@
     data.questions.forEach(e => e.client_uuid = crypto.randomUUID());
     let questions = $state(data.questions);
     let actionDisabled = $state(false);
+    const assignmentUUID = page.params.uuid;
 
     function addNewQuestion(e) {
         switch (parseInt(e.target.dataset.type)) {
@@ -15,6 +17,7 @@
                     question: "Nội dung câu hỏi",
                     type: 0,
                     client_uuid: crypto.randomUUID(),
+                    assignment_uuid: assignmentUUID,
                     data: {
                         "A": "Câu A",
                         "B": "Câu B",
@@ -30,6 +33,7 @@
                     question: "Nội dung câu hỏi",
                     type: 1,
                     client_uuid: crypto.randomUUID(),
+                    assignment_uuid: assignmentUUID,
                     data: [
                         {"statement": "stmt 1", "answer": false},
                         {"statement": "stmt 2", "answer": true},
@@ -59,6 +63,19 @@
             } catch (err) {return alert("Có lỗi xảy ra khi xóa câu hỏi")}
         }
         questions = questions.filter(q => q.client_uuid != client_uuid);
+        actionDisabled = false;
+    }
+
+    async function submitQuestions(e) {
+        actionDisabled = true;
+        try {
+            const updateFetch = await fetch("/api/questions", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(questions)
+            })
+            if (updateFetch.ok) alert("Đã lưu thay đổi");
+        } catch (err) {return alert("Có lỗi xảy ra khi lưu câu hỏi")}
         actionDisabled = false;
     }
 </script>
@@ -130,7 +147,7 @@
         <button type="button" data-type={1} disabled={actionDisabled} onclick={addNewQuestion}>Trắc nghiệm đúng sai</button>
         <button type="button" data-type={2} disabled={actionDisabled} onclick={addNewQuestion}>Tự luận</button>
     </div>
-    <button class="save" type="button" disabled={actionDisabled}><FontAwesomeIcon icon={faFloppyDisk}/> Lưu thay đổi</button>
+    <button class="save" type="button" disabled={actionDisabled} onclick={submitQuestions}><FontAwesomeIcon icon={faFloppyDisk}/> Lưu thay đổi</button>
 </main>
 
 <style>

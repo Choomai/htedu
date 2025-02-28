@@ -30,22 +30,22 @@
                 <input type="radio" name="choice_{question.uuid}" id="ansA" value="A" hidden 
                     bind:group={answers[pointer].answer}
                     onchange={handleMultipleChoice}>
-                <label for="ansA">{question.answers.A}</label>
+                <label for="ansA">{question.data.A}</label>
 
                 <input type="radio" name="choice_{question.uuid}" id="ansB" value="B" hidden 
                     bind:group={answers[pointer].answer}
                     onchange={handleMultipleChoice}>
-                <label for="ansB">{question.answers.B}</label>
+                <label for="ansB">{question.data.B}</label>
 
                 <input type="radio" name="choice_{question.uuid}" id="ansC" value="C" hidden 
                     bind:group={answers[pointer].answer}
                     onchange={handleMultipleChoice}>
-                <label for="ansC">{question.answers.C}</label>
+                <label for="ansC">{question.data.C}</label>
 
                 <input type="radio" name="choice_{question.uuid}" id="ansD" value="D" hidden 
                     bind:group={answers[pointer].answer}
                     onchange={handleMultipleChoice}>
-                <label for="ansD">{question.answers.D}</label>
+                <label for="ansD">{question.data.D}</label>
             </div>
         </section>
     {:else if question.type == 1}
