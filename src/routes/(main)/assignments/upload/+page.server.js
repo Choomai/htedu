@@ -1,4 +1,6 @@
 import { pool } from "$lib/db";
+import { redirect } from "@sveltejs/kit";
+import sharp from "sharp";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
@@ -8,23 +10,29 @@ export async function load() {
 
 /** @type {import('./$types').Actions} */
 export const actions = {
-    default: async ({ request }) => {
+    default: async ({ request, locals }) => {
         const data = await request.formData();
         const { session } = locals;
         const username = session.data.username;
 
         const thumbnailImg = data.get("thumbnail"),
-            assName = data.get("name"),
+            assTitle = data.get("title"),
             assCat = data.get("category");
-        let assFilePath = null, thumbnailPath = null;
+        let thumbnailPath = null;
         const UUID = crypto.randomUUID();
 
         if (thumbnailImg instanceof File && thumbnailImg.type.startsWith("image/")) {
             const imgBuff = await thumbnailImg.arrayBuffer();
-            thumbnailPath = path.join(process.cwd(), "static", "docs", `${username}@${UUID}.webp`);
+            thumbnailPath = path.join(process.cwd(), "static", "assignments", `${username}@${UUID}.webp`);
             
             await sharp(Buffer.from(imgBuff)).toFormat("webp").toFile(thumbnailPath);
-            thumbnailPath = `/docs/${username}@${UUID}.webp`;
+            thumbnailPath = `/assignments/${username}@${UUID}.webp`;
+
+            const [rows] = await pool.execute("INSERT INTO assignments(uuid, user_id, title, category) VALUES(?, ?, ?, ?)", 
+                [UUID, session.data.id, assTitle, assCat]);
+            if (rows.affectedRows == 0) return { success: false, message: "Có lỗi xảy ra khi đăng bài tập" }
+            
+            redirect(302, `/assignments/${UUID}/edit`);
         } else return { success: false, message: "Hình ảnh không hợp lệ" };
     }
 };
