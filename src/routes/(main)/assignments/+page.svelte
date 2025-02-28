@@ -4,7 +4,7 @@
     import User from "/src/components/user.svelte";
 
     let { data } = $props();
-    const { assigments } = data;
+    const { assignments } = data;
 </script>
 
 <main>
@@ -13,12 +13,12 @@
         <span>Đăng bài tập</span>
     </a>
     <h3>Thư viện của tôi</h3>
-    {#each assigments as ass}
-        <a class="normalize" href="/study-area/{ass.uuid}">
+    {#each assignments as ass}
+        <a class="normalize" href="/practice/{ass.uuid}">
             <figure>
                 <img src={ass.img_path} alt="works thumbnail">
                 <figcaption>
-                    <h3>{ass.name}</h3>
+                    <h3>{ass.title}</h3>
                     <User username={ass.username} avatar={ass.avatar}/>
                 </figcaption>
             </figure>
