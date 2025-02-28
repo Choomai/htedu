@@ -1,5 +1,6 @@
 import { pool } from "$lib/db";
 import { error, json } from "@sveltejs/kit";
+const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, locals }) {
@@ -30,8 +31,6 @@ export async function PUT({ request, locals }) {
     const { uuid, question, question_data } = data;
 
     if (!uuid ||!question || !question_data) error(400, "Missing data");
-    
-    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
     if (!uuidRegex.test(uuid)) error(400, "Invalid UUID format");
     
     const [result] = await pool.execute(
@@ -52,8 +51,6 @@ export async function DELETE({ request, locals }) {
     const { uuid } = data;
 
     if (!uuid) error(400, "Missing UUID");
-    
-    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
     if (!uuidRegex.test(uuid)) error(400, "Invalid UUID format");
 
     const [result] = await pool.execute(
