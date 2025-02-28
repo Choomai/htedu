@@ -1,6 +1,7 @@
 import { pool } from "$lib/db";
 import { redirect } from "@sveltejs/kit";
 import sharp from "sharp";
+import path from "node:path";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
