@@ -4,6 +4,8 @@ node_modules
 /static/**/*.*
 !/static/avatars/default.webp
 !/static/**/.nomedia
+!/static/imgs/*.*
+!/static/design/*.*
 
 # Output
 .output
