@@ -70,6 +70,8 @@ hr {
 
 h2, h3 {margin: 0;}
 
+sup.required {color: red;}
+
 div#svelte-root {
     display: flex;
     height: 100%;

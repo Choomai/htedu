@@ -14,7 +14,7 @@
         <h2>Đăng bài tập</h2>
         <hr>
         {#if form?.success == false}<p>{form?.message}</p>{/if}
-        <label for="ass-title">Tên bài tập</label>
+        <label for="ass-title">Tên bài tập<sup class="required">*</sup></label>
         <input type="text" name="title" id="ass-title" placeholder="Tên của bài tập">
         <div class="wrapper">
             <div class="cats-wrapper">

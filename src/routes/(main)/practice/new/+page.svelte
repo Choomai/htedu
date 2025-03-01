@@ -7,13 +7,13 @@
     <h2>Tạo đề</h2>
     <hr>
     <form action method="post">
-        <label for="exam-name">Nhập tên cho đề của bạn</label>
+        <label for="exam-name">Nhập tên cho đề của bạn<sup class="required">*</sup></label>
         <input type="text" id="exam-name" name="name" placeholder="Nhập tên" required>
-        <label for="multiple-choice">Nhập số câu hỏi trắc nghiệm</label>
+        <label for="multiple-choice">Nhập số câu hỏi trắc nghiệm<sup class="required">*</sup></label>
         <input type="number" id="multiple-choice" name="multiple-choice" placeholder="Bạn nên nhập số lượng là 24 để bám sát với đề minh họa" required>
-        <label for="true-false">Nhập số câu hỏi đúng/sai</label>
+        <label for="true-false">Nhập số câu hỏi đúng/sai<sup class="required">*</sup></label>
         <input type="number" id="true-false" name="true-false" placeholder="Bạn nên nhập số lượng là 2 để bám sát với đề minh họa" required>
-        <label for="approach">Nhập số câu hỏi đúng/sai</label>
+        <label for="approach">Nhập số câu hỏi đúng/sai<sup class="required">*</sup></label>
         <select name="approach" id="approach">
             <option value="khmt">Định hướng khoa học máy tính</option>
             <option value="thud">Định hướng tin học ứng dụng</option>

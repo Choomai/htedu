@@ -23,7 +23,7 @@
         <h2>Đăng tài liệu</h2>
         <hr>
         {#if form?.success == false}<p>{form?.message}</p>{/if}
-        <h3><label for="docs-name">Tên tài liệu</label></h3>
+        <h3><label for="docs-name">Tên tài liệu<sup class="required">*</sup></label></h3>
         <input type="text" name="name" id="docs-name" bind:value={docsTitle} placeholder="Tên của tài liệu">
         <h3><label for="docs-tag">Chọn thẻ cho tài liệu</label></h3>
         <select name="category" id="docs-tag">
@@ -34,11 +34,11 @@
         <h3>Tải file lên</h3>
         <div class="file-container">
             <div class="file-wrapper">
-                <label class="file" for="docs-thumbnail"><FontAwesomeIcon icon={faFileImage}/> Ảnh bìa</label>
+                <label class="file" for="docs-thumbnail"><FontAwesomeIcon icon={faFileImage}/> <span>Ảnh bìa<sup class="required">*</sup></span></label>
                 <span>{currentImgName}</span>
             </div>
             <div class="file-wrapper">
-                <label class="file" for="docs"><FontAwesomeIcon icon={faFile}/> Tài liệu</label>
+                <label class="file" for="docs"><FontAwesomeIcon icon={faFile}/> <span>Tài liệu<sup class="required">*</sup></span></label>
                 <span>{currentFileName}</span>
             </div>
             <input type="file" name="thumbnail" id="docs-thumbnail" accept="image/jpeg,image/png,image/webp,image/gif,image/avif,image/tiff,image/svg" hidden required onchange={updateImgName}>
@@ -52,7 +52,7 @@
     form {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: .5rem;
     }
     div.file-container {
         display: flex;
