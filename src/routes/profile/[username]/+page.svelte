@@ -53,10 +53,10 @@
             
             <nav class="profile">
                 <section>
-                    <a class="active normalize" href="/profile/ngvana"><FontAwesomeIcon icon={faNewspaper} fixedWidth={true}/>Bài viết</a>
+                    <a class="active normalize" href="/profile/{data.user.username}/posts"><FontAwesomeIcon icon={faNewspaper} fixedWidth={true}/>Bài viết</a>
                 </section>
                 <section>
-                    <a class="normalize" href="/profile/ngvana/history/"><FontAwesomeIcon icon={faFileLines} fixedWidth={true}/>Lịch sử bài tập</a>
+                    <a class="normalize" href="/profile/{data.user.username}/history"><FontAwesomeIcon icon={faFileLines} fixedWidth={true}/>Lịch sử bài tập</a>
                 </section>
             </nav>
         </article>
@@ -106,6 +106,7 @@
         border-radius: 100%;
         outline: 1rem solid var(--bg);
         user-select: none;
+        background-color: var(--bg);
     }
     div.info {
         display: flex;
