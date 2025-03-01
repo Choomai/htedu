@@ -27,6 +27,7 @@
     article {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
+        justify-items: center;
     }
 
     figure {
@@ -39,6 +40,7 @@
     }
     figcaption {
         background-color: unset;
+        text-align: center;
     }
     figure > img {
         width: 120px;
