@@ -34,7 +34,7 @@
     {#each data.assignments as ass}
         <a class="normalize" href="/practice/{ass.uuid}">
             <figure>
-                <img src={ass.img_path} alt="works thumbnail">
+                <img src={ass.img_path ?? "/imgs/logo.png"} alt="works thumbnail">
                 <figcaption>
                     <h3>{ass.title}</h3>
                     <User username={ass.username} avatar={ass.avatar}/>

@@ -39,7 +39,7 @@
     {#each docs as doc}
         <a class="normalize" href="/study-area/{doc.uuid}">
             <figure>
-                <img src={doc.img_path} alt="works thumbnail">
+                <img src={doc.img_path ?? "/imgs/logo.png"} alt="works thumbnail">
                 <figcaption>
                     <h3>{doc.name}</h3>
                     <User username={doc.username} avatar={doc.avatar}/>
