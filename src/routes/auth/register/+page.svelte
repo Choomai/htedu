@@ -10,7 +10,7 @@
     function updateFilename(e) {
         currentFilename = e.target.value.replace(/^.*[\\\/]/, '');
     }
-    let teacherToggle = $state(false)
+    let teacherToggle = $state(false);
 </script>
 
 <main>
