@@ -28,12 +28,11 @@ export const actions = {
             
             await sharp(Buffer.from(imgBuff)).toFormat("webp").toFile(thumbnailPath);
             thumbnailPath = `/assignments/${username}@${UUID}.webp`;
-
-            const [rows] = await pool.execute("INSERT INTO assignments(uuid, user_id, title, category, img_path) VALUES(?, ?, ?, ?, ?)", 
-                [UUID, session.data.id, assTitle, assCat, thumbnailPath]);
-            if (rows.affectedRows == 0) return { success: false, message: "Có lỗi xảy ra khi đăng bài tập" }
-            
-            redirect(302, `/assignments/${UUID}/edit`);
-        } else return { success: false, message: "Hình ảnh không hợp lệ" };
+        };
+        
+        const [rows] = await pool.execute("INSERT INTO assignments(uuid, user_id, title, category, img_path) VALUES(?, ?, ?, ?, ?)", 
+            [UUID, session.data.id, assTitle, assCat, thumbnailPath]);
+        if (rows.affectedRows == 0) return { success: false, message: "Có lỗi xảy ra khi đăng bài tập" }
+        redirect(302, `/assignments/${UUID}/edit`);
     }
 };
