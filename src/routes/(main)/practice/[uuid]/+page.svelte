@@ -34,17 +34,17 @@
                         bind:group={answers[pointer].answer}
                         onchange={handleMultipleChoice}>
                     <label for="ansA">{question.data.A}</label>
-
+                        
                     <input type="radio" name="choice_{question.uuid}" id="ansB" value="B" hidden 
                         bind:group={answers[pointer].answer}
                         onchange={handleMultipleChoice}>
                     <label for="ansB">{question.data.B}</label>
-
+                        
                     <input type="radio" name="choice_{question.uuid}" id="ansC" value="C" hidden 
                         bind:group={answers[pointer].answer}
                         onchange={handleMultipleChoice}>
                     <label for="ansC">{question.data.C}</label>
-
+                        
                     <input type="radio" name="choice_{question.uuid}" id="ansD" value="D" hidden 
                         bind:group={answers[pointer].answer}
                         onchange={handleMultipleChoice}>
@@ -62,19 +62,19 @@
                         <span>Đ</span>
                         <span>S</span>
                     </div>
-            
+                    
                     {#each question.data as stmt, i}
-                        <span>{stmt.statement}</span>
-                        <div class="true-false">
-                            <input type="radio" name="statement-{i}_{question.uuid}" value="true"
-                                bind:group={answers[pointer].statements[i]} onchange={handleTrueFalse}>
-                            <input type="radio" name="statement-{i}_{question.uuid}" value="false" 
-                                bind:group={answers[pointer].statements[i]} onchange={handleTrueFalse}>
-                        </div>
+                    <span>{stmt.statement}</span>
+                    <div class="true-false">
+                        <input type="radio" name="statement-{i}_{question.uuid}" value="true"
+                        bind:group={answers[pointer].statements[i]} onchange={handleTrueFalse}>
+                        <input type="radio" name="statement-{i}_{question.uuid}" value="false" 
+                        bind:group={answers[pointer].statements[i]} onchange={handleTrueFalse}>
+                    </div>
                     {/each}
                 </div>
             </section>
-        <!-- TODO: Add question with code editor/textarea input. -->
+            <!-- TODO: Add question with code editor/textarea input. -->
         {/if}
         <div class="action">
             <button type="button" data-shift={-1} disabled={pointer === 0} onclick={changeQuestion}><FontAwesomeIcon icon={faArrowLeft}/> Câu trước đó</button>
