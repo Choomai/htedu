@@ -74,8 +74,13 @@
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(questions)
             })
-            if (updateFetch.ok) alert("Đã lưu thay đổi");
-        } catch (err) {return alert("Có lỗi xảy ra khi lưu câu hỏi")}
+            const response = await updateFetch.json();
+            if (!response.errors?.length) alert("Đã lưu câu hỏi")
+            else throw new Error("Sone rows failed to update");
+        } catch (err) {
+            console.error(err);
+            return alert("Có lỗi xảy ra khi lưu câu hỏi")
+        }
         actionDisabled = false;
     }
 </script>

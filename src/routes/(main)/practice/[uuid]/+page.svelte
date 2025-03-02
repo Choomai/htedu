@@ -3,6 +3,7 @@
     import { faArrowLeft, faArrowRight, faCircleCheck, faFileLines, faRepeat } from "@fortawesome/free-solid-svg-icons";
     let { data } = $props();
     let pointer = $state(0);
+    data.questions = typeof data.questions === "string" ? JSON.parse(data.questions) : data.questions;
     let question = $state(data.questions[0]);
     // Store answers for all questions
     let answers = $state(data.questions.map(() => ({
