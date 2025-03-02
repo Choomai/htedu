@@ -3,11 +3,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
 	server: {
-		fs: { allow: [
-			"package.json",
-			"/static/avatars",
-			"/static/docs"
-		] }
+		fs: { allow: ["package.json"] }
 	},
 	plugins: [sveltekit()]
 });
