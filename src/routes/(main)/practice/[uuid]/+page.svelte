@@ -1,10 +1,12 @@
 <script>
+    import { goto } from "$app/navigation";
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { faArrowLeft, faArrowRight, faCircleCheck, faFileLines, faRepeat } from "@fortawesome/free-solid-svg-icons";
     let { data } = $props();
     let pointer = $state(0);
     data.questions.forEach(question => question.data = typeof question.data === "string" ? JSON.parse(question.data) : question.data);
     let question = $state(data.questions[0]);
+    
     // Store answers for all questions
     let answers = $state(data.questions.map(() => ({
         type: null,
@@ -13,14 +15,60 @@
     })));
     let inProgress = $state(true);
 
+    function resetSession() {
+        answers = data.questions.map(() => ({
+            type: null,
+            answer: null,
+            statements: [null, null, null, null]
+        }));
+        inProgress = true;
+    }
+
     function changeQuestion(e) {
         pointer += parseInt(e.target.dataset.shift);
         question = data.questions[pointer];
     }
-    function handleMultipleChoice(e) {answers[pointer].type = 0;}
-    function handleTrueFalse(e) {answers[pointer].type = 1;}
+    function handleMultipleChoice() {answers[pointer].type = 0;}
+    function handleTrueFalse() {answers[pointer].type = 1;}
 
-    function submitSession(e) {inProgress = false;}
+    function calcScore() {
+        let mcScore = 0;
+        let tfScore = 0;
+        let maxMcScore = 0;
+        let maxTfScore = 0;
+        
+        data.questions.forEach((q, i) => {
+            if (q.type === 0) {
+                maxMcScore += 0.25;
+                if (answers[i].answer === q.data.correct) {
+                    mcScore += 0.25;
+                }
+            }
+            else if (q.type === 1) {
+                maxTfScore += 1;
+                let correctCount = 0;
+                q.data.forEach((stmt, j) => {
+                    if (answers[i].statements[j] === stmt.answer.toString()) {
+                        correctCount++;
+                    }
+                });
+                
+                if (correctCount === 1) tfScore += 0.1;
+                else if (correctCount === 2) tfScore += 0.25;
+                else if (correctCount === 3) tfScore += 0.5;
+                else if (correctCount === 4) tfScore += 1;
+            }
+        });
+
+        return { 
+            mcScore, 
+            tfScore, 
+            maxMcScore, 
+            maxTfScore,
+            totalScore: mcScore + tfScore,
+            maxTotalScore: maxMcScore + maxTfScore 
+        };
+    }
 </script>
 
 <main class:done={!inProgress}>
@@ -80,17 +128,22 @@
         <div class="action">
             <button type="button" data-shift={-1} disabled={pointer === 0} onclick={changeQuestion}><FontAwesomeIcon icon={faArrowLeft}/> Câu trước đó</button>
             {#if pointer === data.questions.length - 1}
-                <button type="button" onclick={submitSession}><FontAwesomeIcon icon={faCircleCheck}/> Nộp bài</button>
+                <button type="button" onclick={() => inProgress = false}><FontAwesomeIcon icon={faCircleCheck}/> Nộp bài</button>
             {:else}
                 <button type="button" data-shift={1} onclick={changeQuestion}><FontAwesomeIcon icon={faArrowRight}/> Câu tiếp theo</button>
             {/if}
         </div>
     {:else}
         <h2>Kết quả</h2>
-        <code>100/100</code>
+        {#if calcScore()}
+            {@const scores = calcScore()}
+            <span>Trắc nghiệm 4 phương án: <code>{(scores.mcScore).toFixed(2)}/{(scores.maxMcScore).toFixed(2)}</code></span>
+            <span>Trắc nghiệm đúng sai: <code>{(scores.tfScore).toFixed(2)}/{(scores.maxTfScore).toFixed(2)}</code></span>
+            <span>Tổng điểm: <code>{(scores.totalScore).toFixed(2)}/{(scores.maxTotalScore).toFixed(2)}</code></span>
+        {/if}
         <div class="action">
-            <button type="button"><FontAwesomeIcon icon={faFileLines}/> Luyện đề khác</button>
-            <button type="button"><FontAwesomeIcon icon={faRepeat}/> Làm lại</button>
+            <a href="/practice" class="button"><FontAwesomeIcon icon={faFileLines}/> Luyện đề khác</a>
+            <button type="button" onclick={resetSession}><FontAwesomeIcon icon={faRepeat}/> Làm lại</button>
         </div>
     {/if}
 </main>
