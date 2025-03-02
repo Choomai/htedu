@@ -63,17 +63,19 @@ export async function PUT({ request, locals }) {
 
         try {
             const [result] = await pool.execute(
-                "INSERT INTO questions (uuid, assignment_uuid, question, type, data, user_id) VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE question = VALUES(question), data = VALUES(data)",
-                [uuid, assignment_uuid, question, type, quesTion.data, session.data.id]
+                "INSERT INTO questions (uuid, assignment_uuid, question, type, data, user_id) VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE question = ?, data = ?",
+                [uuid, assignment_uuid, question, type, quesTion.data, session.data.id, question, quesTion.data]
             );
             
             if (result.affectedRows > 0) successCount++
             else errors.push({ uuid, error: "Question not found" });
-        } catch (err) {errors.push({ uuid, error: err })}
+        } catch (err) {
+            console.error(err);
+            errors.push({ uuid, error: err });
+        }
     }
 
     return json({
-        success: true,
         updated: successCount,
         errors: errors
     });
