@@ -41,7 +41,7 @@ export const actions = {
             }
         };
         
-        const permissionLevel = +teacherToggle;
+        const permissionLevel = teacherToggle ? 1 : 0;
         // get the default value of permission_level column
         // const [defaultValue] = await pool.execute(`SELECT column_default FROM information_schema.columns WHERE table_name = "users" AND column_name = "permission_level"`);
         // if (!permissionLevel) permissionLevel = defaultValue[0].column_default ?? 0;
