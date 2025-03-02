@@ -13,20 +13,28 @@
         <span>Đăng bài tập</span>
     </a>
     <h3>Thư viện của tôi</h3>
-    {#each assignments as ass}
-        <a class="normalize" href="/practice/{ass.uuid}">
-            <figure>
-                <img src={ass.img_path ?? "/imgs/logo.png"} alt="works thumbnail">
-                <figcaption>
-                    <h3>{ass.title}</h3>
-                    <User username={ass.username} avatar={ass.avatar}/>
-                </figcaption>
-            </figure>
-        </a>
-    {/each}
+    <div class="uploaded">
+        {#each assignments as ass}
+            <a class="normalize" href="/practice/{ass.uuid}">
+                <figure>
+                    <img src={ass.img_path ?? "/imgs/logo.png"} alt="works thumbnail">
+                    <figcaption>
+                        <h3>{ass.title}</h3>
+                        <User username={ass.username} avatar={ass.avatar}/>
+                    </figcaption>
+                </figure>
+            </a>
+        {/each}
+    </div>
 </main>
 
 <style>
+    div.uploaded {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-items: center;
+    }
+
     a.upload {
         display: flex;
         justify-content: center;

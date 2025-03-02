@@ -53,6 +53,7 @@
     main {
         display: grid;
         grid-template-columns: auto auto;
+        justify-items: center;
     }
     
     nav.filter {

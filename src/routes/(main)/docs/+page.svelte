@@ -13,20 +13,28 @@
         <span>Đăng tài liệu</span>
     </a>
     <h3>Thư viện của tôi</h3>
-    {#each docs as doc}
-        <a class="normalize" href="/study-area/{doc.uuid}">
-            <figure>
-                <img src={doc.img_path ?? "/imgs/logo.png"} alt="works thumbnail">
-                <figcaption>
-                    <h3>{doc.name}</h3>
-                    <User username={doc.username} avatar={doc.avatar}/>
-                </figcaption>
-            </figure>
-        </a>
-    {/each}
+    <div class="uploaded">
+        {#each docs as doc}
+            <a class="normalize" href="/study-area/{doc.uuid}">
+                <figure>
+                    <img src={doc.img_path ?? "/imgs/logo.png"} alt="works thumbnail">
+                    <figcaption>
+                        <h3>{doc.name}</h3>
+                        <User username={doc.username} avatar={doc.avatar}/>
+                    </figcaption>
+                </figure>
+            </a>
+        {/each}
+    </div>
 </main>
 
 <style>
+    div.uploaded {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-items: center;
+    }
+
     a.upload {
         display: flex;
         justify-content: center;

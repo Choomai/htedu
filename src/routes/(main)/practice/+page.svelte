@@ -45,6 +45,12 @@
 </main>
 
 <style>
+    main {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-items: center;
+    }
+    
     nav.filter {
         display: flex;
         gap: 1rem;
