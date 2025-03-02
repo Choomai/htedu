@@ -58,7 +58,7 @@
         padding: .5rem;
         border-radius: 1rem;
     }
-    nav.filter > a.new {
+    nav.filter > a:is(.new, .active) {
         background-color: var(--primary-color);
         color: white;
         font-weight: bold;

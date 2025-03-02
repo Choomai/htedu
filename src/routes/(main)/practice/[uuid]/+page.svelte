@@ -10,7 +10,7 @@
         answer: null,
         statements: [null, null, null, null]
     })));
-    let inProgress = $state(false);
+    let inProgress = $state(true);
 
     function changeQuestion(e) {
         pointer += parseInt(e.target.dataset.shift);
