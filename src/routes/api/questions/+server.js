@@ -62,9 +62,10 @@ export async function PUT({ request, locals }) {
         }
 
         try {
+            const insertData = process.env.NODE_ENV == "production" ? JSON.stringify(quesTion.data) : quesTion.data;
             const [result] = await pool.execute(
-                "INSERT INTO questions (uuid, assignment_uuid, question, type, data, user_id) VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE question = ?, data = ?",
-                [uuid, assignment_uuid, question, type, quesTion.data, session.data.id, question, quesTion.data]
+                "INSERT INTO questions (uuid, assignment_uuid, question, type, data, user_id) VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE question = VALUES(question), data = VALUES(data)",
+                [uuid, assignment_uuid, question, type, insertData, session.data.id]
             );
             
             if (result.affectedRows > 0) successCount++
