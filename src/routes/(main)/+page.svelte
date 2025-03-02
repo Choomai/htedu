@@ -54,13 +54,17 @@
             <h2>Bài tập phổ biến</h2>
             <a href="/study-area">Xem tất cả <FontAwesomeIcon icon={faArrowRight}/></a>
         </div>
-        <figure>
-            <img src="/imgs/logo.png" alt="works thumbnail">
-            <figcaption>
-                <h3>works title</h3>
-                <User username={data.session?.username} avatar={data.session?.avatar}/>
-            </figcaption>
-        </figure>
+        {#each data.assignments as ass}
+            <a class="normalize" href="/practice/{ass.uuid}">
+                <figure>
+                    <img src={ass.img_path ?? "/imgs/logo.png"} alt="works thumbnail">
+                    <figcaption>
+                        <h3>{ass.title}</h3>
+                        <User username={ass.username} avatar={ass.avatar}/>
+                    </figcaption>
+                </figure>
+            </a>
+        {/each}
     </section>
     <Teachers data={data?.teachers} homepage={true}/>
 </main>
