@@ -1,7 +1,8 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
-    import { faFile, faFileImage, faFileArrowUp } from "@fortawesome/free-solid-svg-icons";
+    import { faFileImage, faFileArrowUp } from "@fortawesome/free-solid-svg-icons";
     let { data, form } = $props();
+    console.log(form);
 
     let currentImgName = $state("");
     function updateImgName(e) {
@@ -28,7 +29,7 @@
             <div class="file-wrapper">
                 <label class="file" for="ass-thumbnail"><FontAwesomeIcon icon={faFileImage}/> Ảnh bìa</label>
                 <span>{currentImgName}</span>
-                <input type="file" name="thumbnail" id="ass-thumbnail" accept="image/jpeg,image/png,image/webp,image/gif,image/avif,image/tiff,image/svg" hidden required onchange={updateImgName}>
+                <input type="file" name="thumbnail" id="ass-thumbnail" accept="image/jpeg,image/png,image/webp,image/gif,image/avif,image/tiff,image/svg" hidden onchange={updateImgName}>
             </div>
         </div>
         <button type="submit"><FontAwesomeIcon icon={faFileArrowUp}/> Tải lên</button>
