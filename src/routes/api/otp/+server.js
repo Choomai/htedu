@@ -31,7 +31,7 @@ export async function POST({ request, locals }) {
         username = usernameRows[0].username;
     }
     
-    const [cooldownRows] = await pool.execute("SELECT TIMESTAMPDIFF(SECOND, timestamp, NOW()) AS diff FROM users WHERE username = ?", [mailTo]);
+    const [cooldownRows] = await pool.execute("SELECT TIMESTAMPDIFF(SECOND, timestamp, NOW()) AS diff FROM otp WHERE username = ?", [mailTo]);
     if (cooldownRows.length > 0 && cooldownRows[0].diff < 60) {
         error(429, `Please wait ${60 - cooldownRows[0].diff} seconds before requesting another OTP`);
     }
