@@ -41,10 +41,10 @@ export const actions = {
             }
         };
         
-        let permissionLevel = +teacherToggle;
+        const permissionLevel = +teacherToggle;
         // get the default value of permission_level column
-        const [defaultValue] = await pool.execute(`SELECT column_default FROM information_schema.columns WHERE table_name = "users" AND column_name = "permission_level"`);
-        if (!permissionLevel) permissionLevel = defaultValue[0].column_default ?? 0;
+        // const [defaultValue] = await pool.execute(`SELECT column_default FROM information_schema.columns WHERE table_name = "users" AND column_name = "permission_level"`);
+        // if (!permissionLevel) permissionLevel = defaultValue[0].column_default ?? 0;
         
         const salt = randomBytes(16).toString("hex");
         password = `${salt}:${scryptSync(password, salt, 64).toString("hex")}`;
@@ -58,12 +58,12 @@ export const actions = {
             )
             `.replace(/\s+/g, " ").trim(), [username, password, name, email, avatarPath, permissionLevel, username, email]);
         if (rows.affectedRows == 0) return { success: false, message: "Username hoặc email trùng với tài khoản khác" };
-        
+
         const [userId] = await pool.execute("SELECT id FROM users WHERE username = ?", [username]);
         await session.setData({
             auth: true,
             id: userId[0].id,
-            verified: false,
+            verified: process.env.OTP_DISABLED ?? false,
             email,
             avatar: avatarPath,
             name,
