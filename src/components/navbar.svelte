@@ -1,14 +1,18 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
-    import { faBell, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+    import { faBars, faBell, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+    import { sidebarState } from "$lib/sidebarStore";
     let userDropdown = $state(false);
     let notifyDropdown = $state(false);
 
     let props = $props();
+
+    function toggleSidebar() {sidebarState.update(state => !state)};
 </script>
 
 <nav class="navbar">
     {#if props.showTitle}<a class="title" href="/"><h3>Huong Tra</h3></a>{/if}
+    <button class="fake" type="button" onclick={toggleSidebar}><FontAwesomeIcon icon={faBars} size="xl" fixedWidth={true}/></button>
     <div class="search-wrapper">
         <input type="text" id="search" placeholder="Tìm kiếm...">
         <i id="searchIcon" class="fa-solid fa-magnifying-glass fa-1x"></i>

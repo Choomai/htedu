@@ -1,19 +1,25 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
-    import { faHouse, faPen, faFile, faFileLines, faBook, faChalkboardUser, faUsers } from "@fortawesome/free-solid-svg-icons";
+    import { faHouse, faPen, faFile, faFileLines, faBook, faChalkboardUser, faUsers, faAnglesLeft } from "@fortawesome/free-solid-svg-icons";
     import Navbar from "/src/components/navbar.svelte";
     import { page } from "$app/stores";
     import { app_name } from "$lib/const";
+    import { sidebarState, onMobile } from "$lib/sidebarStore";
     import { version } from "/package.json";
     
     let { data, children } = $props();
 </script>
 
-<nav class="sidebar">
+<nav class="sidebar" class:hidden={!$sidebarState}>
     <div class="sidebar-main">
-        <div>
-            <img src="/imgs/logo.png" alt="Site logo">
-            <span>{app_name}</span>
+        <div class="sidebar-header">
+            <div>
+                <img src="/imgs/logo.png" alt="Site logo">
+                <span>{app_name}</span>
+            </div>
+            {#if !$onMobile}
+                <button class="fake" type="button" onclick={() => sidebarState.set(false)}><FontAwesomeIcon icon={faAnglesLeft} size="xl"/></button>
+            {/if}
         </div>
         <a class:selected={$page.url.pathname == "/"} href="/"><FontAwesomeIcon icon={faHouse} fixedWidth={true}/>Trang chủ</a>
         <a class:selected={$page.url.pathname.startsWith("/study-area")} href="/study-area"><FontAwesomeIcon icon={faPen} fixedWidth={true}/>Khu học tập</a>
@@ -53,8 +59,20 @@
         min-width: 300px;
         padding: 1rem;
         overflow-y: overlay;
-        /* border-right: 1px solid #fff; */
+        background-color: var(--bg);
+        border-right: 3px solid #fff;
         font-size: 1.25rem;
+        transition: 500ms ease;
+    }
+    nav.sidebar.hidden {
+        transform: translateX(-100%);
+        min-width: 0;
+        width: 0;
+        padding: 0;
+        transition: 500ms ease;
+    }
+    @media screen and (max-width: 768px) {
+        nav.sidebar {position: fixed;}
     }
 
     div.sidebar-main {
@@ -62,13 +80,18 @@
         flex-direction: column;
         gap: 1rem;
     }
-    div.sidebar-main div:first-child {
+    div.sidebar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    div.sidebar-header > div:first-child {
         display: flex;
         align-items: center;
         gap: 8px;
         margin-bottom: 8px;
     }
-    div.sidebar-main div:first-child > img {
+    div.sidebar-header > div:first-child > img {
         width: 48px;
         border-radius: 100%;
     }
@@ -94,5 +117,5 @@
         color: white;
     }
 
-    nav.sidebar div:last-child {color: gray;}
+    nav.sidebar > div:last-child {color: gray;}
 </style>
