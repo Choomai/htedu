@@ -4,6 +4,7 @@
     --primary-color-disabled: #6b00b3;
     --bg: white;
     --secondary-bg: #ddd;
+    --third-bg: #f2f2f2;
     --input-box: #f2f2f2;
     --text: black;
     --url: #9900ff;
@@ -215,6 +216,7 @@ div.user-dropdown a.button {
     :root {
         --bg: #111;
         --secondary-bg: #222;
+        --third-bg: #333;
         --text: white;
         --url: white;
         --input-box: #222;

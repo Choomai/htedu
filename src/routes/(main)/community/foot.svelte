@@ -6,7 +6,7 @@
 
 <footer>
     <span>Bạn đang đăng bài với username là {props.username}</span>
-    <button type="submit"><FontAwesomeIcon icon={faPenToSquare} fixedWidth={true}/>Đăng bài</button>
+    <button type="submit" form="post-form"><FontAwesomeIcon icon={faPenToSquare} fixedWidth={true}/>Đăng bài</button>
 </footer>
 
 <style>

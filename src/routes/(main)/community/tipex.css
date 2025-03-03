@@ -1,3 +1,22 @@
 div.tipex-editor {
     background-color: var(--secondary-bg);
+    border-radius: 1rem;
+    width: 100%;
+}
+
+.tipex-floating-group {
+    background-color: var(--third-bg);
+}
+.tipex-floating-button {
+    padding: initial;
+}
+
+.tipex-link-edit-input-group > input {
+    padding: initial;
+    font-size: 1rem;
+}
+
+.tipex-editor-section {
+    height: max-content;
+    overflow-y: initial;
 }
