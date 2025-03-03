@@ -53,7 +53,7 @@
         min-width: 300px;
         padding: 1rem;
         overflow-y: overlay;
-        border-right: 1px solid #fff;
+        /* border-right: 1px solid #fff; */
         font-size: 1.25rem;
     }
 
