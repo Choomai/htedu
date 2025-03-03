@@ -52,8 +52,14 @@
 <style>
     main {
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        gap: 1rem;
         justify-items: center;
+    }
+    main > h2 {
+        grid-column: 1 / -1;
+        text-align: center;
+        margin-top: 1rem;
     }
     
     nav.filter {
