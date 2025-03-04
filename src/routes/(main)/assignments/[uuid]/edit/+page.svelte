@@ -166,10 +166,7 @@
         align-items: center;
         gap: .5rem;
     }
-    main > div.header > button {
-        font-size: 1.5rem;
-        cursor: pointer;
-    }
+    main > div.header > button {font-size: 1.5rem;}
 
     section {
         display: flex;

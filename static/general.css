@@ -171,6 +171,7 @@ button, a.button {
     font-weight: bold;
     transition: ease 500ms;
     user-select: none;
+    cursor: pointer;
 }
 button:hover, a.button:hover {
     background-color: var(--primary-color-selected);
@@ -190,6 +191,7 @@ button.fake {
     padding: initial;
     background: none;
     color: var(--text);
+    cursor: pointer;
 }
 
 div.user-dropdown, button.notify-dropdown {
