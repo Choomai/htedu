@@ -72,14 +72,13 @@
 <style>
     section:is(.documents, .works) {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     }
     section:is(.documents, .works) > div.header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        grid-column-start: 1;
-        grid-column-end: 3;
+        grid-column: 1 / -1;
     }
 
     section.stats {
