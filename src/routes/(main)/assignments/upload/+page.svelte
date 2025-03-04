@@ -14,7 +14,7 @@
     <form action method="POST" enctype="multipart/form-data">
         <h2>Đăng bài tập</h2>
         <hr>
-        {#if form?.success == false}<p>{form?.message}</p>{/if}
+        <p>{form?.message}</p>
         <label for="ass-title">Tên bài tập<sup class="required">*</sup></label>
         <input type="text" name="title" id="ass-title" placeholder="Tên của bài tập">
         <div class="wrapper">

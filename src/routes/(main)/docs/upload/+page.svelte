@@ -22,7 +22,7 @@
     <form action method="POST" enctype="multipart/form-data">
         <h2>Đăng tài liệu</h2>
         <hr>
-        {#if form?.success == false}<p>{form?.message}</p>{/if}
+        <p>{form?.message}</p>
         <h3><label for="docs-name">Tên tài liệu<sup class="required">*</sup></label></h3>
         <input type="text" name="name" id="docs-name" bind:value={docsTitle} placeholder="Tên của tài liệu">
         <h3><label for="docs-tag">Chọn thẻ cho tài liệu</label></h3>
