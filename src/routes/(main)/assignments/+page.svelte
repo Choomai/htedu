@@ -31,7 +31,7 @@
 <style>
     div.uploaded {
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
         justify-items: center;
     }
 
