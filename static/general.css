@@ -114,7 +114,7 @@ figure {
     width: 400px;
     border-radius: 1rem;
 }
-figure > img {
+figure img {
     width: 400px;
     height: 150px;
     border-top-left-radius: 1rem;

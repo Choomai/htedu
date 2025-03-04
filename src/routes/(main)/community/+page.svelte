@@ -1,6 +1,6 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
-    import { faComment, faHeart, faShare } from "@fortawesome/free-solid-svg-icons";
+    import { faComment, faHeart, faShare, faTrash } from "@fortawesome/free-solid-svg-icons";
     import { Tipex } from "@friendofsvelte/tipex";
     import "@friendofsvelte/tipex/styles/Tipex.css";
     import "@friendofsvelte/tipex/styles/ProseMirror.css";
@@ -12,7 +12,7 @@
     import { onMount } from "svelte";
 
     let { data } = $props();
-    const articles = data.articles;
+    let { articles } = $state(data);
     let theme = $state("");
     onMount(() => {
         theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "";
@@ -27,6 +27,18 @@
             e.preventDefault();
         }
     }
+    // function editArticle() {alert("Tính năng đang phát triển")}
+    async function deleteArticle(id) {
+        const formData = new FormData();
+        formData.append("id", id);
+        const deleteReq = await fetch("/api/articles", {
+            method: "DELETE",
+            body: formData
+        })
+        if (!deleteReq.ok) return alert("Xoá thất bại, hãy thử lại sau");
+        articles = articles.filter(article => article.id != id);
+        alert("Xóa bài viết thành công")
+    }
 </script>
 
 <main>
@@ -40,12 +52,19 @@
     {#if articles.length >= 1}
         {#each articles as article}
             <article>
-                <h2><img src={article.avatar || "/avatars/default.webp"} alt="user avatar">{article.username}</h2>
+                <div class="header">
+                    <img src={article.avatar || "/avatars/default.webp"} alt="user avatar">
+                    <h2>{article.username}</h2>
+                </div>
                 <p>{@html article.content}</p>
                 <div class="action">
                     <button class="fake" type="button" title="like"><FontAwesomeIcon icon={faHeart}/>&nbsp;{article.total_likes}</button>
                     <button class="fake" type="button" title="comment"><FontAwesomeIcon icon={faComment}/>&nbsp;{article.total_comments}</button>
-                    <button class="fake" type="button" aria-label="share" title="share"><FontAwesomeIcon icon={faShare}/>&nbsp;</button>
+                    <button class="fake" type="button" aria-label="share" title="share"><FontAwesomeIcon icon={faShare}/></button>
+                    {#if article.user_id == data.session.id}
+                        <!-- <button class="fake" onclick={editArticle} type="button"><FontAwesomeIcon icon={faPen}/></button> -->
+                        <button class="fake" onclick={() => deleteArticle(article.id)} type="button"><FontAwesomeIcon icon={faTrash}/></button>
+                    {/if}
                 </div>
             </article>
         {/each}
@@ -60,13 +79,11 @@
         padding: 0 6rem;
     }
 
-    h2 {
+    div.header {
         display: flex;
-        align-items: center;
-        gap: 8px;
-        margin: 0;
+        gap: .5rem;
     }
-    h2 > img {
+    div.header > img {
         border-radius: 100%;
         width: 40px;
         height: 40px;

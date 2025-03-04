@@ -1,10 +1,22 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
-    import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+    import { faPlusCircle, faTrash } from "@fortawesome/free-solid-svg-icons";
     import User from "/src/components/user.svelte";
 
     let { data } = $props();
-    const { docs } = data;
+    let { docs } = $state(data);
+
+    async function handleDelete(uuid) {
+        const formData = new FormData();
+        formData.append("uuid", uuid);
+        const deleteReq = await fetch("/api/docs", {
+            method: "DELETE",
+            body: formData
+        });
+        if (!deleteReq.ok) return alert("Xoá thất bại, hãy thử lại sau");
+        docs = docs.filter(doc => doc.uuid != uuid);
+        alert("Xóa tài liệu thành công")
+    }
 </script>
 
 <main>
@@ -14,17 +26,22 @@
     </a>
     <h3>Thư viện của tôi</h3>
     <div class="uploaded">
-        {#each docs as doc}
-            <a class="normalize" href="/study-area/{doc.uuid}">
+        {#if docs.length >= 1}
+            {#each docs as doc}
                 <figure>
-                    <img src={doc.img_path ?? "/imgs/logo.png"} alt="works thumbnail">
+                    <a class="normalize" href="/study-area/{doc.uuid}"><img src={doc.img_path ?? "/imgs/logo.png"} alt="works thumbnail"></a>
                     <figcaption>
-                        <h3>{doc.name}</h3>
+                        <div class="info-wrapper">
+                            <h3>{doc.name}</h3>
+                            <button class="fake" onclick={() => handleDelete(doc.uuid)} type="button"><FontAwesomeIcon icon={faTrash}/></button>
+                        </div>
                         <User username={doc.username} avatar={doc.avatar}/>
                     </figcaption>
                 </figure>
-            </a>
-        {/each}
+            {/each}
+        {:else}
+            <h2>Không có tài liệu</h2>
+        {/if}
     </div>
 </main>
 
@@ -46,5 +63,11 @@
         padding: 1rem;
         border: 1px solid var(--text);
         border-radius: 1rem;
+    }
+
+    div.info-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 </style>
