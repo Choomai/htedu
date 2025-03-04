@@ -72,7 +72,10 @@
         transition: 500ms ease;
     }
     @media screen and (max-width: 768px) {
-        nav.sidebar {position: fixed;}
+        nav.sidebar {
+            position: fixed;
+            z-index: 50;
+        }
     }
 
     div.sidebar-main {

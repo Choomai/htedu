@@ -29,7 +29,7 @@
 </script>
 
 <div class="container">
-    <Navbar showTitle name={data.session.name} avatar={data.session.avatar} username={data.session.username}/>
+    <Navbar showTitle noToggleSidebar name={data.session.name} avatar={data.session.avatar} username={data.session.username}/>
     
     <main>
         <div class="cover"></div>
