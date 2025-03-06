@@ -1,6 +1,6 @@
 <script>
     import { getContext } from "svelte";
-    import User from "/src/components/user.svelte";
+    import Card from "/src/components/card.svelte";
     
     const items = getContext("doc-ass");
 </script>
@@ -10,15 +10,8 @@
         <h2>Không có tài liệu</h2>
     {/if}
     {#each $items as doc}
-        <a class="normalize" href="/study-area/{doc.uuid}">
-            <figure>
-                <img src={doc.img_path ?? "/imgs/logo.png"} alt="works thumbnail">
-                <figcaption>
-                    <h3>{doc.name}</h3>
-                    <User username={doc.username} avatar={doc.avatar}/>
-                </figcaption>
-            </figure>
-        </a>
+        <Card title={doc.name} url="/practice/{doc.uuid}" imgPath={doc.img_path} 
+            username={doc.username} avatar={doc.avatar}/>
     {/each}
 </main>
 

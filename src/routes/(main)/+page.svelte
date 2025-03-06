@@ -1,10 +1,12 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { faUser, faFile, faFileLines, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-    import User from "/src/components/user.svelte";
+    import Card from "/src/components/card.svelte";
     import Teachers from "/src/components/teachers.svelte";
     let { data } = $props();
-    if (data.stats) data.stats.docs_count = data.docs.filter(doc => doc.username == data.session.username).length;
+    if (data.stats) {
+        data.stats.docs_count = data.docs.filter(doc => doc.username == data.session.username).length;
+    }
 </script>
 
 <main>
@@ -38,15 +40,8 @@
             <a href="/study-area">Xem tất cả <FontAwesomeIcon icon={faArrowRight}/></a>
         </div>
         {#each data.docs as doc}
-            <a class="normalize" href="/study-area/{doc.uuid}">
-                <figure>
-                    <img src={doc.img_path} alt="works thumbnail">
-                    <figcaption>
-                        <h3>{doc.name}</h3>
-                        <User username={doc.username} avatar={doc.avatar}/>
-                    </figcaption>
-                </figure>
-            </a>
+            <Card title={doc.name} url="/study-area/{doc.uuid}" imgPath={doc.img_path}
+                username={doc.username} avatar={doc.avatar}/>
         {/each}
     </section>
     <section class="works">
@@ -55,15 +50,8 @@
             <a href="/study-area">Xem tất cả <FontAwesomeIcon icon={faArrowRight}/></a>
         </div>
         {#each data.assignments as ass}
-            <a class="normalize" href="/practice/{ass.uuid}">
-                <figure>
-                    <img src={ass.img_path ?? "/imgs/logo.png"} alt="works thumbnail">
-                    <figcaption>
-                        <h3>{ass.title}</h3>
-                        <User username={ass.username} avatar={ass.avatar}/>
-                    </figcaption>
-                </figure>
-            </a>
+            <Card title={ass.title} url="/practice/{ass.uuid}" imgPath={ass.img_path}
+                username={ass.username} avatar={ass.avatar}/>
         {/each}
     </section>
     <Teachers data={data?.teachers} homepage={true}/>

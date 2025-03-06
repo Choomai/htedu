@@ -1,12 +1,14 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { faPlusCircle, faTrash } from "@fortawesome/free-solid-svg-icons";
-    import User from "/src/components/user.svelte";
+    import Card from "/src/components/card.svelte";
 
     let { data } = $props();
     let { docs } = $state(data);
 
     async function handleDelete(uuid) {
+        if (!confirm("Bạn có chắc chắn muốn xóa tài liệu này ?")) return;
+        
         const formData = new FormData();
         formData.append("uuid", uuid);
         const deleteReq = await fetch("/api/docs", {
@@ -28,16 +30,9 @@
     <div class="uploaded">
         {#if docs.length >= 1}
             {#each docs as doc}
-                <figure>
-                    <a class="normalize" href="/study-area/{doc.uuid}"><img src={doc.img_path ?? "/imgs/logo.png"} alt="works thumbnail"></a>
-                    <figcaption>
-                        <div class="info-wrapper">
-                            <h3>{doc.name}</h3>
-                            <button class="fake" onclick={() => handleDelete(doc.uuid)} type="button"><FontAwesomeIcon icon={faTrash}/></button>
-                        </div>
-                        <User username={doc.username} avatar={doc.avatar}/>
-                    </figcaption>
-                </figure>
+                <Card title={doc.name} url="/study-area/{doc.uuid}" imgPath={doc.img_path}
+                    ondelete={() => handleDelete(doc.uuid)} 
+                    username={doc.username} avatar={doc.avatar}/>
             {/each}
         {:else}
             <h2>Không có tài liệu</h2>
@@ -63,11 +58,5 @@
         padding: 1rem;
         border: 1px solid var(--text);
         border-radius: 1rem;
-    }
-
-    div.info-wrapper {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
     }
 </style>

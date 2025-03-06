@@ -1,7 +1,7 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-    import User from "/src/components/user.svelte";
+    import Card from "/src/components/card.svelte";
 
     let { data } = $props();
     const { assignments } = data;
@@ -15,15 +15,7 @@
     <h3>Thư viện của tôi</h3>
     <div class="uploaded">
         {#each assignments as ass}
-            <a class="normalize" href="/practice/{ass.uuid}">
-                <figure>
-                    <img src={ass.img_path ?? "/imgs/logo.png"} alt="works thumbnail">
-                    <figcaption>
-                        <h3>{ass.title}</h3>
-                        <User username={ass.username} avatar={ass.avatar}/>
-                    </figcaption>
-                </figure>
-            </a>
+            <Card title={ass.title} url="/practice/{ass.uuid}" imgPath={ass.img_path} username={ass.username} avatar={ass.avatar}/>
         {/each}
     </div>
 </main>
