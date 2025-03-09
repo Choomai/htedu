@@ -29,6 +29,8 @@
     }
     // function editArticle() {alert("Tính năng đang phát triển")}
     async function deleteArticle(id) {
+        if (!confirm("Bạn có chắc chắn muốn xóa bài viết này ?")) return;
+
         const formData = new FormData();
         formData.append("id", id);
         const deleteReq = await fetch("/api/articles", {
