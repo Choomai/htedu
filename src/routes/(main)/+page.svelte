@@ -34,26 +34,30 @@
             </div>
         </section>
     {/if}
-    <section class="documents">
-        <div class="header">
-            <h2>Tài liệu phổ biến</h2>
-            <a href="/study-area">Xem tất cả <FontAwesomeIcon icon={faArrowRight}/></a>
-        </div>
-        {#each data.docs as doc}
+    {#if data.docs.length >= 1}
+        <section class="documents">
+            <div class="header">
+                <h2>Tài liệu phổ biến</h2>
+                <a href="/study-area">Xem tất cả <FontAwesomeIcon icon={faArrowRight}/></a>
+            </div>
+            {#each data.docs as doc}
             <Card title={doc.name} url="/study-area/{doc.uuid}" imgPath={doc.img_path}
-                username={doc.username} avatar={doc.avatar}/>
-        {/each}
-    </section>
-    <section class="works">
-        <div class="header">
-            <h2>Bài tập phổ biến</h2>
-            <a href="/study-area">Xem tất cả <FontAwesomeIcon icon={faArrowRight}/></a>
-        </div>
-        {#each data.assignments as ass}
-            <Card title={ass.title} url="/practice/{ass.uuid}" imgPath={ass.img_path}
-                username={ass.username} avatar={ass.avatar}/>
-        {/each}
-    </section>
+            username={doc.username} avatar={doc.avatar}/>
+            {/each}
+        </section>
+    {/if}
+    {#if data.assignments.length >= 1}
+        <section class="works">
+            <div class="header">
+                <h2>Bài tập phổ biến</h2>
+                <a href="/study-area">Xem tất cả <FontAwesomeIcon icon={faArrowRight}/></a>
+            </div>
+            {#each data.assignments as ass}
+                <Card title={ass.title} url="/practice/{ass.uuid}" imgPath={ass.img_path}
+                    username={ass.username} avatar={ass.avatar}/>
+            {/each}
+        </section>
+    {/if}
     <Teachers data={data?.teachers} homepage={true}/>
 </main>
 
