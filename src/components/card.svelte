@@ -1,6 +1,6 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
-    import { faTrash } from "@fortawesome/free-solid-svg-icons";
+    import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
     import User from "/src/components/user.svelte";
     
     let props = $props();
@@ -17,9 +17,14 @@
     <figcaption>
         <div class="info-wrapper">
             <h3>{props.title}</h3>
-            {#if props.ondelete}
-                <button class="fake" type="button" onclick={props.ondelete}><FontAwesomeIcon icon={faTrash}/></button>
-            {/if}
+            <div class="action">
+                {#if props.editUrl}
+                    <a href={props.editUrl}><FontAwesomeIcon icon={faPen}/></a>
+                {/if}
+                {#if props.ondelete}
+                    <button class="fake" type="button" onclick={props.ondelete}><FontAwesomeIcon icon={faTrash}/></button>
+                {/if}
+            </div>
         </div>
         <User username={props.username} avatar={props.avatar}/>
     </figcaption>
@@ -51,5 +56,10 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: .5rem;
+    }
+    div.info-wrapper > div.action {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
     }
 </style>

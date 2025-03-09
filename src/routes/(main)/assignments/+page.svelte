@@ -4,7 +4,21 @@
     import Card from "/src/components/card.svelte";
 
     let { data } = $props();
-    const { assignments } = data;
+    let { assignments } = $state(data);
+
+    async function handleDelete(uuid) {
+        if (!confirm("Bạn có chắc chắn muốn xóa bài tập này ?")) return;
+        
+        const formData = new FormData();
+        formData.append("uuid", uuid);
+        const deleteReq = await fetch("/api/assignments", {
+            method: "DELETE",
+            body: formData
+        });
+        if (!deleteReq.ok) return alert("Xoá thất bại, hãy thử lại sau");
+        assignments = assignments.filter(ass => ass.uuid != uuid);
+        alert("Xóa bài tập thành công")
+    }
 </script>
 
 <main>
@@ -15,7 +29,10 @@
     <h3>Thư viện của tôi</h3>
     <div class="uploaded">
         {#each assignments as ass}
-            <Card title={ass.title} url="/practice/{ass.uuid}" imgPath={ass.img_path} username={ass.username} avatar={ass.avatar}/>
+            <Card title={ass.title} url="/practice/{ass.uuid}" imgPath={ass.img_path} 
+                editUrl="/assignments/{ass.uuid}/edit"
+                ondelete={() => handleDelete(ass.uuid)}
+                username={ass.username} avatar={ass.avatar}/>
         {/each}
     </div>
 </main>
