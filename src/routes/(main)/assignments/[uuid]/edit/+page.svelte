@@ -5,7 +5,10 @@
     import { uuidPattern } from "$lib/const";
 
     let { data } = $props();
-    data.questions.forEach(e => e.client_uuid = crypto.randomUUID());
+    data.questions.forEach(e => {
+        e.client_uuid = crypto.randomUUID();
+        if (typeof e.data === "string") e.data = JSON.parse(e.data);
+    });
     let questions = $state(data.questions);
     let actionDisabled = $state(false);
     const assignmentUUID = page.params.uuid;
