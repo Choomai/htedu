@@ -15,7 +15,6 @@
     {#if !props.noToggleSidebar}<button class="fake" type="button" onclick={toggleSidebar}><FontAwesomeIcon icon={faBars} size="xl" fixedWidth={true}/></button>{/if}
     <div class="search-wrapper">
         <input type="text" id="search" placeholder="Tìm kiếm...">
-        <i id="searchIcon" class="fa-solid fa-magnifying-glass fa-1x"></i>
     </div>
     <div class="user">
         <button class="fake" type="button" aria-label="user" onclick={() => notifyDropdown = !notifyDropdown}><FontAwesomeIcon icon={faBell} size="2x"/></button>
@@ -60,11 +59,11 @@
         font-size: 1rem;
     }
     input#search::placeholder {color: var(--placeholder-color);}
-    #searchIcon {
+    input#search::after {
+        content: "\f002";
+        display: block;
+        font-family: "Font Awesome 6 Free";
         position: relative;
-        left: -28px;
-        top: 10px;
-        cursor: pointer;
     }
     div.user {
         justify-self: flex-end;
