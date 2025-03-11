@@ -16,17 +16,28 @@
     let theme = $state("");
     onMount(() => {
         theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "";
+        console.log($state.snapshot(articles))
     });
     let body = "";
     let editor = $state();
     const postContent = $derived(editor?.getHTML());
-
+    
     function handleSubmit(e) {
         // Only submit if it's an actual form submission, not a link button click
         if (e.submitter?.getAttribute("aria-label") === "Edit link") {
             e.preventDefault();
         }
     }
+
+    async function likeArticle(id) {
+        const likeReq = await fetch("/api/articles", {
+            method: "PUT",
+            body: JSON.stringify({ id })
+        });
+        if (likeReq.status == 409) return alert("Bài viết đã được like từ trước");
+        if (!likeReq.ok) return alert("Không thể thích, hãy thử lại sau");
+    }
+
     // function editArticle() {alert("Tính năng đang phát triển")}
     async function deleteArticle(id) {
         if (!confirm("Bạn có chắc chắn muốn xóa bài viết này ?")) return;
@@ -60,8 +71,8 @@
                 </div>
                 <p>{@html article.content}</p>
                 <div class="action">
-                    <button class="fake" type="button" title="like"><FontAwesomeIcon icon={faHeart}/>&nbsp;{article.total_likes}</button>
-                    <button class="fake" type="button" title="comment"><FontAwesomeIcon icon={faComment}/>&nbsp;{article.total_comments}</button>
+                    <button class="fake" type="button" onclick={() => likeArticle(article.id)} title="like"><FontAwesomeIcon icon={faHeart} style={article.already_liked == 1 ? "color:red" : null}/><span>&nbsp;{article.total_likes}</span></button>
+                    <button class="fake" type="button" title="comment"><FontAwesomeIcon icon={faComment}/><span>&nbsp;{article.total_comments}</span></button>
                     <button class="fake" type="button" aria-label="share" title="share"><FontAwesomeIcon icon={faShare}/></button>
                     {#if article.user_id == data.session.id}
                         <!-- <button class="fake" onclick={editArticle} type="button"><FontAwesomeIcon icon={faPen}/></button> -->

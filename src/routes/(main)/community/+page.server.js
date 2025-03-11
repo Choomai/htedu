@@ -2,17 +2,21 @@ import { pool } from "$lib/db"
 import { error, redirect } from "@sveltejs/kit";
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load() {
+export async function load({ locals }) {
+    const { session } = locals;
     const query_stmt = `
-SELECT articles.*, users.username, users.avatar, COUNT(likes.id) AS total_likes, COUNT(comments.id) AS total_comments FROM articles
+SELECT
+    articles.*, users.username, users.avatar,
+    COUNT(DISTINCT likes.id) AS total_likes, COUNT(DISTINCT comments.id) AS total_comments,
+    MAX(CASE WHEN likes.user_id = ? THEN 1 ELSE 0 END) AS already_liked
+FROM articles
 INNER JOIN users ON users.id = articles.user_id
-LEFT JOIN likes ON likes.user_id = articles.user_id AND likes.article_id = articles.id
-LEFT JOIN comments ON comments.user_id = articles.user_id AND comments.article_id = articles.id
+LEFT JOIN likes ON likes.article_id = articles.id
+LEFT JOIN comments ON comments.article_id = articles.id
 GROUP BY articles.id
-ORDER BY articles.timestamp DESC
-    `;
-    const [articles] = await pool.execute(query_stmt.replace(/\s+/g, " ").trim());
-    return { articles: articles }
+ORDER BY articles.timestamp DESC`;
+    const [articles] = await pool.execute(query_stmt.replace(/\s+/g, " ").trim(), [session.data.id]);
+    return { articles }
 }
 
 /** @type {import('./$types').Actions} */
