@@ -22,6 +22,7 @@
 		"@fortawesome/svelte-fontawesome": "^0.2.3",
 		"@friendofsvelte/tipex": "^0.0.7-fix-0",
 		"@monaco-editor/loader": "^1.4.0",
+		"express": "^4.21.2",
 		"ioredis": "^5.4.2",
 		"monaco-editor": "^0.52.0",
 		"mysql2": "^3.11.3",
