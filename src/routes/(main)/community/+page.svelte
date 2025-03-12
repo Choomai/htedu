@@ -14,6 +14,7 @@
     let { data } = $props();
     let { articles } = $state(data);
     let theme = $state("");
+    let actionDisabled = $state(false);
     onMount(() => {
         theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "";
         console.log($state.snapshot(articles))
@@ -30,27 +31,48 @@
     }
 
     async function likeArticle(id) {
+        actionDisabled = true;
         const likeReq = await fetch("/api/articles", {
             method: "PUT",
             body: JSON.stringify({ id })
         });
-        if (likeReq.status == 409) return alert("Bài viết đã được like từ trước");
-        if (!likeReq.ok) return alert("Không thể thích, hãy thử lại sau");
+        if (!likeReq.ok) {
+            actionDisabled = false;
+            return alert("Không thể thích bài viết, hãy thử lại sau");
+        }
+
+        const likeRes = await likeReq.json();
+
+        const article = articles.find(a => a.id == id);
+        if (!article) {
+            actionDisabled = false;
+            return alert("Không thể tìm thấy bài viết");
+        }
+
+        article.already_liked = likeRes.liked;
+        article.total_likes += likeRes.liked ? 1 : -1;
+        articles = [...articles];
+        actionDisabled = false;
     }
 
     // function editArticle() {alert("Tính năng đang phát triển")}
     async function deleteArticle(id) {
         if (!confirm("Bạn có chắc chắn muốn xóa bài viết này ?")) return;
 
+        actionDisabled = true;
         const formData = new FormData();
         formData.append("id", id);
         const deleteReq = await fetch("/api/articles", {
             method: "DELETE",
             body: formData
         })
-        if (!deleteReq.ok) return alert("Xoá thất bại, hãy thử lại sau");
+        if (!deleteReq.ok) {
+            actionDisabled = false;
+            return alert("Xoá thất bại, hãy thử lại sau");
+        }
         articles = articles.filter(article => article.id != id);
-        alert("Xóa bài viết thành công")
+        alert("Xóa bài viết thành công");
+        actionDisabled = false;
     }
 </script>
 
@@ -71,12 +93,12 @@
                 </div>
                 <p>{@html article.content}</p>
                 <div class="action">
-                    <button class="fake" type="button" onclick={() => likeArticle(article.id)} title="like"><FontAwesomeIcon icon={faHeart} style={article.already_liked == 1 ? "color:red" : null}/><span>&nbsp;{article.total_likes}</span></button>
-                    <button class="fake" type="button" title="comment"><FontAwesomeIcon icon={faComment}/><span>&nbsp;{article.total_comments}</span></button>
-                    <button class="fake" type="button" aria-label="share" title="share"><FontAwesomeIcon icon={faShare}/></button>
+                    <button class="fake" disabled={actionDisabled} class:active={article.already_liked} type="button" onclick={() => likeArticle(article.id)} title="like"><FontAwesomeIcon icon={faHeart}/><span>&nbsp;{article.total_likes}</span></button>
+                    <button class="fake" disabled={actionDisabled} type="button" title="comment"><FontAwesomeIcon icon={faComment}/><span>&nbsp;{article.total_comments}</span></button>
+                    <button class="fake" disabled={actionDisabled} type="button" aria-label="share" title="share"><FontAwesomeIcon icon={faShare}/></button>
                     {#if article.user_id == data.session.id}
                         <!-- <button class="fake" onclick={editArticle} type="button"><FontAwesomeIcon icon={faPen}/></button> -->
-                        <button class="fake" onclick={() => deleteArticle(article.id)} type="button"><FontAwesomeIcon icon={faTrash}/></button>
+                        <button class="fake" disabled={actionDisabled} onclick={() => deleteArticle(article.id)} type="button"><FontAwesomeIcon icon={faTrash}/></button>
                     {/if}
                 </div>
             </article>
@@ -118,5 +140,8 @@
         display: inline-flex;
         align-items: center;
         font-size: 1.5rem;
+    }
+    article > div.action > button.fake.active {
+        color: red;
     }
 </style>
