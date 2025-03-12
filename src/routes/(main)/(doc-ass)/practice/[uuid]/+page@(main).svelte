@@ -25,7 +25,8 @@
     }
 
     function changeQuestion(e) {
-        pointer += parseInt(e.target.dataset.shift);
+        if (e.target.dataset.shift) pointer += parseInt(e.target.dataset.shift)
+        else if (e.target.dataset.pointer) pointer = parseInt(e.target.dataset.pointer);
         question = data.questions[pointer];
     }
     function handleMultipleChoice() {answers[pointer].type = 0;}
@@ -73,6 +74,13 @@
 
 <main class:done={!inProgress}>
     {#if inProgress}
+        <div class="slider-wrapper">
+            <div class="slider">
+                {#each data.questions as _, i}
+                    <button type="button" class:active={pointer === i} data-pointer={i} onclick={changeQuestion}>{i + 1}</button>
+                {/each}
+            </div>
+        </div>
         {#if question.type == 0}
             <section class="multiple-choice">
                 <p class="question">{question.question}</p>
@@ -149,6 +157,36 @@
         justify-content: center;
         align-self: center;
         width: 100%;
+    }
+
+    div.slider-wrapper {
+        width: 100%;
+        overflow-x: auto;
+    }
+    div.slider {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        width: fit-content;
+        min-width: 100%;
+        overflow-x: auto;
+    }
+
+    div.slider button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        background: var(--secondary-bg);
+        cursor: pointer;
+    }
+
+    div.slider button.active {
+        background: var(--primary-color);
+        color: white;
     }
 
     section {

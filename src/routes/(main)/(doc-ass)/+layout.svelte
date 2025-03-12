@@ -48,6 +48,7 @@
         display: flex;
         gap: 1rem;
         justify-content: center;
+        flex-wrap: wrap;
     }
     nav.filter > a {
         display: flex;
