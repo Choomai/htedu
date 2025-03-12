@@ -8,10 +8,10 @@
     function requestFollow(e) {
         e.target.disabled = true;
         e.target.textContent = "Đang xử lý...";
-        fetch("/api/follow/", {
+        fetch("/api/follow", {
             method: "PUT",
             headers: {"Content-Type": "text/plain"},
-            body: user.id
+            body: data.user.id
         })
         .then(res => {
             e.target.disabled = false;
