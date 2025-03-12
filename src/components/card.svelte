@@ -4,15 +4,22 @@
     import User from "/src/components/user.svelte";
     
     let props = $props();
+    let imgError = $state(false);
+
+    function handleImgError(e) {
+        imgError = true;
+        e.target.style.display = "none";
+        console.log("called");
+    }
 </script>
 
 <figure>
     {#if props.url}
         <a class="normalize" href={props.url}>
-            <img src={props.imgPath ?? "/imgs/logo.png"} alt="thumbnail">
+            <img class:error={imgError} onerror={handleImgError} alt="thumbnail">
         </a>
     {:else}
-        <img src={props.imgPath ?? "/imgs/logo.png"} alt="thumbnail">
+        <img class:error={imgError} onerror={handleImgError} src={props.imgPath} alt="thumbnail">
     {/if}
     <figcaption>
         <div class="info-wrapper">
@@ -43,7 +50,24 @@
         height: 150px;
         border-top-left-radius: 1rem;
         border-top-right-radius: 1rem;
+        font-size: 0;
     }
+    figure img::after {
+        content: "Hương Trà";
+        display: block;
+        position: relative;
+        z-index: 30;
+        min-width: 320px;
+        min-height: 150px;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        background: linear-gradient(45deg, var(--first-gradient-dark-start), var(--first-gradient-dark-end));
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+        line-height: 150px;
+    }
+    a.normalize {font-size: 0;}
     figure > figcaption {
         padding: .5rem;
         background-color: var(--secondary-bg);

@@ -18,27 +18,16 @@
     --cover-gradient-start: #f4afaf;
     --cover-gradient-end: #ab72f0;
 
-    /* --first-gradient-start: #47cacc;
+    --first-gradient-start: #47cacc;
     --first-gradient-end: #cdb3d4;
-    --second-graident-start: #fe676e;
+    /* --second-graident-start: #fe676e;
     --second-graident-end: #47cacc;
     --third-graident-start: #cdb3d4;
     --third-graident-end: #ffbe88;
     --fourth-graident-start: #e7b7c8;
     --fourth-graident-end: #cdb3d4;
     --fifth-graident-start: #ffbe88;
-    --fifth-graident-end: #e7b7c8;
-
-    --first-gradient-dark-start: #041B2D;
-    --first-gradient-dark-end: #004E9A;
-    --second-gradient-dark-start: #004E9A;
-    --second-gradient-dark-end: #428CD4;
-    --third-gradient-dark-start: #FF9CDA;
-    --third-gradient-dark-end: #F9AD6A;
-    --fourth-gradient-dark-start: #FF9CDA;
-    --fourth-gradient-dark-end: #EA4492;
-    --fifth-gradient-dark-start: #EA4492;
-    --fifth-gradient-dark-end: #004E9A; */
+    --fifth-graident-end: #e7b7c8; */
 }
 
 * {box-sizing: border-box;}
@@ -210,5 +199,16 @@ div.user-dropdown a.button {
         --toggle-ball: #eee;
         --toggle-on-bg: #9900ff;
         --toggle-off-bg: #514d4d;
+
+        --first-gradient-dark-start: #041B2D;
+        --first-gradient-dark-end: #004E9A;
+        /* --second-gradient-dark-start: #004E9A;
+        --second-gradient-dark-end: #428CD4;
+        --third-gradient-dark-start: #FF9CDA;
+        --third-gradient-dark-end: #F9AD6A;
+        --fourth-gradient-dark-start: #FF9CDA;
+        --fourth-gradient-dark-end: #EA4492;
+        --fifth-gradient-dark-start: #EA4492;
+        --fifth-gradient-dark-end: #004E9A; */
     }
 }
