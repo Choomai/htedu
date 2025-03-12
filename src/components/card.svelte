@@ -34,11 +34,12 @@
     figure {
         display: flex;
         flex-direction: column;
-        width: 400px;
+        width: 320px;
         border-radius: 1rem;
+        margin: 1rem;
     }
     figure img {
-        width: 400px;
+        width: 320px;
         height: 150px;
         border-top-left-radius: 1rem;
         border-top-right-radius: 1rem;

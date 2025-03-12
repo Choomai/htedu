@@ -75,9 +75,7 @@
     {#if inProgress}
         {#if question.type == 0}
             <section class="multiple-choice">
-                <div class="question">
-                    <h3>{question.question}</h3>
-                </div>
+                <p class="question">{question.question}</p>
                 <div class="answers">
                     <input type="radio" name="choice_{question.uuid}" id="ansA" value="A" hidden 
                         bind:group={answers[pointer].answer}
@@ -102,9 +100,7 @@
             </section>
         {:else if question.type == 1}
             <section class="true-false">
-                <div class="question">
-                    <h3>{question.question}</h3>
-                </div>
+                <p class="question">{question.question}</p>
                 <div class="answers">
                     <h3>Chọn đúng sai</h3>
                     <div class="true-false">
@@ -152,7 +148,7 @@
     main {
         justify-content: center;
         align-self: center;
-        width: 80%;
+        width: 100%;
     }
 
     section {
@@ -162,10 +158,15 @@
         gap: 2rem;
     }
 
-    div.question {
+    p.question {
         background-color: var(--secondary-bg);
         padding: 2rem;
         border-radius: 1rem;
+        font-weight: bold;
+        font-size: 1.25rem;
+        word-wrap: break-word;
+        overflow-x: hidden;
+        max-width: 100%;
     }
 
     div.answers {
@@ -199,6 +200,12 @@
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr;
         width: 100%;
+    }
+    @media screen and (max-width: 425px) {
+        section.multiple-choice > div.answers {
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(4, auto);
+        }
     }
     section.multiple-choice label {
         background-color: var(--secondary-bg);

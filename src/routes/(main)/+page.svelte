@@ -64,18 +64,21 @@
 <style>
     section:is(.documents, .works) {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        justify-items: center;
     }
     section:is(.documents, .works) > div.header {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        justify-self: normal;
         grid-column: 1 / -1;
     }
 
     section.stats {
-        display: flex;
-        justify-content: space-evenly;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        justify-items: center;
     }
     section.stats > div {
         display: flex;
