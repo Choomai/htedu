@@ -78,7 +78,7 @@
         padding: 0;
     }
     div.cover {
-        background: linear-gradient(-45deg, var(--cover-gradient-start), var(--cover-gradient-end));
+        background: linear-gradient(-45deg, var(--gradient-start), var(--gradient-end));
         border-radius: 0 0 2rem 2rem;
         width: 100%;
         height: 300px;

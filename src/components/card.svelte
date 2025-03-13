@@ -56,15 +56,18 @@
         content: "Hương Trà";
         display: block;
         position: relative;
+        top: 0;
+        left: 0;
         z-index: 30;
         min-width: 320px;
         min-height: 150px;
         border-top-left-radius: 1rem;
         border-top-right-radius: 1rem;
-        background: linear-gradient(45deg, var(--first-gradient-dark-start), var(--first-gradient-dark-end));
+        background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
         font-size: 2rem;
         font-weight: bold;
         text-align: center;
+        text-indent: -1rem;
         line-height: 150px;
     }
     a.normalize {font-size: 0;}

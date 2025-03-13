@@ -15,12 +15,12 @@
     --toggle-off-bg: #d0cece;
     
 
-    --cover-gradient-start: #f4afaf;
-    --cover-gradient-end: #ab72f0;
+    --gradient-start: #f4afaf;
+    --gradient-end: #ab72f0;
 
-    --first-gradient-start: #47cacc;
+    /* --first-gradient-start: #47cacc;
     --first-gradient-end: #cdb3d4;
-    /* --second-graident-start: #fe676e;
+    --second-graident-start: #fe676e;
     --second-graident-end: #47cacc;
     --third-graident-start: #cdb3d4;
     --third-graident-end: #ffbe88;
@@ -200,9 +200,9 @@ div.user-dropdown a.button {
         --toggle-on-bg: #9900ff;
         --toggle-off-bg: #514d4d;
 
-        --first-gradient-dark-start: #041B2D;
-        --first-gradient-dark-end: #004E9A;
-        /* --second-gradient-dark-start: #004E9A;
+        /* --first-gradient-start: #041B2D;
+        --first-gradient-end: #004E9A;
+        --second-gradient-dark-start: #004E9A;
         --second-gradient-dark-end: #428CD4;
         --third-gradient-dark-start: #FF9CDA;
         --third-gradient-dark-end: #F9AD6A;
