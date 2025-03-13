@@ -24,10 +24,10 @@ export const actions = {
 
         if (thumbnailImg instanceof File && thumbnailImg.type.startsWith("image/")) {
             const imgBuff = await thumbnailImg.arrayBuffer();
-            thumbnailPath = path.join(process.cwd(), "static", "assignments", `${username}@${UUID}.webp`);
+            thumbnailPath = path.join(process.cwd(), "static", "ass", `${username}@${UUID}.webp`);
             
             await sharp(Buffer.from(imgBuff)).toFormat("webp").toFile(thumbnailPath);
-            thumbnailPath = `/assignments/${username}@${UUID}.webp`;
+            thumbnailPath = `/ass/${username}@${UUID}.webp`;
         };
         
         const [rows] = await pool.execute("INSERT INTO assignments(uuid, user_id, title, category, img_path) VALUES(?, ?, ?, ?, ?)", 
