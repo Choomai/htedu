@@ -22,7 +22,7 @@
 </script>
 
 <main>
-    <a href="/docs/upload" class="normalize upload">
+    <a href="/documents/upload" class="normalize upload">
         <FontAwesomeIcon icon={faPlusCircle} size="3x"/>
         <span>Đăng tài liệu</span>
     </a>
