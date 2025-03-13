@@ -37,7 +37,7 @@
     {#if currentFilter != ""}
         <a class="normalize" href="#top"><FontAwesomeIcon icon={faCircleXmark} fixedWidth={true}/></a>
     {/if}
-    {#if page.url.pathname.startsWith('/practice')}
+    {#if page.url.pathname.startsWith("/practice")}
         <a class="button new" href="/practice/new"><FontAwesomeIcon icon={faPlus}/>Tạo đề</a>
     {/if}
 </nav>
