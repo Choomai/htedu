@@ -8,15 +8,15 @@
 
     function handleImgError(e) {
         imgError = true;
-        e.target.style.display = "none";
-        console.log("called");
+        // e.target.style.display = "none";
+        // console.log("called");
     }
 </script>
 
 <figure>
     {#if props.url}
         <a class="normalize" href={props.url}>
-            <img class:error={imgError} onerror={handleImgError} alt="thumbnail">
+            <img class:error={imgError} onerror={handleImgError} src={props.imgPath} alt="thumbnail">
         </a>
     {:else}
         <img class:error={imgError} onerror={handleImgError} src={props.imgPath} alt="thumbnail">
@@ -52,13 +52,12 @@
         border-top-right-radius: 1rem;
         font-size: 0;
     }
-    figure img::after {
+    figure img.error::after {
         content: "Hương Trà";
         display: block;
         position: relative;
         top: 0;
         left: 0;
-        z-index: 30;
         min-width: 320px;
         min-height: 150px;
         border-top-left-radius: 1rem;
