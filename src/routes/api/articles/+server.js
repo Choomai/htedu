@@ -36,11 +36,12 @@ export async function PUT({ request, locals }) {
 export async function DELETE({ request, locals }) {
     const data = await request.formData();
     const { session } = locals;
-
-    if (!session.data.auth) return json({ success: false, message: "Unauthorized" }, { status: 403 });
+    if (!session.data.auth) return json({ error: "Unauthorized" }, { status: 403 });
 
     const articleId = data.get("id");
-    const [deleteQuery] = await pool.execute("DELETE FROM articles WHERE id = ? AND user_id = ?", [articleId, session.data.id]);
-    if (deleteQuery.affectedRows == 0) return json({ success: false, message: "Unauthorized" }, { status: 403 });
+    await pool.execute("DELETE FROM likes WHERE article_id = ?", [articleId]);
+    await pool.execute("DELETE FROM comments WHERE article_id = ?", [articleId]);
+    const [deleteArticle] = await pool.execute("DELETE FROM articles WHERE id = ? AND user_id = ?", [articleId, session.data.id]);
+    if (deleteArticle.affectedRows == 0) return json({ error: "Failed to delete article" }, { status: 500 });
     return json({ success: true, message: "Deleted" });
 }
