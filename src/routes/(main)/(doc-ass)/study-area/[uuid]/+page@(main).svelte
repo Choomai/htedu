@@ -11,8 +11,12 @@
     <iframe
         title="Google Docs Viewer"
         src="https://docs.google.com/viewer?url={encodeURIComponent(url)}&embedded=true"
-        width="100%"
-        height="600px"
-        style="border: none;"
+        width="100%" height="100%"
     ></iframe>
 </main>
+
+<style>
+    iframe {
+        border: none;
+    }
+</style>
