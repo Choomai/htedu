@@ -10,15 +10,13 @@
     import "./tipex.css";
     import Foot from "./foot.svelte";
     import { onMount } from "svelte";
+    import { enhance } from "$app/forms";
 
     let { data } = $props();
     let { articles } = $state(data);
     let theme = $state("");
     let actionDisabled = $state(false);
-    onMount(() => {
-        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "";
-        console.log($state.snapshot(articles))
-    });
+    onMount(() => theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "");
     let body = "";
     let editor = $state();
     const postContent = $derived(editor?.getHTML());
@@ -74,13 +72,91 @@
         alert("Xóa bài viết thành công");
         actionDisabled = false;
     }
+
+    async function toggleComments(articleId, page = 1) {
+        const article = articles.find(a => a.id === articleId);
+        if (!article) return;
+        
+        // If comments are already loaded and it's page 1, just toggle visibility
+        if (article.comments && page === 1) {
+            articles = articles.map(a => {
+                if (a.id === articleId) {
+                    return { ...a, showComments: !a.showComments };
+                }
+                return a;
+            });
+            return;
+        }
+        
+        // Load comments (first time or more)
+        try {
+            const response = await fetch(`/api/articles/comments?article_id=${articleId}&page=${page}&limit=5`);
+            if (!response.ok) throw new Error('Failed to load comments');
+            
+            const data = await response.json();
+            articles = articles.map(a => {
+                if (a.id === articleId) {
+                    return {
+                        ...a,
+                        comments: page === 1 ? data.comments : [...(a.comments || []), ...data.comments],
+                        showComments: true,
+                        hasMore: data.hasMore,
+                        currentPage: page
+                    };
+                }
+                return a;
+            });
+        } catch (error) {
+            console.error('Failed to load comments:', error);
+            alert('Failed to load comments. Please try again.');
+        }
+    }
+
+    async function submitComment(e, articleId) {
+        e.preventDefault();
+        const article = articles.find(a => a.id === articleId);
+        if (!article?.newComment) return;
+
+        actionDisabled = true;
+        try {
+            const response = await fetch("/api/articles/comments", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    article_id: articleId,
+                    content: article.newComment
+                })
+            });
+
+            if (!response.ok) throw new Error("Failed to post comment");
+
+            const newComment = await response.json();
+            
+            articles = articles.map(a => {
+                if (a.id === articleId) {
+                    return {
+                        ...a,
+                        comments: [...(a.comments || []), newComment],
+                        total_comments: a.total_comments + 1,
+                        newComment: "" // Clear input after successful post
+                    };
+                }
+                return a;
+            });
+        } catch (error) {
+            console.error("Failed to post comment:", error);
+            alert("Failed to post comment. Please try again.");
+        } finally {
+            actionDisabled = false;
+        }
+    }
 </script>
 
 <main>
     <Tipex {body} bind:tipex={editor} class={theme} controls floating>
         {#snippet foot()}<Foot username={data.session.username}/>{/snippet}
     </Tipex>
-    <form id="post-form" action="?/new_article" method="post" onsubmit={handleSubmit}>
+    <form id="post-form" action="?/new_article" method="post" onsubmit={handleSubmit} use:enhance>
         <input type="hidden" name="content" value={postContent}>
     </form>
 
@@ -94,18 +170,37 @@
                 <p>{@html article.content}</p>
                 <div class="action">
                     <button class="fake" disabled={actionDisabled} class:active={article.already_liked} type="button" onclick={() => likeArticle(article.id)} title="like"><FontAwesomeIcon icon={faHeart}/><span>&nbsp;{article.total_likes}</span></button>
-                    <button class="fake" disabled={actionDisabled} type="button" title="comment"><FontAwesomeIcon icon={faComment}/><span>&nbsp;{article.total_comments}</span></button>
+                    <button class="fake" disabled={actionDisabled} type="button" title="comment" onclick={() => toggleComments(article.id)}><FontAwesomeIcon icon={faComment}/><span>&nbsp;{article.total_comments}</span></button>
                     <button class="fake" disabled={actionDisabled} type="button" aria-label="share" title="share"><FontAwesomeIcon icon={faShare}/></button>
                     {#if article.user_id == data.session.id}
                         <!-- <button class="fake" onclick={editArticle} type="button"><FontAwesomeIcon icon={faPen}/></button> -->
                         <button class="fake" disabled={actionDisabled} onclick={() => deleteArticle(article.id)} type="button"><FontAwesomeIcon icon={faTrash}/></button>
                     {/if}
                 </div>
+                {#if article.showComments}
+                    <hr>
+                    <div class="comments">
+                        {#if article.comments?.length}
+                            {#each article.comments as comment}
+                                <div class="comment">
+                                    <img src={comment.avatar || "/avatars/default.webp"} alt="commenter avatar">
+                                    <div><b>{comment.username}</b><br><span>{comment.content}</span></div>
+                                </div>
+                            {/each}
+                            {#if article.hasMore}
+                                <button class="fake load-more" type="button" onclick={() => toggleComments(article.id, (article.currentPage || 1) + 1)}>Xem thêm</button>
+                            {/if}
+                        {/if}
+                        
+                        <form class="comment-form" method="post" onsubmit={(e) => submitComment(e, article.id)}>
+                            <input type="text" bind:value={article.newComment} placeholder="Nhập bình luận..." required>
+                            <button type="submit" disabled={actionDisabled}><FontAwesomeIcon icon={faComment}/>&nbsp;Comment</button>
+                        </form>
+                    </div>
+                {/if}
             </article>
         {/each}
-    {:else}
-        <h2>Không có bài viết</h2>
-    {/if}
+    {:else}<h2>Không có bài viết</h2>{/if}
 </main>
 
 <style>
@@ -113,12 +208,14 @@
         align-items: center;
         padding: 0 6rem;
     }
+    hr {border-color: var(--border-low);}
 
-    div.header {
+    div:is(.header, .comment) {
         display: flex;
+        align-items: center;
         gap: .5rem;
     }
-    div.header > img {
+    div:is(.header, .comment) > img {
         border-radius: 100%;
         width: 40px;
         height: 40px;
@@ -127,7 +224,7 @@
     form {width: 100%;}
 
     article {
-        border: 1px solid white;
+        border: 1px solid var(--border);
         width: 100%;
         padding: 8px;
         border-radius: 16px;
@@ -143,5 +240,30 @@
     }
     article > div.action > button.fake.active {
         color: red;
+    }
+
+    div.comments {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+    form.comment-form {
+        display: flex;
+        gap: 0.5rem;
+    }
+    form.comment-form input {
+        flex-grow: 1;
+        padding: 0.5rem;
+        border-radius: 8px;
+        border: 1px solid var(--border-low);
+        background: transparent;
+        color: inherit;
+    }
+    form.comment-form button {
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        background: var(--primary-color);
+        border: none;
+        cursor: pointer;
     }
 </style>

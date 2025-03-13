@@ -13,6 +13,8 @@
     --toggle-ball: #9900ff;
     --toggle-on-bg: #dcb9ff;
     --toggle-off-bg: #d0cece;
+    --border: black;
+    --border-low: #00000033;
     
 
     --gradient-start: #f4afaf;
@@ -199,6 +201,8 @@ div.user-dropdown a.button {
         --toggle-ball: #eee;
         --toggle-on-bg: #9900ff;
         --toggle-off-bg: #514d4d;
+        --border: white;
+        --border-low: #ffffff33;
 
         /* --first-gradient-start: #041B2D;
         --first-gradient-end: #004E9A;
