@@ -184,11 +184,15 @@
                             {#each article.comments as comment}
                                 <div class="comment">
                                     <img src={comment.avatar || "/avatars/default.webp"} alt="commenter avatar">
-                                    <div><b>{comment.username}</b><br><span>{comment.content}</span></div>
+                                    <div>
+                                        <b>{comment.username}</b>&nbsp;<code>-</code>&nbsp;<time datetime={comment.timestamp}>{(new Date(comment.timestamp)).toLocaleString("vi-VN")}</time>
+                                        <br>
+                                        <span>{comment.content}</span>
+                                    </div>
                                 </div>
                             {/each}
                             {#if article.hasMore}
-                                <button class="fake load-more" type="button" onclick={() => toggleComments(article.id, (article.currentPage || 1) + 1)}>Xem thêm</button>
+                                <button class="fake" type="button" onclick={() => toggleComments(article.id, (article.currentPage || 1) + 1)}>Xem thêm</button>
                             {/if}
                         {/if}
                         

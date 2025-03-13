@@ -66,10 +66,12 @@ export async function POST({ request, locals }) {
             "INSERT INTO comments(article_id, user_id, content) VALUES (?, ?, ?)",
             [article_id, session.data.id, content]
         );
+
+        const [comments] = await pool.execute("SELECT * FROM comments WHERE id = LAST_INSERT_ID()");
         if (result.affectedRows == 0) throw new Error("Insert failed");
 
         const comment = {
-            content,
+            ...comments[0],
             username: session.data.username,
             avatar: session.data.avatar,
             user_id: session.data.id
