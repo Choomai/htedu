@@ -91,7 +91,7 @@
         // Load comments (first time or more)
         try {
             const response = await fetch(`/api/articles/comments?article_id=${articleId}&page=${page}&limit=5`);
-            if (!response.ok) throw new Error('Failed to load comments');
+            if (!response.ok) throw new Error("Failed to load comments");
             
             const data = await response.json();
             articles = articles.map(a => {
@@ -106,9 +106,9 @@
                 }
                 return a;
             });
-        } catch (error) {
-            console.error('Failed to load comments:', error);
-            alert('Failed to load comments. Please try again.');
+        } catch (err) {
+            console.error(err);
+            alert("Load bình luận thất bại, hãy thử lại sau");
         }
     }
 
@@ -143,14 +143,18 @@
                 }
                 return a;
             });
-        } catch (error) {
-            console.error("Failed to post comment:", error);
-            alert("Failed to post comment. Please try again.");
+        } catch (err) {
+            console.error(err);
+            alert("Đăng bình luận thất bại, hãy thử lại sau");
         } finally {
             actionDisabled = false;
         }
     }
 </script>
+
+<svelte:head>
+    <title>Cộng đồng - {app_name}</title>
+</svelte:head>
 
 <main>
     <Tipex {body} bind:tipex={editor} class={theme} controls floating>

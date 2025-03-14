@@ -1,5 +1,10 @@
 import { pool } from "$lib/db"
 import { error, redirect } from "@sveltejs/kit";
+import createDOMPurify from "dompurify";
+import { JSDOM } from "jsdom";
+
+const window = new JSDOM("").window;
+const DOMPurify = createDOMPurify(window);
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ locals }) {
@@ -33,10 +38,16 @@ export const actions = {
             throw error(400, "Content cannot be empty");
         }
 
+        // Sanitize HTML content
+        const sanitizedContent = DOMPurify.sanitize(content, {
+            ALLOWED_TAGS: ["h1", "h2", "p", "b", "i", "em", "strong", "a", "ul", "ol", "li", "br", "code", "img"],
+            ALLOWED_ATTR: ["href", "src", "target"]
+        });
+
         try {
             await pool.execute(
                 "INSERT INTO articles(user_id, content) VALUES (?, ?)",
-                [session.data.id, content]
+                [session.data.id, sanitizedContent]
             );
         } catch (err) {
             console.error(err);
