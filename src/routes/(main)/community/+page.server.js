@@ -41,7 +41,7 @@ export const actions = {
         // Sanitize HTML content
         const sanitizedContent = DOMPurify.sanitize(content, {
             ALLOWED_TAGS: ["h1", "h2", "p", "b", "i", "em", "strong", "a", "ul", "ol", "li", "br", "code", "img"],
-            ALLOWED_ATTR: ["href", "src", "target"]
+            ALLOWED_ATTR: ["href", "src", "target", "rel"]
         });
 
         try {
@@ -53,6 +53,6 @@ export const actions = {
             console.error(err);
             throw error(500, "Failed to create post");
         }
-        throw redirect(303, "/community"); // Redirect after successful post
+        return { success: true, message: "Đăng bài viết thành công" }
     }
 };

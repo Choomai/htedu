@@ -10,9 +10,9 @@
     import "./tipex.css";
     import Foot from "./foot.svelte";
     import { onMount } from "svelte";
-    import { enhance } from "$app/forms";
+    import { app_name } from "$lib/const";
 
-    let { data } = $props();
+    let { data, form } = $props();
     let { articles } = $state(data);
     let theme = $state("");
     let actionDisabled = $state(false);
@@ -23,9 +23,7 @@
     
     function handleSubmit(e) {
         // Only submit if it's an actual form submission, not a link button click
-        if (e.submitter?.getAttribute("aria-label") === "Edit link") {
-            e.preventDefault();
-        }
+        if (e.submitter?.getAttribute("aria-label") === "Edit link") return e.preventDefault();
     }
 
     async function likeArticle(id) {
@@ -157,10 +155,11 @@
 </svelte:head>
 
 <main>
+    {#if form}<p class="message" class:error={!form?.success}>{form?.message}</p>{/if}
     <Tipex {body} bind:tipex={editor} class={theme} controls floating>
         {#snippet foot()}<Foot username={data.session.username}/>{/snippet}
     </Tipex>
-    <form id="post-form" action="?/new_article" method="post" onsubmit={handleSubmit} use:enhance>
+    <form id="post-form" action="?/new_article" method="post" onsubmit={handleSubmit}>
         <input type="hidden" name="content" value={postContent}>
     </form>
 

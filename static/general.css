@@ -131,6 +131,11 @@ label.file ~ span {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+p.message {
+    margin-top: 0;
+    color: lime;
+}
+p.message.error {color: red;}
 
 
 button, a.button {
