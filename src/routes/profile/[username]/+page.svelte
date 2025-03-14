@@ -2,6 +2,7 @@
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { faNewspaper, faFileLines } from "@fortawesome/free-solid-svg-icons";
     import Navbar from "/src/components/navbar.svelte";
+    import { app_name } from "$lib/const";
     
     let { data } = $props();
 
@@ -27,6 +28,10 @@
         });
     }
 </script>
+
+<svelte:head>
+    <title>{data.user.name} - {app_name}</title>
+</svelte:head>
 
 <div class="container">
     <Navbar showTitle noToggleSidebar name={data.session.name} avatar={data.session.avatar} username={data.session.username}/>

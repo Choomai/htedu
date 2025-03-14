@@ -5,6 +5,10 @@
     let { form } = $props();
 </script>
 
+<svelte:head>
+    <title>Đăng nhập - {app_name}</title>
+</svelte:head>
+
 <main>
     <h1 class="app-name">{app_name}</h1>
     <div class="container">

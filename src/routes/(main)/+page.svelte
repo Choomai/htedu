@@ -3,11 +3,16 @@
     import { faUser, faFile, faFileLines, faArrowRight } from "@fortawesome/free-solid-svg-icons";
     import Card from "/src/components/card.svelte";
     import Teachers from "/src/components/teachers.svelte";
+    import { app_name } from "$lib/const";
     let { data } = $props();
     if (data.stats) {
         data.stats.docs_count = data.docs.filter(doc => doc.username == data.session.username).length;
     }
 </script>
+
+<svelte:head>
+    <title>{app_name}</title>
+</svelte:head>
 
 <main>
     {#if data.session.permission_level >= 1}

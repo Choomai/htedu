@@ -1,9 +1,14 @@
 <script>
     import { getContext } from "svelte";
+    import { app_name } from "$lib/const";
     import Card from "/src/components/card.svelte";
 
     const items = getContext("doc-ass");
 </script>
+
+<svelte:head>
+    <title>Luyện đề - {app_name}</title>
+</svelte:head>
 
 <main>
     {#if $items.length == 0}

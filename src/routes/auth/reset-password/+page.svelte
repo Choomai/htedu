@@ -29,6 +29,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>Quên mật khẩu - {app_name}</title>
+</svelte:head>
+
 <main>
     <h1 class="app-name">{app_name}</h1>
     <div class="container">

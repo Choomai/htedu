@@ -1,8 +1,12 @@
 <script>
-    let { data } = $props();
-
     import Teachers from "/src/components/teachers.svelte";
+    import { app_name } from "$lib/const";
+    let { data } = $props();
 </script>
+
+<svelte:head>
+    <title>Giáo viên - {app_name}</title>
+</svelte:head>
 
 <main>
     {#if data.session.permission_level == 0}

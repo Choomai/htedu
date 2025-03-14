@@ -28,12 +28,16 @@
     </a>
     <h3>Thư viện của tôi</h3>
     <div class="uploaded">
-        {#each assignments as ass}
-            <Card title={ass.title} url="/practice/{ass.uuid}" imgPath={ass.img_path} 
-                editUrl="/assignments/{ass.uuid}/edit"
-                ondelete={() => handleDelete(ass.uuid)}
-                username={ass.username} avatar={ass.avatar}/>
-        {/each}
+        {#if assignments.length >= 1}
+            {#each assignments as ass}
+                <Card title={ass.title} url="/practice/{ass.uuid}" imgPath={ass.img_path} 
+                    editUrl="/assignments/{ass.uuid}/edit"
+                    ondelete={() => handleDelete(ass.uuid)}
+                    username={ass.username} avatar={ass.avatar}/>
+            {/each}
+        {:else}
+            <h2>Không có tài liệu</h2>
+        {/if}
     </div>
 </main>
 
