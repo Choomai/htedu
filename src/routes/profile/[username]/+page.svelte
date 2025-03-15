@@ -77,6 +77,9 @@
         height: 100%;
         overflow-y: scroll;
     }
+    @media screen and (max-width: 425px) {
+        div.container {padding: 0 .5rem;}
+    }
 
     main {
         flex-grow: 1;
@@ -102,6 +105,7 @@
         display: flex;
         justify-content: center;
         align-items: flex-end;
+        flex-wrap: wrap;
         gap: 2rem;
         font-size: 1.5rem;
     }
@@ -115,7 +119,9 @@
     }
     div.info {
         display: flex;
+        justify-content: center;
         align-items: center;
+        flex-wrap: wrap;
         gap: 1.5rem;
     }
     div.info > :is(a.button, button) {

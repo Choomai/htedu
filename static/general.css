@@ -98,9 +98,6 @@ main {
     padding: 0 1rem;
     flex-grow: 1;
 }
-@media screen and (max-width: 425px) {
-    main {padding: 0 .5rem;}
-}
 
 input:not([type="file"], [type="radio"], [type="checkbox"]), select {
     padding: 1rem;
@@ -191,6 +188,11 @@ div.user-dropdown {
 }
 div.user-dropdown a.button {
     padding: .5rem;
+}
+
+@media screen and (max-width: 425px) {
+    :root {font-size: 14px;}
+    main {padding: 0 .5rem;}
 }
 
 @media (prefers-color-scheme: dark) {
