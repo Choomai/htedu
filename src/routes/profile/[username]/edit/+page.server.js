@@ -16,6 +16,6 @@ export const actions = {
     default: async ({ request, locals }) => {
         const data = await request.formData();
         const { session } = locals;
-        throw error(503, "Not Implemented");
+        throw error(501, "Not Implemented");
     }
 };
