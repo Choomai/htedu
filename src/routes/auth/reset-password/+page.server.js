@@ -1,6 +1,11 @@
 import { pool } from "$lib/db";
 import { error, redirect } from "@sveltejs/kit";
 
+/** @type {import('./$types').PageServerLoad} */
+export async function load() {
+    if (process.env.OTP_DISABLED) throw error(503, "Service Unavailable");
+}
+
 /** @type {import('./$types').Actions} */
 export const actions = {
     default: async ({ request, locals }) => {
