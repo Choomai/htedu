@@ -3,7 +3,7 @@ import { pool } from "$lib/db";
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ locals }) {
     const { session } = locals;
-    const [teachers] = await pool.execute("SELECT * FROM users WHERE permission_level = 1 ORDER BY RAND() LIMIT 4");
+    const [teachers] = await pool.execute("SELECT username, name, avatar FROM users WHERE permission_level = 1 ORDER BY RAND() LIMIT 4");
     let stats = [null];
     if (session.data.permission_level >= 1) [stats] = await pool.execute(
         `SELECT

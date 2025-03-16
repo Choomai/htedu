@@ -12,7 +12,8 @@ export async function load({ locals }) {
             id: session.data.id,
             username: session.data.username,
             name: session.data.name,
-            avatar: session.data.avatar
+            avatar: session.data.avatar,
+            permission_level: session.data.permission_level
         }
     }
 }
