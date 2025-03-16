@@ -5,7 +5,7 @@ import { REDIS_HOST, REDIS_PASSWORD, SESSION_KEY } from "$env/static/private";
 const client = new Redis({
     host: REDIS_HOST,
     password: REDIS_PASSWORD,
-    tls: { rejectUnauthorized: false }
+    // tls: { rejectUnauthorized: false }
 })
 
 export const handle = sveltekitSessionHandle({
