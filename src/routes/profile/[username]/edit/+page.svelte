@@ -1,14 +1,14 @@
 <script>
     let { data } = $props();
-    const { session } = data;
+    const { name, username, email } = data;
 </script>
 
 <main>
     <form action method="post">
         <h1>Chỉnh sửa trang cá nhân</h1>
-        <input type="text" name="name" placeholder="Tên" value={session.name}>
-        <input type="text" name="username" placeholder="Username" value={session.username}>
-        <input type="email" name="email" placeholder="Email" value={session.email}>
+        <input type="text" name="name" placeholder="Tên" value={name}>
+        <input type="text" name="username" placeholder="Username" value={username}>
+        <input type="email" name="email" placeholder="Email" value={email}>
         <input type="password" name="old-password" placeholder="Mật khẩu cũ">
         <input type="password" name="new-password" placeholder="Mật khẩu mới">
         <input type="password" name="new-password-confirm" placeholder="Xác nhận mật khẩu mới">

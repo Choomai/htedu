@@ -17,5 +17,5 @@ export async function load({ locals }) {
     const [docs] = await pool.execute("SELECT docs.*, users.avatar FROM docs LEFT JOIN users ON docs.username = users.username ORDER BY RAND() LIMIT 4");
     const [assignments] = await pool.execute("SELECT assignments.*, users.username, users.avatar FROM assignments LEFT JOIN users ON assignments.user_id = users.id ORDER BY RAND() LIMIT 4");
     
-    return { teachers, stats: stats[0], session: session.data, docs, assignments }
+    return { teachers, stats: stats[0], docs, assignments }
 }
