@@ -35,8 +35,8 @@
         color: white;
         width: 60%;
     }
-    div.left {border-radius: 35% 0 0 35%;}
-    div.right {border-radius: 0 35% 35% 0;}
+    div.left {border-radius: 30% 0 0 30%;}
+    div.right {border-radius: 0 30% 30% 0;}
 
     h1 {margin: 0;}
 

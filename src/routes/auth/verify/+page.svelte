@@ -32,6 +32,7 @@
 <main>
     <h1 class="app-name">{app_name}</h1>
     <div class="container">
+        <AuthDecoration type="verify"/>
         <form action method="post">
             <!-- TODO: Add CAPCHA system -->
             {#if !form?.success}<p class="invalid">{form?.message}</p>{/if}
@@ -41,7 +42,6 @@
             </div>
             <button type="submit">Xác nhận OTP</button>
         </form>
-        <AuthDecoration type="verify"/>
     </div>
 </main>
 
@@ -60,7 +60,7 @@
     }
     div.container {
         display: flex;
-        flex-direction: row;
+        flex-direction: row-reverse;
         flex-grow: 1;
     }
 

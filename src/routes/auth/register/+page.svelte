@@ -20,6 +20,7 @@
 <main>
     <h1 class="app-name">{app_name}</h1>
     <div class="container">
+        <AuthDecoration type="register"/>
         <form action method="post" enctype="multipart/form-data" use:enhance>
             <h2>Đăng ký</h2>
             {#if form?.success == false}<p>{form?.message}</p>{/if}
@@ -45,7 +46,6 @@
             </div>
             <button type="submit">Đăng ký</button>
         </form>
-        <AuthDecoration type="register"/>
     </div>
 </main>
 
@@ -64,7 +64,7 @@
     }
     div.container {
         display: flex;
-        flex-direction: row;
+        flex-direction: row-reverse;
         flex-grow: 1;
     }
     h1 {margin: 0;}
