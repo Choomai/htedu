@@ -7,7 +7,7 @@
 <main>
     <h2>Tạo đề</h2>
     <hr>
-    {#if !form?.success}<p class="message">{form?.message}</p>{/if}
+    {#if form?.message}<p class="message" class:error={form?.success}>{form?.message}</p>{/if}
     <form action method="post">
         <label for="exam-name">Nhập tên cho đề của bạn<sup class="required">*</sup></label>
         <input type="text" id="exam-name" name="name" placeholder="Nhập tên" required>

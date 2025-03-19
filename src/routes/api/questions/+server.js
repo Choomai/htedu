@@ -28,6 +28,7 @@ export async function PUT({ request, locals }) {
     const { session } = locals;
     if (!session.data.auth) error(401, "Unauthorized");
 
+    const allowedType = [0,1,2];
     const data = await request.json();
     // const { uuid, question, question_data } = data;
 
@@ -51,7 +52,9 @@ export async function PUT({ request, locals }) {
     for (const quesTion of data) {
         quesTion.uuid ??= quesTion.client_uuid;
         const { uuid, assignment_uuid, type, question } = quesTion;
-        if (!uuid || !assignment_uuid || ![0,1,2].includes(type) || !question || !quesTion.data) {
+        const true_false_type = type == 1 ? parseInt(quesTion.true_false_type) : 0;
+
+        if (!uuid || !assignment_uuid || !allowedType.includes(type) || !allowedType.includes(true_false_type) || !question || !quesTion.data) {
             errors.push({ uuid, error: "Missing data" });
             continue;
         }
@@ -64,8 +67,10 @@ export async function PUT({ request, locals }) {
         try {
             const insertData = process.env.NODE_ENV == "production" ? JSON.stringify(quesTion.data) : quesTion.data;
             const [result] = await pool.execute(
-                "INSERT INTO questions (uuid, assignment_uuid, question, type, data, user_id) VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE question = VALUES(question), data = VALUES(data)",
-                [uuid, assignment_uuid, question, type, insertData, session.data.id]
+                `INSERT INTO questions (uuid, assignment_uuid, question, type, true_false_type, data, user_id) 
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                ON DUPLICATE KEY UPDATE question = VALUES(question), data = VALUES(data), true_false_type = VALUES(true_false_type)`,
+                [uuid, assignment_uuid, question, type, true_false_type, insertData, session.data.id]
             );
             
             if (result.affectedRows > 0) successCount++

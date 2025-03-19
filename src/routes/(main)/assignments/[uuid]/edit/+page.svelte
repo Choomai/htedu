@@ -35,6 +35,7 @@
                 questions.push({
                     question: "Nội dung câu hỏi",
                     type: 1,
+                    true_false_type: 0,
                     client_uuid: crypto.randomUUID(),
                     assignment_uuid: assignmentUUID,
                     data: [
@@ -78,8 +79,8 @@
                 body: JSON.stringify(questions)
             })
             const response = await updateFetch.json();
-            if (!response.errors?.length) alert("Đã lưu câu hỏi")
-            else throw new Error("Sone rows failed to update");
+            if (!response.errors?.length) alert("Đã lưu câu hỏi");
+            else throw new Error("Some rows failed to update");
         } catch (err) {
             console.error(err);
             return alert("Có lỗi xảy ra khi lưu câu hỏi")
@@ -144,6 +145,14 @@
                                 data-index={index}>
                         </div>
                     {/each}
+                    <div class="type-wrapper">
+                        <label for="true-false-type">Định hướng câu hỏi</label>
+                        <select id="true-false-type" bind:value={question.true_false_type}>
+                            <option value={0}>Chung</option>
+                            <option value={1}>Khoa học máy tính</option>
+                            <option value={2}>Tin học ứng dụng</option>
+                        </select>
+                    </div>
                 </div>
             </section>
         {/if}
@@ -186,7 +195,7 @@
 
     div.answers {
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: 1fr auto;
         align-items: center;
         width: fit-content;
         gap: 1rem 2rem;
@@ -208,6 +217,16 @@
         margin: 0;
         width: 1.25rem;
         height: 1.25rem;
+    }
+    section.true-false div.type-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        grid-column: 1 / -1;
+    }
+    section.true-false div.type-wrapper > select {
+        padding: .5rem;
     }
 
 
