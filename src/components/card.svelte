@@ -23,10 +23,10 @@
 <figure>
     {#if props.url}
         <a class="normalize" href={props.url}>
-            <img class:error={imgError} onerror={handleImgError} src={props.imgPath} alt="thumbnail">
+            <img class:error={imgError} onerror={handleImgError} src={props.imgPath ?? ""} alt="thumbnail">
         </a>
     {:else}
-        <img class:error={imgError} onerror={handleImgError} src={props.imgPath} alt="thumbnail">
+        <img class:error={imgError} onerror={handleImgError} src={props.imgPath ?? ""} alt="thumbnail">
     {/if}
     <figcaption>
         <div class="info-wrapper">
