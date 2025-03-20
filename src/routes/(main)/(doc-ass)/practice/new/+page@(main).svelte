@@ -17,8 +17,8 @@
         <input type="number" id="true-false" name="true-false" placeholder="Bạn nên nhập số lượng là 2 để bám sát với đề minh họa" required>
         <label for="true-false-add">Nhập số câu hỏi đúng/sai<sup class="required">*</sup></label>
         <select name="true-false-add-type">
-            <option value={0}>Định hướng khoa học máy tính</option>
-            <option value={1}>Định hướng tin học ứng dụng</option>
+            <option value={1}>Định hướng khoa học máy tính</option>
+            <option value={2}>Định hướng tin học ứng dụng</option>
         </select>
         <input type="number" id="true-false-add" name="true-false-add" placeholder="Bạn nên nhập số lượng là 2 để bám sát với đề minh họa">
         <button type="submit"><FontAwesomeIcon icon={faPlus}/> Tạo đề</button>
