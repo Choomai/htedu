@@ -58,7 +58,7 @@
                 <a href="/study-area">Xem tất cả <FontAwesomeIcon icon={faArrowRight}/></a>
             </div>
             {#each data.assignments as ass}
-                <Card title={ass.title} url="/practice/{ass.uuid}" imgPath={ass.img_path}
+                <Card title={ass.title} url="/practice/{ass.uuid}" imgPath={ass.img_path ?? ""}
                     username={ass.username} avatar={ass.avatar}/>
             {/each}
         </section>
