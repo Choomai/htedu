@@ -1,10 +1,17 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
-    import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+    import { faPen, faTag, faTrash } from "@fortawesome/free-solid-svg-icons";
     import User from "/src/components/user.svelte";
     
     let props = $props();
     let imgError = $state(false);
+    const tagsMap = {
+        "advanced": "Mở rộng",
+        "c10": "Lớp 10",
+        "c11": "Lớp 11",
+        "c12": "Lớp 12",
+        "gen": "Ngẫu nhiên"
+    }
 
     function handleImgError(e) {
         imgError = true;
@@ -23,7 +30,10 @@
     {/if}
     <figcaption>
         <div class="info-wrapper">
-            <h3>{props.title}</h3>
+            <span>
+                <h3>{props.title}</h3>
+                <h4><FontAwesomeIcon icon={faTag}/> {tagsMap[props.tag]}</h4>
+            </span>
             <div class="action">
                 {#if props.editUrl}
                     <a href={props.editUrl}><FontAwesomeIcon icon={faPen}/></a>
@@ -83,6 +93,10 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: .5rem;
+    }
+    div.info-wrapper h4 {
+        font-weight: normal;
+        margin: 0;
     }
     div.info-wrapper > div.action {
         display: flex;

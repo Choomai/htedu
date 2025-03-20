@@ -30,7 +30,8 @@
     <div class="uploaded">
         {#if docs.length >= 1}
             {#each docs as doc}
-                <Card title={doc.name} url="/study-area/{doc.uuid}" imgPath={doc.img_path}
+                <Card title={doc.name} url="/study-area/{doc.uuid}"
+                    imgPath={doc.img_path} tag={doc.category}
                     ondelete={() => handleDelete(doc.uuid)} 
                     username={doc.username} avatar={doc.avatar}/>
             {/each}

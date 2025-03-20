@@ -46,8 +46,9 @@
                 <a href="/study-area">Xem tất cả <FontAwesomeIcon icon={faArrowRight}/></a>
             </div>
             {#each data.docs as doc}
-            <Card title={doc.name} url="/study-area/{doc.uuid}" imgPath={doc.img_path}
-            username={doc.username} avatar={doc.avatar}/>
+            <Card title={doc.name} url="/study-area/{doc.uuid}"
+                imgPath={doc.img_path} tag={doc.category}
+                username={doc.username} avatar={doc.avatar}/>
             {/each}
         </section>
     {/if}
@@ -58,7 +59,8 @@
                 <a href="/study-area">Xem tất cả <FontAwesomeIcon icon={faArrowRight}/></a>
             </div>
             {#each data.assignments as ass}
-                <Card title={ass.title} url="/practice/{ass.uuid}" imgPath={ass.img_path ?? ""}
+                <Card title={ass.title} url="/practice/{ass.uuid}"
+                    imgPath={ass.img_path ?? ""} tag={ass.category}
                     username={ass.username} avatar={ass.avatar}/>
             {/each}
         </section>

@@ -15,7 +15,8 @@
         <h2>Không có đề</h2>
     {/if}
     {#each $items as ass}
-        <Card title={ass.title} url="/practice/{ass.uuid}" imgPath={ass.img_path ?? ""} 
+        <Card title={ass.title} url="/practice/{ass.uuid}"
+            imgPath={ass.img_path ?? ""} tag={ass.category}
             username={ass.username} avatar={ass.avatar}/>
     {/each}
 </main>

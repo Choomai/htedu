@@ -30,7 +30,8 @@
     <div class="uploaded">
         {#if assignments.length >= 1}
             {#each assignments as ass}
-                <Card title={ass.title} url="/practice/{ass.uuid}" imgPath={ass.img_path} 
+                <Card title={ass.title} url="/practice/{ass.uuid}"
+                    imgPath={ass.img_path} tag={ass.category}
                     editUrl="/assignments/{ass.uuid}/edit"
                     ondelete={() => handleDelete(ass.uuid)}
                     username={ass.username} avatar={ass.avatar}/>

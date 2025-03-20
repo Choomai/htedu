@@ -15,7 +15,8 @@
         <h2>Không có tài liệu</h2>
     {/if}
     {#each $items as doc}
-        <Card title={doc.name} url="/study-area/{doc.uuid}" imgPath={doc.img_path} 
+        <Card title={doc.name} url="/study-area/{doc.uuid}"
+            imgPath={doc.img_path} tag={doc.category}
             username={doc.username} avatar={doc.avatar}/>
     {/each}
 </main>
