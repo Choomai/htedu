@@ -1,8 +1,12 @@
 <script>
     import { enhance } from "$app/forms";
-    import { app_name } from "$lib/const";
+    import { app_name, usernamePattern } from "$lib/const";
     import AuthDecoration from "/src/components/auth-decoration.svelte";
     let { form } = $props();
+    function validateUsername(e) {
+        if (usernamePattern.test(e.target.value)) e.target.setCustomValidity("")
+        else e.target.setCustomValidity("Username có độ dài 3 đến 32 kí tự, không chứa kí tự đặc biệt (ngoại trừ _ và .)");
+    }
 </script>
 
 <svelte:head>
@@ -17,7 +21,7 @@
             <h2>Đăng nhập</h2>
             {#if form?.success == false}<p>{form?.message}</p>{/if}
             <div class="input">
-                <input type="text" name="username" placeholder="Tên đăng nhập">
+                <input type="text" name="username" onchange={validateUsername} oninput={e => e.target.setCustomValidity("")} placeholder="Tên đăng nhập">
                 <input type="password" name="password" placeholder="Mật khẩu">
             </div>
             <div class="action">
