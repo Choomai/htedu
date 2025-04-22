@@ -94,6 +94,17 @@
         align-items: center;
         margin-bottom: .5rem;
     }
+    div.info-wrapper > span {width: 100%;}
+    div.info-wrapper h3 {
+        word-wrap: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    div.info-wrapper h4 {
+        font-weight: normal;
+        margin: 0;
+    }
     div.info-wrapper h4 {
         font-weight: normal;
         margin: 0;
