@@ -1,5 +1,7 @@
 <script>
+    import { Turnstile } from "sveltekit-turnstile";
     import AuthDecoration from "/src/components/auth-decoration.svelte";
+    import { PUBLIC_TURNSTILE_SITE_KEY } from "$env/static/public";
     import { app_name } from "$lib/const";
     let { form } = $props();
     let timeLeft = 0;
@@ -7,9 +9,11 @@
     async function sendOTP(e) {
         const formData = new FormData();
         formData.append("type", "verify");
+        // token automaticlly inserted
+        e.target.disabled = true;
+        e.target.textContent = "Đang gửi...";
         const otpFetch = await fetch("/api/otp", { method: "POST", body: formData })
         if (otpFetch.ok) {
-            e.target.disabled = true;
             timeLeft = 60;
             const wait_interval = setInterval(() => {
                 timeLeft -= 1;
@@ -40,6 +44,7 @@
                 <input type="number" min={1} max={999999} name="otp" placeholder="Mã OTP" required>
                 <button type="button" onclick={sendOTP}>Gửi OTP</button>
             </div>
+            <Turnstile siteKey={PUBLIC_TURNSTILE_SITE_KEY} />
             <button type="submit">Xác nhận OTP</button>
         </form>
     </div>
@@ -72,6 +77,7 @@
         flex-grow: 1;
         width: 30%;
         font-size: 1.5rem;
+        gap: .5rem;
     }
     p.invalid {
         color: red;
@@ -87,7 +93,6 @@
     }
     button[type="submit"] {
         width: 80%;
-        margin-top: .5rem;
         font-size: 1.25rem;
     }
 </style>

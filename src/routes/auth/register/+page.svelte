@@ -6,7 +6,7 @@
     import AuthDecoration from "/src/components/auth-decoration.svelte";
     let { form } = $props();
 
-    let currentFilename = $state(""), currentPass = $state("");
+    let currentFilename = $state(null), currentPass = $state("");
     function updateFilename(e) {
         currentFilename = e.target.value.replace(/^.*[\\\/]/, '');
     }

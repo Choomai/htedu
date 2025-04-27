@@ -29,8 +29,8 @@ export const actions = {
         if (teacherToggle && !emailDomain.includes(".edu.")) return { success: false, message: "Email không thuộc domain EDU" };
         if (password != passwordConfirm) return { success: false, message: "Mật khẩu không giống nhau"};
 
-        if (avatarImage !== null) {
-            if (avatarImage instanceof File && avatarImage.type.startsWith("image/")) {
+        if (avatarImage instanceof File && avatarImage.size > 0) {
+            if (avatarImage.type.startsWith("image/")) {
                 const buff = await avatarImage.arrayBuffer();
                 avatarPath = path.join(process.cwd(), "static", "avatars", `${username}.webp`);
                 await sharp(Buffer.from(buff)).toFormat("webp").toFile(avatarPath);

@@ -1,16 +1,20 @@
 import { createTransport } from "nodemailer";
-import { MAIL_HOST, MAIL_ACCOUNT, MAIL_PASSWORD } from "$env/static/private";
+import { MAIL_HOST, MAIL_ACCOUNT, MAIL_PASSWORD, TURNSTILE_SECRET_KEY } from "$env/static/private";
 import { error } from "@sveltejs/kit";
 import { randomInt } from "node:crypto"
 import Safe from "safejslib";
 import { pool } from "$lib/db";
+import { validateToken } from "sveltekit-turnstile";
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, locals }) {
     const data = await request.formData();
     const { session } = locals;
     const mailTo = session.data.email || data.get("email");
-    if (!Safe.validateEmail(mailTo)) return error(400);
+    const token = data.get("token");
+
+    if (await validateToken(token, TURNSTILE_SECRET_KEY)) throw error(409);
+    if (!Safe.validateEmail(mailTo)) throw error(400);
     const mailSender = createTransport({
         host: MAIL_HOST,
         port: 465,
