@@ -4,6 +4,8 @@
     import { enhance } from "$app/forms";
     import { app_name, usernamePattern } from "$lib/const";
     import AuthDecoration from "/src/components/auth-decoration.svelte";
+    import { Turnstile } from "sveltekit-turnstile";
+    import { PUBLIC_TURNSTILE_SITE_KEY } from "$env/static/public";
     let { form } = $props();
 
     let currentFilename = $state(null), currentPass = $state("");
@@ -21,55 +23,40 @@
     <title>Đăng ký - {app_name}</title>
 </svelte:head>
 
-<main>
-    <h1 class="app-name">{app_name}</h1>
-    <div class="container">
-        <AuthDecoration type="register"/>
-        <form action method="post" enctype="multipart/form-data" use:enhance>
-            <h2>Đăng ký</h2>
-            {#if form?.success == false}<p>{form?.message}</p>{/if}
-            <div class="input">
-                <div class="teacher-toggle">
-                    <label for="teacher">Tài khoản giáo viên</label>
-                    <input type="checkbox" name="teacher" id="teacher" bind:checked={teacherToggle}>
-                </div>
-                <input type="text" name="username" onchange={validateUsername} oninput={e => e.target.setCustomValidity("")} placeholder="Tên đăng nhập" required minlength="3" maxlength="24">
-                <input type="text" name="name" placeholder="Họ và tên" required>
-                <input type="email" name="email" placeholder={"Email" + (teacherToggle ? " (edu.vn)" : "")} required>
-                <input type="password" name="password" bind:value={currentPass} placeholder="Mật khẩu" required>
-                {#if currentPass}
-                    <input type="password" name="password-confirm" placeholder="Xác nhận mật khẩu" required>
-                {/if}
-                <div class="file-input">
-                    <label class="file" for="avatar"><FontAwesomeIcon icon={faFileImage}/>Ảnh đại diện</label>
-                    <span>{currentFilename}</span>
-                    <input type="file" name="avatar" id="avatar" accept="image/jpeg,image/png,image/webp,image/gif,image/avif,image/tiff,image/svg" onchange={updateFilename} hidden>
-                </div>
+<div class="container">
+    <AuthDecoration type="register"/>
+    <form action method="post" enctype="multipart/form-data" use:enhance>
+        <h2>Đăng ký</h2>
+        {#if form?.success == false}<p>{form?.message}</p>{/if}
+        <div class="input">
+            <div class="teacher-toggle">
+                <label for="teacher">Tài khoản giáo viên</label>
+                <input type="checkbox" name="teacher" id="teacher" bind:checked={teacherToggle}>
             </div>
-            <button type="submit">Đăng ký</button>
-        </form>
-    </div>
-</main>
+            <input type="text" name="username" onchange={validateUsername} oninput={e => e.target.setCustomValidity("")} placeholder="Tên đăng nhập" required minlength="3" maxlength="24">
+            <input type="text" name="name" placeholder="Họ và tên" required>
+            <input type="email" name="email" placeholder={"Email" + (teacherToggle ? " (edu.vn)" : "")} required>
+            <input type="password" name="password" bind:value={currentPass} placeholder="Mật khẩu" required>
+            {#if currentPass}
+                <input type="password" name="password-confirm" placeholder="Xác nhận mật khẩu" required>
+            {/if}
+            <div class="file-input">
+                <label class="file" for="avatar"><FontAwesomeIcon icon={faFileImage}/>Ảnh đại diện</label>
+                <span>{currentFilename}</span>
+                <input type="file" name="avatar" id="avatar" accept="image/jpeg,image/png,image/webp,image/gif,image/avif,image/tiff,image/svg" onchange={updateFilename} hidden>
+            </div>
+            <Turnstile siteKey={PUBLIC_TURNSTILE_SITE_KEY} size="flexible"/>
+        </div>
+        <button type="submit">Đăng ký</button>
+    </form>
+</div>
 
 <style>
-    main {
-        padding: 0;
-        gap: 0;
-    }
-    h1.app-name {
-        width: 100%;
-        margin: 0;
-        margin-left: 10%;
-        font-size: 1.5rem;
-        padding: 1rem;
-        padding-left: 0;
-    }
     div.container {
         display: flex;
         flex-direction: row-reverse;
         flex-grow: 1;
     }
-    h1 {margin: 0;}
 
     form {
         display: flex;

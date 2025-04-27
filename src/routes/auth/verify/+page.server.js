@@ -1,5 +1,7 @@
 import { redirect } from "@sveltejs/kit";
 import { pool } from "$lib/db";
+import { TURNSTILE_SECRET_KEY } from "$env/static/private";
+import { validateToken } from "sveltekit-turnstile";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ locals }) {
@@ -15,6 +17,10 @@ export const actions = {
         const { session } = locals;
 
         const otp = data.get("otp");
+        const token = data.get("token");
+        const capchaSuccess = await validateToken(token, TURNSTILE_SECRET_KEY);
+        if (!capchaSuccess) return { success: false, message: "CAPCHA không hợp lệ" };
+
         await pool.execute("DELETE FROM otp WHERE timestamp < NOW() - INTERVAL 10 MINUTE");
         const [otpRows] = await pool.execute("SELECT username, otp FROM otp WHERE username = ?", [session.data.username]);
         if (otpRows.length < 1 || otpRows[0]?.otp != otp) return { success: false, message: "Sai mã OTP" }

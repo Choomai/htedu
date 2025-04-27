@@ -12,8 +12,10 @@ export async function POST({ request, locals }) {
     const { session } = locals;
     const mailTo = session.data.email || data.get("email");
     const token = data.get("token");
-
-    if (await validateToken(token, TURNSTILE_SECRET_KEY)) throw error(409);
+    
+    if (!token) throw error(400);
+    const capchaSuccess = await validateToken(token, TURNSTILE_SECRET_KEY);
+    if (!capchaSuccess) throw error(409);
     if (!Safe.validateEmail(mailTo)) throw error(400);
     const mailSender = createTransport({
         host: MAIL_HOST,

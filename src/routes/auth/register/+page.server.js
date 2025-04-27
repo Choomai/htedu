@@ -5,6 +5,8 @@ import { redirect } from "@sveltejs/kit";
 import { usernamePattern } from "$lib/const";
 import { pool } from "$lib/db";
 import sharp from "sharp";
+import { TURNSTILE_SECRET_KEY } from "$env/static/private";
+import { validateToken } from "sveltekit-turnstile";
 
 /** @type {import('./$types').Actions} */
 export const actions = {
@@ -19,7 +21,9 @@ export const actions = {
             teacherToggle = data.get("teacher"),
             avatarImage = data.get("avatar"),
             avatarPath = null;
-        
+        const token = data.get("token");
+        const capchaSuccess = await validateToken(token, TURNSTILE_SECRET_KEY);
+        if (!capchaSuccess) return { success: false, message: "CAPCHA không hợp lệ" };
         
         if (!(username && password && passwordConfirm && email)) return { success: false, message: "Hãy nhập đầy đủ các thông tin" };
         if (!usernamePattern.test(username)) return { success: false, message: "Username không hợp lệ" };

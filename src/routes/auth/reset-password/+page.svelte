@@ -3,17 +3,22 @@
     import { app_name } from "$lib/const";
     import AuthDecoration from "/src/components/auth-decoration.svelte";
     import Safe from "safejslib";
+    import { Turnstile } from "sveltekit-turnstile";
+    import { PUBLIC_TURNSTILE_SITE_KEY } from "$env/static/public";
     let { form } = $props();
-    let timeLeft = 0, email = $state("");
+    let timeLeft = 0, email = $state(""), turnstileToken = "";
 
     async function sendOTP(e) {
         const formData = new FormData();
         formData.append("type", "reset-password");
+        formData.append("token", turnstileToken);
         if (!Safe.validateEmail(email)) return alert("Sai định dạng email");
         formData.append("email", email);
+
+        e.target.disabled = true;
+        e.target.textContent = "Đang gửi...";
         const otpFetch = await fetch("/api/otp", { method: "POST", body: formData })
         if (otpFetch.ok) {
-            e.target.disabled = true;
             timeLeft = 60;
             const wait_interval = setInterval(() => {
                 timeLeft -= 1;
@@ -33,48 +38,33 @@
     <title>Quên mật khẩu - {app_name}</title>
 </svelte:head>
 
-<main>
-    <h1 class="app-name">{app_name}</h1>
-    <div class="container">
-        <AuthDecoration type="reset-password"/>
-        <form action method="post" use:enhance>
-            <h2>Quên mật khẩu</h2>
-            {#if form?.success == false}<p>{form?.message}</p>{/if}
-            <div class="input">
-                <div class="email-wrapper">
-                    <input type="email" name="email" placeholder="Email" bind:value={email}>
-                    <input type="number" name="otp" placeholder="Mã OTP" min={1} max={999999}>
-                    <button type="button" onclick={sendOTP} disabled={!email}>Gửi OTP</button>
-                </div>
-                <input type="password" name="password" placeholder="Mật khẩu mới">
-                <input type="password" name="password-confirm" placeholder="Xác nhận mật khẩu mới">
+<div class="container">
+    <AuthDecoration type="reset-password"/>
+    <form action method="post" use:enhance>
+        <h2>Quên mật khẩu</h2>
+        {#if form?.success == false}<p>{form?.message}</p>{/if}
+        <div class="input">
+            <div class="email-wrapper">
+                <input type="email" name="email" placeholder="Email" bind:value={email}>
+                <input type="number" name="otp" placeholder="Mã OTP" min={1} max={999999}>
+                <button type="button" onclick={sendOTP} disabled={!email}>Gửi OTP</button>
             </div>
-            <div class="action">
-                <button type="submit">Đổi mật khẩu</button>
-            </div>
-        </form> 
-    </div>
-</main>
+            <input type="password" name="password" placeholder="Mật khẩu mới">
+            <input type="password" name="password-confirm" placeholder="Xác nhận mật khẩu mới">
+            <Turnstile siteKey={PUBLIC_TURNSTILE_SITE_KEY} size="flexible" on:turnstile-callback={e => turnstileToken = e.detail.token}/>
+        </div>
+        <div class="action">
+            <button type="submit">Đổi mật khẩu</button>
+        </div>
+    </form> 
+</div>
 
 <style>
-    main {
-        padding: 0;
-        gap: 0;
-    }
-    h1.app-name {
-        width: 100%;
-        margin: 0;
-        margin-left: 10%;
-        font-size: 1.5rem;
-        padding: 1rem;
-        padding-left: 0;
-    }
     div.container {
         display: flex;
         flex-direction: row;
         flex-grow: 1;
     }
-    h1 {margin: 0;}
 
     form {
         display: flex;

@@ -2,6 +2,9 @@
     import { enhance } from "$app/forms";
     import { app_name, usernamePattern } from "$lib/const";
     import AuthDecoration from "/src/components/auth-decoration.svelte";
+    import { Turnstile } from "sveltekit-turnstile";
+    import { PUBLIC_TURNSTILE_SITE_KEY } from "$env/static/public";
+
     let { form } = $props();
     function validateUsername(e) {
         if (usernamePattern.test(e.target.value)) e.target.setCustomValidity("")
@@ -13,44 +16,29 @@
     <title>Đăng nhập - {app_name}</title>
 </svelte:head>
 
-<main>
-    <h1 class="app-name">{app_name}</h1>
-    <div class="container">
-        <AuthDecoration type="login"/>
-        <form action method="post" use:enhance>
-            <h2>Đăng nhập</h2>
-            {#if form?.success == false}<p>{form?.message}</p>{/if}
-            <div class="input">
-                <input type="text" name="username" onchange={validateUsername} oninput={e => e.target.setCustomValidity("")} placeholder="Tên đăng nhập">
-                <input type="password" name="password" placeholder="Mật khẩu">
-            </div>
-            <div class="action">
-                <a href="/auth/reset-password">Quên mật khẩu?</a>
-                <button type="submit">Đăng nhập</button>
-            </div>
-        </form> 
-    </div>
-</main>
+<div class="container">
+    <AuthDecoration type="login"/>
+    <form action method="post" use:enhance>
+        <h2>Đăng nhập</h2>
+        {#if form?.success == false}<p>{form?.message}</p>{/if}
+        <div class="input">
+            <input type="text" name="username" onchange={validateUsername} oninput={e => e.target.setCustomValidity("")} placeholder="Tên đăng nhập">
+            <input type="password" name="password" placeholder="Mật khẩu">
+            <Turnstile siteKey={PUBLIC_TURNSTILE_SITE_KEY} size="flexible"/>
+        </div>
+        <div class="action">
+            <a href="/auth/reset-password">Quên mật khẩu?</a>
+            <button type="submit">Đăng nhập</button>
+        </div>
+    </form> 
+</div>
 
 <style>
-    main {
-        padding: 0;
-        gap: 0;
-    }
-    h1.app-name {
-        width: 100%;
-        margin: 0;
-        margin-left: 10%;
-        font-size: 1.5rem;
-        padding: 1rem;
-        padding-left: 0;
-    }
     div.container {
         display: flex;
         flex-direction: row;
         flex-grow: 1;
     }
-    h1 {margin: 0;}
 
     form {
         display: flex;

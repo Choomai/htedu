@@ -1,5 +1,7 @@
 import { pool } from "$lib/db";
 import { error, redirect } from "@sveltejs/kit";
+import { TURNSTILE_SECRET_KEY } from "$env/static/private";
+import { validateToken } from "sveltekit-turnstile";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
@@ -11,7 +13,11 @@ export const actions = {
     default: async ({ request, locals }) => {
         const data = await request.formData();
         const password = data.get("password"), passwordConfirm = data.get("password-confirm");
-        const otp = data.get("otp"), email = data.get("email");
+        const otp = data.get("otp"), email = data.get("email"), token = data.get("token");
+
+        const capchaSuccess = await validateToken(token, TURNSTILE_SECRET_KEY);
+        if (!capchaSuccess) return { success: false, message: "CAPCHA không hợp lệ" };
+
         if (password != passwordConfirm) return { success: false, message: "Mật khẩu không giống nhau" };
 
         const [usernameRows] = await pool.execute("SELECT username FROM users WHERE email = ?", [email]);

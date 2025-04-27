@@ -5,11 +5,12 @@
     import { app_name } from "$lib/const";
     let { form } = $props();
     let timeLeft = 0;
+    let turnstileToken = "";
 
     async function sendOTP(e) {
         const formData = new FormData();
         formData.append("type", "verify");
-        // token automaticlly inserted
+        formData.append("token", turnstileToken);
         e.target.disabled = true;
         e.target.textContent = "Đang gửi...";
         const otpFetch = await fetch("/api/otp", { method: "POST", body: formData })
@@ -24,7 +25,7 @@
                 e.target.disabled = false;
             }, timeLeft * 1000);
             return alert("Mã OTP đã được gửi, hãy kiểm tra mục Spam nếu không thấy mail!");
-        }
+        } else if (otpFetch.status == 409) return alert("Xác thực capcha thất bại, vui lòng tải lại trang")
         else return alert("Đã xảy ra lỗi khi gửi mail, vui lòng thử lại sau.");
     }
 </script>
@@ -33,36 +34,20 @@
     <title>Xác minh - {app_name}</title>
 </svelte:head>
 
-<main>
-    <h1 class="app-name">{app_name}</h1>
-    <div class="container">
-        <AuthDecoration type="verify"/>
-        <form action method="post">
-            <!-- TODO: Add CAPCHA system -->
-            {#if !form?.success}<p class="invalid">{form?.message}</p>{/if}
-            <div class="input">
-                <input type="number" min={1} max={999999} name="otp" placeholder="Mã OTP" required>
-                <button type="button" onclick={sendOTP}>Gửi OTP</button>
-            </div>
-            <Turnstile siteKey={PUBLIC_TURNSTILE_SITE_KEY} />
-            <button type="submit">Xác nhận OTP</button>
-        </form>
-    </div>
-</main>
+<div class="container">
+    <AuthDecoration type="verify"/>
+    <form action method="post">
+        {#if !form?.success}<p class="invalid">{form?.message}</p>{/if}
+        <div class="input">
+            <input type="number" min={1} max={999999} name="otp" placeholder="Mã OTP" required>
+            <button type="button" onclick={sendOTP}>Gửi OTP</button>
+        </div>
+        <Turnstile siteKey={PUBLIC_TURNSTILE_SITE_KEY} on:turnstile-callback={e => turnstileToken = e.detail.token}/>
+        <button type="submit">Xác nhận OTP</button>
+    </form>
+</div>
 
 <style>
-    main {
-        padding: 0;
-        gap: 0;
-    }
-    h1.app-name {
-        width: 100%;
-        margin: 0;
-        margin-left: 10%;
-        font-size: 1.5rem;
-        padding: 1rem;
-        padding-left: 0;
-    }
     div.container {
         display: flex;
         flex-direction: row-reverse;

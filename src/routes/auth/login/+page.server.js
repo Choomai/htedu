@@ -1,6 +1,8 @@
 import { scryptSync, timingSafeEqual } from "node:crypto";
 import { pool } from "$lib/db";
 import { redirect } from "@sveltejs/kit";
+import { TURNSTILE_SECRET_KEY } from "$env/static/private";
+import { validateToken } from "sveltekit-turnstile";
 
 /** @type {import('./$types').Actions} */
 export const actions = {
@@ -9,6 +11,10 @@ export const actions = {
         const { session } = locals;
         let username = data.get("username"), password = data.get("password");
         if (!(username && password)) return { success: false, message: "Hãy nhập đầy đủ các thông tin" };
+
+        const token = data.get("token");
+        const capchaSuccess = await validateToken(token, TURNSTILE_SECRET_KEY);
+        if (!capchaSuccess) return { success: false, message: "CAPCHA không hợp lệ" };
         
         let [rows] = await pool.execute("SELECT * FROM users WHERE username = ?", [username]);
         if (rows.length == 0) return { success: false, message: "Tài khoản không tồn tại" };
