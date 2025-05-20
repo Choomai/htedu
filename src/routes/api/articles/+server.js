@@ -41,6 +41,7 @@ export async function DELETE({ request, locals }) {
     const articleId = data.get("id");
     await pool.execute("DELETE FROM likes WHERE article_id = ?", [articleId]);
     await pool.execute("DELETE FROM comments WHERE article_id = ?", [articleId]);
+    await pool.execute("DELETE FROM report WHERE article_id = ?", [articleId]);
     const [deleteArticle] = await pool.execute("DELETE FROM articles WHERE id = ? AND user_id = ?", [articleId, session.data.id]);
     if (deleteArticle.affectedRows == 0) return json({ error: "Failed to delete article" }, { status: 500 });
     return json({ success: true, message: "Deleted" });
