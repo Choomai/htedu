@@ -1,6 +1,6 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
-    import { faComment, faHeart, faShare, faTrash } from "@fortawesome/free-solid-svg-icons";
+    import { faComment, faHeart, faShare, faTrash, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
     import { Tipex } from "@friendofsvelte/tipex";
     import "@friendofsvelte/tipex/styles/Tipex.css";
     import "@friendofsvelte/tipex/styles/ProseMirror.css";
@@ -148,6 +148,26 @@
             actionDisabled = false;
         }
     }
+
+    async function reportArticle(articleId) {
+        if (!confirm("Bạn có muốn báo cáo bài viết ?")) return;
+        
+        try {
+            const response = await fetch("/api/report", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ article_id: articleId })
+            });
+            
+            if (!response.ok) throw new Error("Failed to report article");
+
+            alert("Đã báo cáo bài viết");
+        }
+        catch (err) {
+            console.error(err);
+            alert("Báo cáo bài viết thất bại, hãy thử lại sau");
+        }
+    }
 </script>
 
 <svelte:head>
@@ -175,6 +195,7 @@
                     <button class="fake" disabled={actionDisabled} class:active={article.already_liked} type="button" onclick={() => likeArticle(article.id)} title="like"><FontAwesomeIcon icon={faHeart}/><span>&nbsp;{article.total_likes}</span></button>
                     <button class="fake" disabled={actionDisabled} type="button" title="comment" onclick={() => toggleComments(article.id)}><FontAwesomeIcon icon={faComment}/><span>&nbsp;{article.total_comments}</span></button>
                     <button class="fake" disabled={actionDisabled} type="button" aria-label="share" title="share"><FontAwesomeIcon icon={faShare}/></button>
+                    <button class="fake" disabled={actionDisabled} type="button" aria-label="report" title="report" onclick={() => reportArticle(article.id)}><FontAwesomeIcon icon={faTriangleExclamation}/></button>
                     {#if article.user_id == data.session.id}
                         <!-- <button class="fake" onclick={editArticle} type="button"><FontAwesomeIcon icon={faPen}/></button> -->
                         <button class="fake" disabled={actionDisabled} onclick={() => deleteArticle(article.id)} type="button"><FontAwesomeIcon icon={faTrash}/></button>

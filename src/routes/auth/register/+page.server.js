@@ -67,7 +67,8 @@ export const actions = {
         await session.setData({
             auth: true,
             id: userId[0].id,
-            verified: process.env.OTP_DISABLED == "true",
+            // More explicit handling of OTP_DISABLED
+            verified: process.env.OTP_DISABLED ? process.env.OTP_DISABLED.toLowerCase() === "true" : false,
             email,
             avatar: avatarPath,
             name,
