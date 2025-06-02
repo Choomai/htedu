@@ -1,5 +1,7 @@
 # KHKT Hương Trà
 
+Đạt giải 3 bảng D3 hội thi Tin học trẻ TP Huế 2025
+
 Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
 ## Developing
