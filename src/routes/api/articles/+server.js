@@ -11,7 +11,7 @@ export async function PUT({ request, locals }) {
     
     // First check if like exists
     const [checkQuery] = await pool.execute(
-        "SELECT id FROM likes WHERE article_id = ? AND user_id = ?",
+        "SELECT article_id, user_id FROM likes WHERE article_id = ? AND user_id = ?",
         [data.id, session.data.id]
     );
 

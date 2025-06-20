@@ -6,14 +6,13 @@ import { JSDOM } from "jsdom";
 const window = new JSDOM("").window;
 const DOMPurify = createDOMPurify(window);
 
-// TODO: Fix SQL statement, due to the change in the DB.
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ locals }) {
     const { session } = locals;
     const query_stmt = `
 SELECT
     articles.*, users.username, users.avatar,
-    COUNT(DISTINCT likes.id) AS total_likes, COUNT(DISTINCT comments.id) AS total_comments,
+    COUNT(DISTINCT likes.article_id) AS total_likes, COUNT(DISTINCT comments.id) AS total_comments,
     MAX(CASE WHEN likes.user_id = ? THEN 1 ELSE 0 END) AS already_liked
 FROM articles
 INNER JOIN users ON users.id = articles.user_id
