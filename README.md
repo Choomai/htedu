@@ -2,6 +2,12 @@
 
 Kết quả: Đạt **giải 3 bảng D3** hội thi [**Tin học trẻ**](https://tinhoctre.vn/) **TP Huế 2025**
 
+# Domain Expiration
+The domain huongtraedu.site will expire soon and will not be renewed. Additionally, the associated GitHub repository will be archived.
+
+- The website and repository will no longer be available.
+- No further updates or maintenance will be provided.
+
 ---
 
 Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
